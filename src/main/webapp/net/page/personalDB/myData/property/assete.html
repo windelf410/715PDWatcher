@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>实物资产</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../../css/common.css" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css" />
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">实物资产列表</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="data_tab" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="10%" class="fnt_333333_13" align="right">购买时间：</td>
+				<td width="20%" >
+					<div style="float:left;width:100px;" class="default_box ">
+						<input class="default_input icon_date_input" style="width:100px" id="startTime"
+							readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)">
+					</div>
+					<div style="float:left;height:22px;line-height:25px;"
+						class="fnt_333333_13">&nbsp;至&nbsp;</div>
+					<div style="float:left;width:100px;" class="default_box ">
+						<input class="default_input icon_date_input" style="width:100px" id="endTime"
+							readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)">
+					</div>
+				</td>
+				<td class="errorMsg" width="10%" id="reminder" >
+					<label>*开始时间不能大于结束时间</label>
+				</td>
+				<td width="10%" class="fnt_333333_13" align="right">资产类型：</td>
+				<td width="10%">
+					<div style="float:left;width:100px;">
+						<input id="select" class="easyui-combobox" style="width:100px"
+							data-options=" valueField: 'type_ID',textField: 'typeName',editable:false,
+									        url: '../../../../../rest/getType/7' ">
+					</div>
+				</td>
+				<td width="40%"><a href="javascript:void(0)" class="default_btn4 no-line" id="query"
+					style="float:left;margin-left:60px;">确认查询</a> <a href="addAssete.html"
+					class="default_btn5 no-line" style="float:left;margin-left:20px;">新增实物资产</a>
+				</td>
+			</tr>
+		</table>
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="easyui-datagrid" cellpadding="0" cellspacing="0" id="dg" data-options="
+					url: '../../../../../rest/app/asset/page/phyass',
+					fitColumns: true,
+					singleSelect:true,
+					method: 'post',
+					pagination: true,
+					striped: true,
+					onBeforeLoad: function(){
+					 	acquireType('../../../../../rest/getType/7');
+					}
+				">
+			<thead>
+				<tr class="tr1 fnt_333333_13">
+					<!-- <th style="width:8%;">序号</th>
+					<th style="width:22%;">服务商家</th>
+					<th style="width:10%;">消费类型</th>
+					<th style="width:10%;">消费金额</th>
+					<th style="width:10%;">支付方式</th>
+					<th style="width:10%;">用户</th>
+					<th style="width:10%;">时间</th>
+					<th style="width:20%;">操作</th> -->
+					<th data-options="field:'order', align:'center', formatter: generateOrder, width:50">序号</th>
+					<th data-options="field:'name', align:'center', width:150">名称</th>
+					<th data-options="field:'amount', align:'center', width:100">金额</th>
+					<th data-options="field:'shop', align:'center', width:150">服务商家</th>
+					<!-- <th data-options="field:'5'">支付方式</th>
+					<th data-options="field:'6'">用户</th> -->
+					<th data-options="field:'buyDate', align:'center', width:100">购买时间</th>
+					<th data-options="field:'type', align:'center', formatter: getTypeName, width:80">资产类型</th>
+					<th data-options="field:'maintenance', align:'center', resizable:true, width:100">维修记录</th>
+					<th data-options="field:'operate', align:'center', formatter: operate, width:200">操作</th>
+				</tr>
+			</thead>
+		</table>
+
+		<input id="idName" value="physicalAsset_ID" type="hidden">
+		<div class="clearfloat" style="height:15px;"></div>
+	</div>
+	
+	<!-- <script src="../../../js/jquery.easing.1.3.js"></script> -->
+	<script src="../../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../../js/calendar.js"></script>
+	<script src="../../../../../js/myjs/list.js"></script>
+	<script src="../../../../../js/myjs/index.js"></script>
+	<script>
+	$(function() {
+		  initUrl('../../../../../rest/app/asset/del/phyass', 'editAssete.html');
+		  $("#query").bind("click", function(){
+		  		query();
+		  });
+		  lines_bottom();
+		});
+	</script>
+</body>
+</html>

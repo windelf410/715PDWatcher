@@ -1,0 +1,78 @@
+TD.TitleTD
+{
+    FONT-SIZE: 12px;
+    COLOR: Navy 
+}
+TD.EditTD
+{
+    FONT-SIZE: 12px
+}
+TD.EditRadio
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-COLOR: LightYellow 
+}
+INPUT.Edit
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 1px solid;
+    width: 100%;
+    BACKGROUND-COLOR: LightYellow  
+}
+INPUT.EditCheck
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-COLOR: LightYellow  
+}
+INPUT.ReadCheck
+{
+    BORDER-RIGHT: 1px #ffffff solid;
+    BORDER-TOP: 1px #ffffff solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px #ffffff solid;
+    BORDER-BOTTOM: 1px #ffffff solid;
+}
+SELECT.Edit
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-COLOR: LightYellow  
+}
+INPUT.EditRead
+{
+    BORDER-RIGHT: 0pt solid;
+    BORDER-TOP: 0pt solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 0pt solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 0pt solid;
+    BACKGROUND-COLOR: ##cccccc  
+}
+TEXTAREA.Edit
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    COLOR: teal;
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-COLOR: LightYellow  
+}

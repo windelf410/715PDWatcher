@@ -1,0 +1,471 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/default.css" />
+		<link rel="stylesheet" type="text/css"href="../../js/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/themes/icon.css" />
+		<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="../../js/myjs/index.js"></script>
+		<script type="text/javascript" src="../../js/json2.js"></script>
+		<style type="text/css">
+		${demo.css}
+		</style>
+		<script type="text/javascript">
+		(function ($) {
+		    $.getUrlParam = function (name) {
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		        var r = window.location.search.substr(1).match(reg);
+		        if (r != null) return unescape(r[2]); return null;
+		    }
+		})(jQuery);
+
+		var data1 = new Array();
+		 var data2 = new Array();
+		 var data3 = new Array();
+		 var data4 = new Array();
+		 var data5 = new Array();
+		 var data6 = new Array();
+		 var data7 = new Array();
+		 var data8 = new Array();
+		 var data9 = new Array();
+		 var data10 = new Array();
+		var chart;  
+		var timer;
+		var timerreq;
+		function stopIn(){
+			clearInterval(timerreq);
+		}
+		function search(){
+			
+			
+		
+		}
+		$(document).ready(function() {
+			$("a[name='left1']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#1l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[0].show(); 
+				});
+			$("a[name='left2']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#2l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[1].show(); 
+				});
+			$("a[name='left3']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#3l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[2].show(); 
+				});
+			$("a[name='left4']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#4l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[3].show(); 
+				});
+			$("a[name='left5']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#5l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[4].show(); 
+				});
+			$("a[name='left6']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#6l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[5].show(); 
+				});
+			$("a[name='left7']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#7l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[6].show(); 
+				});
+			$("a[name='left8']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#8l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[7].show(); 
+				});
+			$("a[name='left9']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#9l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[8].show(); 
+				});
+			$("a[name='left10']").click(function(){
+				$("span[name='lc']").css("color","#A8A8A8");
+				$('#10l').css("color","red");
+				var series=chart.series;
+				for(var o=0 ;o<10;o++){
+					series[o].hide(); 
+				}
+				series[9].show(); 
+				});
+			time = setInterval("getups()", 500);  
+			 $.ajax({
+ 				type:'POST',
+ 				url:'../../rest/manage/user/getvleftList',
+ 				data: {
+ 					XH: $.getUrlParam('id')
+ 				},
+ 				dataType : 'json',
+ 				success:function(data){  
+ 					
+ 					 for (var i = 0; i < data.length; i++) {
+
+ 						var son =  new Array();
+ 						var ar = data[i];
+						var da =ar.sj;
+						
+ 						da=da.replace("-","/");
+ 						da=da.substring(0,da.length-2);
+ 						var date = new Date(da); 
+ 						var res = date.getTime()
+ 						son.push(res);
+ 						son.push(ar.ad_1*1);
+						data1.push(son);
+						
+						var son1 = new Array();
+						
+						son1.push(res);
+						son1.push(ar.ad_2*1);
+						data2.push(son1);
+						
+						var son2 = new Array();
+						son2.push(res);
+						son2.push(ar.ad_3*1);
+						data3.push(son2);
+						
+						var son3 = new Array();
+						son3.push(res);
+						son3.push(ar.ad_4*1);
+						data4.push(son3);
+						
+						var son4 = new Array();
+						son4.push(res);
+						son4.push(ar.ad_5*1);
+						data5.push(son4);
+						
+						var son5 = new Array();
+						son5.push(res);
+						son5.push(ar.ad_6*1);
+						data6.push(son5);
+						
+						var son6 = new Array();
+						son6.push(res);
+						son6.push(ar.ad_7*1);
+						data7.push(son6);
+						
+						var son7 = new Array();
+						son7.push(res);
+						son7.push(ar.ad_8*1);
+						data8.push(son7);
+						
+						var son8 = new Array();
+						son8.push(res);
+						son8.push(ar.ad_9*1);
+						data9.push(son8);
+						
+						var son9 = new Array();
+						son9.push(res);
+						son9.push(ar.ad_10*1);
+						data10.push(son9);
+
+ 					}
+ 					 
+ 					 
+ 					 
+ 					 
+ 					 
+ 					 
+ 		           },  
+ 		           //显示错误                                         
+ 		           error:function (err){  
+ 		        }  
+ 		     });
+			 
+			   
+			     
+			});  
+		function getups(){
+			if(data1.length>0){
+				dolaod();
+				clearInterval(time);
+			}
+		}
+		function dolaod(){
+			 Highcharts.setOptions({  
+			        global: {  
+			            useUTC: false  
+			        }  
+			    });
+			
+			    chart = new Highcharts.Chart({  
+			        chart: {  
+			            renderTo: 'container', 
+			            type: 'spline',
+
+			            marginRight: 10,
+			            
+			            events: {  
+			                      load: function() {  
+			                          // set up the updating of the chart each second 
+			                          var last="";
+			                          var series0 = this.series[0];  
+			                          var series1 = this.series[1];  
+			                          var series2 = this.series[2];  
+			                          var series3 = this.series[3];  
+			                          var series4 = this.series[4];  
+			                          var series5 = this.series[5];  
+			                          var series6 = this.series[6];  
+			                          var series7 = this.series[7];  
+			                          var series8 = this.series[8];  
+			                          var series9 = this.series[9];  
+			                          //setInterval(dopoint(series), 5000);  
+ 			                          timerreq = setInterval(function() {
+ 			                        	 var as = window.parent.getTabsselct();
+ 				                          if(as==$.getUrlParam('name')){
+ 				                        	  
+ 				                          
+			                              $.ajax({
+			                  				type:'POST',
+			                  				url:'../../rest/manage/user/getvleftnewinfo',
+			                  				data: {
+			                  					XH: $.getUrlParam('id')
+			                  				},
+			                  				dataType : 'json',
+			                  				success:function(data){  
+			                  		           
+			                  					 for (var i = 0; i < data.length; i++) {
+			                  						var son = new Array();
+			                  						var ar = data[i];
+			                  						series0.addPoint([(new Date()).getTime(), ar.ad_1*1], true, true);
+			                  						series1.addPoint([(new Date()).getTime(), ar.ad_2*1], true, true);
+			                  						series2.addPoint([(new Date()).getTime(), ar.ad_3*1], true, true);
+			                  						series3.addPoint([(new Date()).getTime(), ar.ad_4*1], true, true);
+			                  						series4.addPoint([(new Date()).getTime(), ar.ad_5*1], true, true);
+			                  						series5.addPoint([(new Date()).getTime(), ar.ad_6*1], true, true);
+			                  						series6.addPoint([(new Date()).getTime(), ar.ad_7*1], true, true);
+			                  						series7.addPoint([(new Date()).getTime(), ar.ad_8*1], true, true);
+			                  						series8.addPoint([(new Date()).getTime(), ar.ad_9*1], true, true);
+			                  						series9.addPoint([(new Date()).getTime(), ar.ad_10*1], true, true);
+			                  				        	
+			                  						
+			                  						//var series= $('#container').series[0];  
+
+			                  					}
+				                                 
+			                  		           },  
+			                  		           //显示错误                                         
+			                  		           error:function (err){  
+			                  		        }  
+			                  		     });  
+ 				                        }
+			                              
+			                              
+			                              
+			                          }, 30000);  
+			                      }  
+			                  }  
+
+			           
+			        },  
+			        title: {
+			            text: '左1到左10实时电压图'
+			        },
+
+
+		            xAxis: {
+		                type: 'datetime'
+		            },
+					
+		            yAxis: {
+		            	 title: {
+				                text: '电压量程 V'
+				            }
+
+
+		            },
+					
+			        tooltip: {  
+			            formatter: function() {  
+			                    return '<b>'+ this.series.name +'</b><br/>'+  
+			                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+  
+			                    Highcharts.numberFormat(this.y, 2);  
+			            }  
+			        },  
+			        legend: {  
+			            enabled: false  
+			        },  
+			       
+			        plotOptions: {
+		                area: {
+		                    fillColor: {
+		                        linearGradient: {
+		                            x1: 0,
+		                            y1: 0,
+		                            x2: 120,
+		                            y2: 300
+		                        },
+		                        stops: [
+		                            [0, Highcharts.getOptions().colors[0]],
+		                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+		                        ]
+		                    },
+		                    marker: {
+		                        radius: 2
+		                    },
+		                    lineWidth: 1,
+		                    states: {
+		                        hover: {
+		                            lineWidth: 1
+		                        }
+		                    },
+		                    threshold: null
+		                }
+		            },
+
+			        series: [{  
+			        	type: 'line',
+			        	name: '左1', 
+			        	visible:true,
+			            data: data1  
+			        },{  
+			        	type: 'line',
+			        	name: '左2',
+			        	visible:false,
+			            data: data2  
+			        },{  
+			        	type: 'line',
+			        	name: '左3',
+			        	visible:false,
+			            data: data3  
+			        },{  
+			        	type: 'line',
+			        	name: '左4',
+			        	visible:false,
+			            data: data4  
+			        },{  
+			        	type: 'line',
+			        	name: '左5',
+			        	visible:false,
+			            data: data5 
+			        },{  
+			        	type: 'line',
+			        	name: '左6', 
+			        	visible:false,
+			            data: data6  
+			        },{  
+			        	type: 'line',
+			        	name: '左7', 
+			        	visible:false,
+			            data: data7  
+			        },{  
+			        	type: 'line',
+			        	name: '左8',
+			        	visible:false,
+			            data: data8  
+			        },{  
+			        	type: 'line',
+			        	name: '左9',
+			        	visible:false,
+			            data: data9  
+			        },{  
+			        	type: 'line',
+			        	name: '左10',
+			        	visible:false,
+			            data: data10  
+			        }]  
+			    }); 
+		}
+		</script>
+	</head>
+	<body >
+<script src="js/highcharts.js"></script>
+<script src="js/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 200px; margin: 0 auto;"></div>
+<table style="width:480px;">
+						<tr >
+	    						<td align="right">电参数:</td><td   colspan="5" align="left">&nbsp;</td>
+	    						
+	    				</tr>
+						<tr >
+								<td  align="left">&nbsp;</td>
+	    						<td >
+	    							<a name="left1"><span id=1l name="lc" style="color: red" ><B>-·-左1</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left2"><span id=2l name="lc" style="color: #A8A8A8"><B>-·-左2<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left3"><span id=3l name="lc" style="color: #A8A8A8"><B>-·-左3<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left4"><span id=4l name="lc" style="color: #A8A8A8"><B>-·-左4<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left5"><span id=5l name="lc" style="color: #A8A8A8"><B>-·-左5<B></span></a>
+	    						</td>
+	    						
+
+	    					</tr>
+	    					<tr >
+	    						<td  align="left">&nbsp;</td>
+	    						<td >
+	    							<a name="left6"><span id=6l name="lc" style="color: #A8A8A8"><B>-·-左6</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left7"><span id=7l name="lc" style="color: #A8A8A8"><B>-·-左7<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left8"><span id=8l name="lc" style="color: #A8A8A8"><B>-·-左8<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left9"><span id=9l name="lc" style="color: #A8A8A8"><B>-·-左9<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left10"><span id=10l name="lc" style="color: #A8A8A8"><B>-·-左10<B></span></a>
+	    						</td>
+	    						
+
+	    					</tr>
+	    					</table>
+	</body>
+</html>

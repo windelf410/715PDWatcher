@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>宠物事记</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../../css/common.css" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css" />
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">宠物事记列表</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="data_tab" style="cellpadding:0;cellspacing:0;border:0">
+			<tr>
+				<td style="width:10%;align:right" class="fnt_333333_13">事记时间：</td>
+				<td style="width:35%">
+					<div style="float:left;width:100px;" class="default_box ">
+						<input class="default_input icon_date_input" style="width:100px" id="startTime"
+							readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)">
+					</div>
+					<div style="float:left;height:22px;line-height:25px;"
+						class="fnt_333333_13">&nbsp;至&nbsp;</div>
+					<div style="float:left;width:100px;" class="default_box ">
+						<input class="default_input icon_date_input" style="width:100px" id="endTime"
+							readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)">
+					</div>
+				</td>
+				<td class="errorMsg" style="width:20%" id="reminder" >
+					<label>开始时间不许大于结束时间</label>
+				</td>
+				<!-- </td> -->
+				<td style="width:45%"><a href="javascript:void(0)" class="default_btn4 no-line" id="query"
+					style="float:left;margin-left:30px;">确认查询</a>
+					<a href="javascript:void(0)" class="default_btn4 no-line" onclick="add()"
+					style="float:left;margin-left:30px;">新增</a>
+					<a href="pet.html" class="default_btn4 no-line" style="float:left;margin-left:20px;">返回</a>
+				</td>
+			</tr>
+		</table>
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="easyui-datagrid" style="cellpadding:0;cellspacing:0" id="dg" data-options="
+					url: '../../../../../rest/common/petDiary/page',
+					fitColumns: true,
+					singleSelect:true,
+					method: 'post',
+					pagination: true,
+					striped: true,
+					onBeforeLoad: function(param){
+						var index = window.location.search.match(/\d+/g).toString();
+						var id = parseInt(index);
+						param.pet_ID = id;
+					}
+				">
+			<thead>
+				<tr class="tr1 fnt_333333_13">
+					<th data-options="field:'order', align:'center', formatter: generateOrder, width:50">序号</th>
+					<th data-options="field:'genDate', align:'center', width:100">时间</th>
+					<th data-options="field:'diary', align:'center', width:450">事记</th>
+					<th data-options="field:'operate', align:'center', formatter: operate, width:200">操作</th>
+				</tr>
+			</thead>
+		</table>
+		
+		<input id="idName" value="diary_ID" type="hidden">
+		<div class="clearfloat" style="height:15px;"></div>
+	</div>
+	
+	<!-- <script src="../../../js/jquery.easing.1.3.js"></script> -->
+	<script src="../../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../../js/calendar.js"></script>
+	<script src="../../../../../js/myjs/list.js"></script>
+	<script>
+		$(function() {
+		  initUrl('../../../../../rest/common/petDiary/del', 'addDiary.html');
+		  $("#query").bind("click", function(){
+			    var startTime = $('#startTime').val();
+			    var endTime = $('#endTime').val();
+				if (startTime.length != 0 && endTime.length != 0 && startTime > endTime) {
+				  $("#reminder").css("display", "inline");
+				  return;
+			    }
+	$("#reminder").css("display", "none");
+				$("#dg").datagrid('load', {
+					startTime: startTime,
+					endTime: endTime
+				});
+		  });
+		  lines_bottom();
+		});
+		function add(){
+			var index = window.location.search.match(/\d+/g).toString();
+			var id = parseInt(index);
+			window.location.href = "addDiary.html?pet_ID=" + id;
+		}
+	</script>
+</body>
+</html>

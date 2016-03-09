@@ -1,0 +1,210 @@
+/* CSS Document */
+scrolling="no"
+html,body{font-family:"宋体", "微软雅黑","Arial", "Helvetica";font-size:12px; width:100%; height:100%;}
+body,h1,h2,h3,h4,ul,ol,li,dl,p,form{ list-style:none; margin:0px; padding:0px;}
+body {background:url(../../images/nyt/webbg.jpg) repeat-x;}
+/* 超链的的样式 */
+a {noFocusLine: expression(this.onFocus = this.blur () );}
+:focus {-moz-outline-style: none}
+a{color:#333;text-decoration: none;}
+a:hover {color:#666;text-decoration: none;}
+img {border: none;}
+fieldset,img {border: none;}
+legend {display: none;}
+em,strong,cite,th {font-style: normal;font-weight: normal;}
+input,textarea,select,button {font: 12px Helvetica, Arial, sans-serif;}
+table {border-collapse: collapse;}
+
+html {overflow: -moz-scrollbars-vertical;}
+/*页面控制开始*/
+
+.xtRightWhole {
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+.xtRight {width:100%;height:100%;overflow: hidden;}
+.xtRightB {
+	width:100%;
+	margin:0px auto;
+	margin-bottom:5px;
+	overflow: hidden;
+}
+.location{
+	width:73.5% !important;
+	width:71%;
+	height:22px;
+	border: 1px solid #638699; background:#DBE6EA; float:left; margin-right:1%;
+	overflow: hidden;
+	text-align:left;
+}
+.time{
+	width:28%;
+	height:22px;
+	border: 1px solid #638699; background:#DBE6EA; float:right;
+	overflow: hidden;
+	text-align:left;
+}
+
+.xtRightB span {
+	font-size: 12px;
+	color:#333;
+	padding-top:2px;
+	float:left;
+}
+
+.xtRightT {
+	width:100%;
+	height:97%;
+	margin:0px auto;
+	overflow: hidden;
+	margin-top:5px;
+}
+
+.xtRightDiv {
+	width:49.8%;
+	height:47.7%;
+	border: 1px solid #8CC5D9;
+	float: left;
+	overflow: hidden;
+	background:#fff ;
+	margin-bottom:6px;
+	position:relative;
+
+}
+
+.xtRightDivB {
+	width:100%;
+	height:25px;
+	padding-top:0px !important;
+	padding-top:2px;
+	margin:0px auto;
+	text-align:left;
+	background: url(../../images/nyt/linktitlebg.jpg) repeat-x;
+}
+html>body .xtRightDivB .icon01{margin-left:6px;background:url(../../images/nyt/iconall.png) no-repeat 0px 2px;}
+*html .xtRightDivB .icon01{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/iconall.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon02{margin-left:6px;background:url(../../images/nyt/icon02.png) no-repeat 0px 2px;}
+*html .xtRightDivB .icon02{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/icon02.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon03{margin-left:6px;background:url(../../images/nyt/icon03.png) no-repeat 0px 0px;}
+*html .xtRightDivB .icon03{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/icon03.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon04{margin-left:6px;background:url(../../images/nyt/icon04.png) no-repeat 0px 0px;}
+*html .xtRightDivB .icon04{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/icon04.png",sizingMethod=crop);}
+
+.xtRightDivB .title {
+	font-size: 14px;
+	color: #246f95;
+	font-weight:900;
+	padding:0px;
+}
+.xtRightText3Nav {
+	background:url(../../images/nyt/link_r5_c4.jpg) repeat-x;
+	width:100%;
+	height:100%;
+	padding:6px;
+}
+.page{ position:absolute;  bottom:0px;  padding:0px; width:100%;}
+.xtRightText3 {
+	width:97.5% !important;
+	padding:0px;
+	width:100%;
+	height:90%;
+	margin:0px;
+	overflow:auto;
+	border:#BCDBF0 1px solid;
+	background:#fff;
+}
+.linkBG{ background:#F6FBFF;}
+
+.xtRightText3 li {
+	line-height: 28px;
+	height:25px;
+	font-size: 12px;
+	text-align: left;
+	overflow: hidden;
+	width:100%;
+	float: left;
+}
+
+.xtRightText3 li a {
+	float:left;
+	width:60%;
+	color:#003561;
+	overflow: hidden;
+	padding-left:15px;
+}
+.xtRightText3 li a:hover {
+	float:left;
+	width:60%;
+	color:#cc0000;
+	overflow: hidden;
+	padding-left:15px;
+}
+.xtRightText3 li span {
+	float: right;
+	width:20%;
+	overflow: hidden;
+	text-align: right;
+	padding-right:10px;
+}
+
+.xtRightDivr {
+	width:49.8%;
+	height:47.7%;
+	border: 1px solid #8CC5D9;
+	float: right;
+	overflow: hidden;
+	padding:0px;
+	background:#fff ;
+	margin-bottom:6px;
+	position:relative;
+}
+.linktitlebg{background:url(../../images/nyt/link_r7_c4.jpg) repeat-x top left;font-size: 12px;color:#003561;}
+.linktitlebg td{padding-left:5px; padding-right:5px; line-height:25px;}
+.linktd{ background:url(../../images/nyt/link_r7_c2.jpg) no-repeat right top; height:28px; text-align:center;}
+
+.searchbg{background:#EDF5F7; font-size:12px;}
+.input{border:#C8DFE7 1px solid; color:#333333; background-color:transparent; width:100%;background:url(../../images/nyt/search_r3_c2.jpg) no-repeat 5px 2px;padding-left:20px; height:21px; width:100%;}
+.input01{border:#C8DFE7 1px solid; color:#333333; background-color:transparent; width:100%;padding-left:20px; height:21px; width:100%;}
+.red{ color:#ff0000; font-family:Arial, Helvetica, sans-serif; font-weight:bolder;}
+
+
+.leftNav{background-color:#FFFFFF; top:34px; left:0px; right:0; bottom:0; border-left:#78BAD2 1px solid;border-right:#78BAD2 1px solid;}
+.leftMenuNav{height:100%; position:absolute;top:34px; left:0px; bottom:0; right:0;}
+
+.xtRightDiv100 {border: 1px solid #8CC5D9; position:absolute; background:#fff;top:27px; left:0px; right:0; bottom:0; height:80%}
+
+.linktitlebg100{background:url(../../images/nyt/link_r7_c4.jpg) repeat-x;font-size:12px;color:#003561;border:#BCDBF0 1px solid;height:100%; position:absolute;top:30px; left:6px; bottom:0; right:0;}
+.linktitlebg100 td{padding-left:5px; padding-right:5px; line-height:25px;}
+
+.linkadmin{font-size: 12px;color:#003561; border:#D7F0F7 1px solid; border-collapse:collapse;}
+.linkadmin td{padding-left:5px; padding-right:5px; padding-top:3px; padding-bottom:3px;border:#D7F0F7 1px solid;}
+.xtadmin {
+	width:97.5% !important;
+	width:100%;
+	overflow:auto;
+	background:#fff;
+}
+.blue01{ font-size:12px; color:#246F96;}
+.saveadmin{ float:right;}
+.titleadmin{ float:left;}
+.link01{color:#cc0000;font-family:"宋体"}
+.link01 a{color:#cc0000;}
+.link01 a:hover{color:#666666;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

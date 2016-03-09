@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>联系我们</title>
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../../css/net/helpPage.css" />
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/jquery.easing.1.3.js"></script>
+	</head>
+	<body>
+    	<!-- header -->
+        <div id="header" style="position:relative;">
+        	<div style="width:1024px;margin:0 auto;">
+            	<div style="float:left;width:380px;height:87px;padding-left:24px;" class="fnt_00a0e9_37_yahei">
+               		<img src="../../images/logo.png" >
+                </div>
+            	<div style="float:left;width:620px;height:87px;">
+                	<nav id="nav" style="float:right;">
+                        <ul id="cssdropdown">
+                            <li><a href="../../index.html" class="fnt_333333_14 no-line">首页</a></li>
+                            <li><a href="../../personalDB.html" class="fnt_333333_14 no-line">个人数据银行</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝企业版</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝个人版</a></li>
+                            <li><a href="../../download.html" class="fnt_333333_14 no-line">应用下载</a></li>
+                            <li  id="help">
+                            <a href="employ.html" class="fnt_333333_14 no-line">帮助与服务</a>
+                            <ul class="subMenu" id="subMenu">
+                            <li><a class="sub" href="aboutUs.html">关于我们</a></li>
+                            <li><a class="sub" href="employ.html">诚聘英才</a></li>
+                            <li><a class="sub" href="contactUs.html">联系我们</a></li>
+                            <li><a class="sub" href="question.html">常见问题</a></li>
+                            <li><a class="sub" href="serviceItem.html">服务条款</a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <div style="height:0px;" class="clearfloat"></div>
+                        <div style="width:100%;height:1px;background:#fff;margin-top:-1px;"></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    	<!-- /header -->
+
+        <section id="se_1_div" data-section-name="se_1" style="padding-top:0px;">
+            <img class="se_bg_2" src="../../images/bg_5_2.png"/>
+            <div class="parentDiv">
+            	<div class="outerDiv">
+                </div>
+                <div class="textContentDiv">  
+                  
+<h3>联系地址</h3>
+ <p>地 址:成都市高新区孵化园6号楼公共技术平台204窒</p>
+ <p>电 话: 028-85112884</p>
+ <p>联系人：张先生</p>
+ <p>邮 编: 610041</p>
+ <p>E-Mail: Support@cdatabank.com</p>
+ <br>
+ <br>
+ 
+<h3>市场合作</h3>
+  <p>欢迎有广告投放、移动需求、市场推广及其他合作事务的机构与我们联系。</p>
+  <p>电 话: 028-85112884</p>
+  <p>联系人：张先生</p>
+  <p>邮 编: 610041</p>
+  <p>E-Mail: Sale@cdatabank.com</p>
+                </div>
+                <div class="clearfloat" style="height:0px;"></div>
+            </div>
+            
+        </section>
+        <div id="bottom2" style="position:absolute;height:28px;bottom:0px;left:0;width:100%;z-index:999;">
+                <div style="background:#efefef;">
+                	<div style="width:1024px;margin:0 auto;line-height:28px;text-align:left;">
+                    	<!-- <div style="float:left;width:700px;">
+                        	<a href="#" class="fnt_666666_13">首页</a>
+                            &nbsp;|&nbsp;
+                        	<a href="#" class="fnt_666666_13">个人数据银行</a>
+                            &nbsp;|&nbsp;
+                        	<a href="#" class="fnt_666666_13">数汇宝企业版</a>
+                            &nbsp;|&nbsp;
+                        	<a href="#" class="fnt_666666_13">数汇宝个人版</a>
+                            &nbsp;|&nbsp;
+                        	<a href="#" class="fnt_666666_13">应用下载</a>
+                            &nbsp;|&nbsp;
+                        	<a href="#" class="fnt_666666_13">帮助与服务</a>
+                        </div> -->
+                        <div style="margin:auto;width:355px" class="fnt_999999_13">
+                        	成都数银科技有限公司©2014-2020 蜀ICP备15003732号-1
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+	</body>
+<script>
+	function init(){
+		
+		$("section").css({"height":$(window).height()- 87-28});
+		
+		$(".se_bg_1").css({"width":$(window).width(),"height":$(window).height()});
+		$(".se_bg_2").css({"width":$(window).width(),"height":$(window).height()-28});
+		
+		$(".parentDiv").css({"height":($(".se_bg_2").outerHeight())+"px"});
+		if($(".parentDiv").outerHeight()>$(".textContentDiv").outerHeight()){
+			$(".outerDiv").css({"height":($(".parentDiv").outerHeight())+"px"});
+		}else{
+			$(".outerDiv").css({"height":($(".textContentDiv").outerHeight())+"px"});
+		}
+		
+		$(".textContentDiv").css({"margin-top":("-"+($(".outerDiv").outerHeight()))+"px"});
+		$(".textContentDiv").css({"width":(($(".parentDiv").width()-35))+"px"});
+	}
+	
+	$(function() {
+		
+		init();
+		$(window).resize(function(){
+			init();
+		});
+		
+	});
+	
+</script>
+</html>

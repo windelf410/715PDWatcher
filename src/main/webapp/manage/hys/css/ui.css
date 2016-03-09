@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+/*==========================add waffie=============================*/
+*{ padding:0; margin:0; list-style:none; line-height:150%;}
+body,html{ font-size:13px; font-family:"宋体",Helvetica, Arial, sans-serif; }
+body{ background:url(../images/bg_header.jpg) repeat-x; }
+a,img{ border:0; }
+a{ text-decoration:none; }
+a:hover{ text-decoration:underline; }
+.dyn{ display:none; }
+
+/*-------------------header-------------------*/
+.header{ width:100%; height:83px; overflow:hidden; background:url(../images/gsln.jpg) no-repeat 570px center; }
+.header ul{ display:block; height:83px; overflow:hidden; }
+.header .logo{ float:left; width:555px; height:78px; background:url(../images/logo.jpg) no-repeat; }
+.header .nav{ float:right; }
+.nav li{ float:left; }
+.nav .sys{ width:20px; height:65px; margin-top:10px; background:url(../images/jcxt.jpg) no-repeat center; cursor:pointer; }
+.nav .sps{ width:10px; height:83px; background:url(../images/nav_s.jpg) no-repeat center; }
+.nav .ns{ margin-top:2px; width:81px; height:78px; cursor:pointer; }
+.nav .hov{ background:url(../images/nav_cur.jpg) no-repeat; }
+.nav .ns .pic{ display:block; height:50px; background-repeat:no-repeat; background-position:bottom; text-align:center; }
+.nav .ns .tt{ display:block; padding-top:3px; height:20px; overflow:hidden; text-align:center; font-family:verdana; font-weight:bold; color:#fff; }
+/*-------------------end header-------------------*/
+.mt{ height:27px; overflow:hidden; background:#023c86; color:#cedef3; }
+.mt li{ float:left; }
+.mt .ll{ padding:3px 10px 0; font-family:verdana; }
+.mt .lc{ padding:3px 10px 0 30px; font-weight:bold; }
+.mt .lr{ float:right; margin:3px 5px 0; width:194px; height:23px; overflow:hidden; background:url(../images/gl.jpg) no-repeat; }
+.mt .lr .lrs{ float:left; display:block; width:24px; height:100%; cursor:pointer; }
+.mt .lr .lbs{ float:left; width:10px; height:100%; overflow:hidden; }
+
+.mb{ height:10px; overflow:hidden; background:url(../images/bg_b.jpg) repeat-x; }
+
+.content{ background:none; }
+/*-------------------left-------------------*/
+.cl{ float:left; width:137px; height:100%; overflow:hidden; background:url(../images/bg_menu.jpg) repeat-y; position:relative; }
+.cl .clt{ height:29px; overflow:hidden;background:url(../images/lt.jpg) no-repeat right top; }
+.cl .clt .spt{ display:block; width:118px; height:29px; background:url(../images/menu_t.jpg) no-repeat; }
+.cl .clc{ overflow:auto; }
+.cl .menu_t{ padding-left:30px; height:33px; line-height:33px; overflow:hidden; color:#fff; font-weight:bold; font-size:14px; background:url(../images/menu_bg.jpg) no-repeat; cursor:pointer; }
+.cl .menu_t_h{ background:url(../images/menu_c.jpg) no-repeat; color:#000; }
+.cl .menu_c{ display:none; }
+.cl .menu_c li{ padding-left:35px; height:26px; line-height:26px; overflow:hidden; color:#badcff;  background:url(../images/menu_bgs.jpg) no-repeat;  }
+.cl .menu_c .hov{ background:url(../images/menu_hov.jpg) no-repeat; cursor:pointer; }
+.cl .menu_c .cur{ background:url(../images/menu_cur.jpg) no-repeat; }
+.cl a{ outline:none; }
+.cl .hcl{ display:block; width:10px; height:41px; background:url(../images/shl.jpg) no-repeat right; position:absolute; right:0; top:45%; cursor:pointer; }
+.clh{ width:0px; padding-right:10px; }
+.clh .hcl{ background:url(../images/shlr.jpg) no-repeat right; }
+.clh .clt,.clh .clc{ display:none; }
+/*-------------------end left-------------------*/
+
+.cr{ float:right; height:500px; overflow:hidden; background:#fff; position:relative; }
+.cr .crt{ height:13px; overflow:hidden; background:#f2f2f2; border-top:1px solid #fcfcfc; border-bottom:1px solid #d8d8d8; }
+.cr .crc{ }
+
+/* masksDiv */
+.masksDiv{display:none; width:670px; background:#fff; border:1px solid #acacac; position:fixed !important; top:9%; left:20%; z-index:999; }
+.masksDiv .mdt{ height:32px; overflow:hidden; padding:0 5px; background:#eee url(../images/c_pt_bc.jpg) repeat-x; border-bottom:1px solid #ccc; }
+.masksDiv .mdt .spt{ float:left; display:block; padding:3px 0 5px 28px; background:url(../images/gzt_ico.gif) no-repeat left; color:#000; font-size:14px; font-weight:bold; }
+.masksDiv .mdt .close{ float:right; display:block; width:30px; height:30px; background:url(../images/close.gif) no-repeat center; cursor:pointer; }
+.masksDiv .mdt .close:hover{ background-image:url(../images/close_hov.gif); }
+
+.masksDiv .mdc{ padding:10px 0 0 10px; height:250px; overflow:auto; }
+.masksDiv .nav .hov{ background:url(../images/nav_cur2.jpg) no-repeat; }
+.masksDiv .nav .ns .tt{ color:#000; }

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>数据产品</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../css/common.css" />
+<link rel="stylesheet" href="../../../css/style.css" />
+<link rel="stylesheet" href="../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/icon.css" />
+<script src="../.../../../../js/jquery-1.11.1.min.js"></script>
+<script src="../../../../js/jquery.easyui.min.js"></script>
+<script src="../../../../js/locale/easyui-lang-zh_CN.js"></script>
+<script src="../../../js/calendar.js"></script>
+ <script src="../../../../js/myjs/list.js"></script>
+<script>
+	
+		function generateOrders(value, row, index) {
+		return index + 1;
+	}
+		
+		function operateDataProduct(vlaue, row, index){
+			
+		var editButton = '<input id="edit' + index 
+						+ '" type="button" class="default_btn5 btn_height" value="详情"'
+						+ ' onmouseover="over(this)" onmouseout="out(this)" onclick="editRows(this)">';
+				
+		return editButton;
+}
+function over(element){
+	$(element).removeClass('default_btn5').addClass('default_btn6');
+}
+function out(element){
+	$(element).removeClass('default_btn6').addClass('default_btn5');
+}
+function editRows(element){
+	
+	var index = element.id.match(/\d+/g).toString();
+	
+	var value;
+	eval("value = $('#dg').datagrid('getRows')[index]." + $('#idName').val());
+	if (index.length != 0) {
+	window.location=encodeURI("/shuhuibao/net/page/personalDB/dataProduct/dataProductDetail.html?dataproductId="+value);
+		
+	}
+}
+</script>
+</head>
+
+<body>
+	<div id="right_content">
+		<div class="content_title">数据产品清单</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="easyui-datagrid" cellpadding="0" cellspacing="0" id="dg" data-options="
+					url: '/shuhuibao/rest/app/dataProduct/listDataProduct',
+					fitColumns: true,
+					singleSelect:true,
+					method: 'post',
+					pagination: true,
+					striped: true
+				">
+			<thead>
+				<tr class="tr1 fnt_333333_13">
+					<th data-options="field:'order', align:'center', formatter: generateOrders, width:50">序号</th>
+					<th data-options="field:'expiredate', align:'center', width:150">到期时间</th>
+					<th data-options="field:'description', align:'center', width:100">产品类型</th>
+					<th data-options="field:'productname', align:'center', width:150">产品名称</th>
+					<th data-options="field:'dataproductId', align:'center', width:200" >产品id</th>
+					<th data-options="field:'operate', align:'center', formatter: operateDataProduct, width:200">操作</th>
+					
+				</tr>
+			</thead>
+		</table>
+		
+		<input id="idName" value="dataproductId" type="hidden">
+		<div class="clearfloat" style="height:15px;"></div>
+	</div>
+	
+	
+</body>
+
+</html>

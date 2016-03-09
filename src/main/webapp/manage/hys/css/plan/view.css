@@ -1,0 +1,40 @@
+/* CSS Document */
+#workInfo { width:100%; height:auto; margin:0 auto; }
+
+
+#viewBar { width:100%; height:30px; background:url(/jflow/resource/images/plan/img/barBG3.jpg) repeat-x;
+		    text-align:center; line-height:30px; font-size:14px; font-weight:bold;}
+#viewBar .blank { width:10px; height:30px; float:left;}
+#viewBar .cardActive { width:160px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnActive3.jpg); color:#039; cursor:pointer;}
+#viewBar .cardNormal { width:160px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnNormal3.jpg); color:#999; cursor:pointer;}
+#viewBar .viewBarMore { width:100px; height:30px; float:right; line-height:30px;}
+#viewBar .viewBarMore a { text-decoration:none; color:#000;}
+#viewBar .viewBarMore a:hover { color:#00F;}
+
+
+#viewBar1 { width:100%; height:30px; background:url(/jflow/resource/images/plan/img/barBG2.jpg) repeat-x;
+		    text-align:center; line-height:30px; font-size:14px; font-weight:bold;}
+#viewBar1 .blank { width:10px; height:30px; float:left;}
+#viewBar1 .cardActive { width:160px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnActive1.jpg); color:#039; cursor:pointer;}
+#viewBar1 .cardNormal { width:160px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnNormal1.jpg); color:#999; cursor:pointer;}
+#viewBar1 .viewBarMore { width:100px; height:30px; float:right; line-height:30px;}
+#viewBar1 .viewBarMore a { text-decoration:none; color:#000;}
+#viewBar1 .viewBarMore a:hover { color:#00F;}
+
+
+#viewBody { margin:0px; padding:0px; border:0px; font-size:12px; text-align:left;}
+
+.listTab {}
+.listTab tr td {height:24px;line-height:24px;}
+.listTab tr td  a { display:block; width:100%; height:24px; text-decoration:none; color:#333;}
+.listTab tr td  a:hover { background:#EFF5FB; color:#36C;}
+
+#body0,#body1,#body2, #body3  { width:100%; height:auto; margin:10px auto 0 auto;}
+
+table a { text-decoration:none; color:#00F;}
+table a:hover { color:#009;}
+
+table tr td { padding:0 0 0 5px;}
+#__01 tr td {padding:0;}
+
+.dashedTable { border-bottom:1px dashed #CCC;}

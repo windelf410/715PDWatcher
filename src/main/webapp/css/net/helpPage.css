@@ -1,0 +1,96 @@
+        /*header部分 开始*/
+        #header{
+		  overflow:visible;
+		}
+        .subMenu{
+			width: 5em;
+			position: absolute;
+			left:-999em;
+			background-color: #bae3f9;
+			border: 0px;
+			z-index:1000;
+		}
+		.subMenu li{
+		    float: center;
+			width: auto;
+			height:29px;
+		    z-index:1001;
+		    border-bottom:0px !important;
+		}
+		.subMenu li:hover{
+		    float: center;
+			width: auto;
+			height:29px;
+		    z-index:1001;
+		    background:#80CCF4;
+		    border-bottom:0px!important;
+		}
+		.sub{
+		    text-decoration: none !important;
+		    font-family:宋体 !important;
+			font-size:13px !important;
+			color:#000000 !important;
+			margin:7px auto !important;
+			padding:0px 14px 0px 14px !important;
+		}
+		#help:hover .subMenu{
+		    display: block;
+		    left:0.5em;
+		    top:3.0em;
+		}
+		/* #help:hover .subMenu li{
+		    top:-.5em;
+		} */
+		section{
+			overfolw:hidden;
+		}
+		/*header部分 结束*/
+		
+		/*段落 左对齐首行缩进  开始 */
+		p{
+		   text-indent:2em;
+		   text-align:left
+		}
+		/*段落 左对齐首行缩进  结束  */
+		h2,h3,h4{
+		 text-align:left;
+		}
+		/*中间 静态页面部分     开始*/
+		body{
+		  overflow:hidden;
+		}
+		.parentDiv{
+		   position:relative;
+		   z-index:11;
+		   overflow-x:hidden;
+		   overflow-y:scroll;
+		   margin:0px auto;
+		   width:60%;
+		}
+		.outerDiv{
+		   position:relative;
+		   width:100%;
+		   
+		   margin:auto;		   
+		   
+		   overflow-x:hidden;
+		   overflow-y:auto;
+		   z-index:11;
+		   
+		   background:rgba(f,f,f,0.6) !important;
+	       filter:Alpha(opacity=60);
+	       background:#fff;
+	       opacity:0.6;  
+			}
+		.textContentDiv{
+		   position:relative;
+		   margin:auto;
+		   padding-top:0px;
+		   padding-bottom:100px;
+		   padding-left:15px;
+		   padding-right:20px;
+		   overflow-x:hidden;
+		   overflow-y:auto;
+		   z-index:100;
+        }
+        /*中间 静态页面部分     结束*/

@@ -1,0 +1,157 @@
+@charset "utf-8";
+/* 自定义样式 */
+#iframe{
+	float:right;
+	width:840px;
+	min-height:840px;
+
+    overflow:visible;
+	background-color :#fff;
+	border-style:none;
+	border:0;
+	marginwidth:0;
+	marginheight:0;
+	frameborder:0;
+}
+
+.necessity,
+.errorMsg{
+	color: red;
+}
+
+.btn_height{
+	height: 28px;
+	line-height: 32px;
+}
+
+/* 覆盖界面原型的默认样式*/
+#right_content{
+	float:left;
+	width:800px;
+	padding:20px 15px 15px 20px; 
+	min-height:800px;
+    height:auto !important;
+    height:800px;
+    overflow:visible;
+	background-color :#fff;
+}
+.default_box{
+	border-color:#95b8e7;
+	border-radius:5px;
+}
+.errorMsg{
+	font-size: 13px;
+	font-fimaly: 宋体;
+	display: none;
+}
+thead tr th{
+	font-weight:normal;
+}
+.default_input{
+	color: #000000;
+}
+.default_btn5:hover{
+	cursor:pointer;
+	background:#D2D3D4;
+	color:#fff;
+}
+.default_btn6:hover{
+	cursor:pointer;
+	background:#1198C2;
+}
+.default_btn4:hover{
+	cursor:pointer;
+	background:#6FAECF;
+}
+.tr1{
+	line-height:35px;
+}
+
+
+/* 改变input标签中占位符显示的格式  */
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #A9A9A9;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #A9A9A9;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #A9A9A9;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #A9A9A9;
+}
+
+
+/* 覆盖 easyui 的默认样式  */
+.lines-bottom .datagrid-body td {
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid #E6E6E6;
+	font-size: 20px !important;
+}
+.datagrid-body tr{
+	height: 35px;
+}
+.datagrid-body th{
+	height:35px;
+}
+.panel-header,
+.panel-body {
+  border-color: #E6E6E6 !important;
+}
+.datagrid-row-selected {
+  background: #F3F3F3 !important;
+  color: #000000;
+}
+.datagrid-row-over,
+.datagrid-header td.datagrid-header-over {
+  background: #F3F3F3 !important;
+}
+
+/*按钮使能与禁止*/
+       /* .ableStyle{
+            height: 28px;
+	        line-height: 32px;
+	        border:0;
+			padding:0 20px;
+			background:#00b9ef;
+			
+			font-family:宋体;
+			font-size:13px;
+			color:#ffffff;
+    	    float:left !important;
+		}
+       .ableStyle:hover{
+			cursor:pointer;
+			background:#1198C2;
+       } */
+		.disStyle{
+		    height: 28px;
+	        line-height: 32px;
+	        border:0;
+			padding:0 20px;
+			background:#f3f3f3;
+			
+			font-family:宋体;
+			font-size:13px;
+			color:#999999;
+		}
+		.disStyle:hover{
+			cursor:wait;
+			/* background:#D2D3D4;
+			color:#fff; */
+        }
+        
+/********somnus 2015-07-29*******/
+#header2{
+	background:#e2f2fb;
+	z-index:9999 !important;
+}
+#bottom2{
+	width:100%;
+	height:48px;
+	background:#d7d7d7;
+	float:left !important;	
+}

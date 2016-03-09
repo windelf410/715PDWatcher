@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>数汇宝模板</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../../css/common.css" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css" />
+<style>
+td div {
+	padding: 2.2px 0;
+}
+</style>
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">保险明细</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<form method="post" id="data">
+			<table class="data_tab" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>名称：</td>
+					<td width="85%" colspan="5">
+						<div style="float:left;width:451px;" class="default_box ">
+							<input class="default_input" style="width:430px" id="name"
+								name="name" placeholder="长度不能超过40">
+							
+						</div>
+						<span class="errorMsg" id="empName">×名称必须填写</span>
+						<span class="errorMsg" id="errNameFormat">×长度不能超过40</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>投保日期：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input icon_date_input2" style="width:180px"
+								readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)"
+								id="buy_date" name="buyDate">
+						</div>
+						<span class="errorMsg" id="empBuyDate">×投保日期必须选择</span>
+					</td>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>到期日期：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input icon_date_input2" style="width:180px"
+								readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150, true)"
+								id="expire_date" name="maturityDate">
+						</div>
+						<span class="errorMsg" id="empExpireDate">×到期日期必须选择</span>
+						<span class="errorMsg" id="errExpireDate">x到期日期必须大于投保日期</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>币种：</td>
+					<td width="35%">
+						<div style="float:left;width:150px;">
+							<input class="easyui-combobox" name="currency" id="currency"
+								data-options="
+								url: '../../../../../rest/getType/2',
+								valueField: 'type_ID',
+								textField: 'typeName',
+								editable: false,
+								onLoadSuccess: function(data){
+									for(i in data){
+										if(data[i].typeName == '人民币元'){
+											$('#currency').combobox('select', data[i].type_ID);
+											break;
+										}
+									}
+								}
+								">
+						</div>
+						<span class="errorMsg" id="empCurrency">×币种必须选择</span>
+					</td>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>保险类型：</td>
+					<td width="35%">
+						<div style="float:left;width:160px;">
+							<input class="easyui-combobox" name="type" id="type"
+								data-options="
+								url: '../../../../../rest/getType/8',
+								valueField: 'type_ID',
+								textField: 'typeName',
+								editable: false,
+								onLoadSuccess: function(data){
+									for(i in data){
+										if(data[i].typeName == '养老保险'){
+											$('#type').combobox('select', data[i].type_ID);
+										}
+									}
+								}
+								">
+						</div>
+						<span class="errorMsg" id="empType">×保险类型必须选择</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>保险公司：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="shop"
+								name="issuer" placeholder="长度不能超过100">
+						</div>
+						<span class="errorMsg" id="errShop">×长度不能超过100</span>
+						<span class="errorMsg" id="empShop">×保险公司必须填写</span>
+					</td>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>金额(元)：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="amount" 
+								name="amount" placeholder="最长10位整数和2位小数">
+						</div>
+						<span id="errFormatAmount" class="errorMsg">×格式不正确</span>
+						<span id="empAmount" class="errorMsg">×金额必须填写</span>
+					</td>
+				</tr>
+					
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>投保人：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="policyHolder"
+								name="policyHolder" placeholder="长度不能超过30">
+						</div>
+						<span class="errorMsg" id="errPolicyHolder">×长度不能超过30</span>
+						<span class="errorMsg" id="empPolicyHolder">×投保人必须填写</span>
+					</td>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>受益人：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="beneficiary"
+								name="beneficiary" placeholder="长度不能超过30">
+						</div>
+						<span class="errorMsg" id="errBeneficiary">×长度不能超过30</span>
+						<span class="errorMsg" id="empBeneficiary">×受益人必须填写</span>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">备注：</td>
+					<td width="85%" colspan="3">
+						<div style="float:left;width:451px;">
+							<input class="easyui-textbox" data-options="multiline:true"
+								style="width:430px;height:50px" id="description" name="description">
+						</div>
+						<span class="errorMsg" id="errDescription">×长度不能超过200</span>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">添加附件：</td>
+					<td width="85%" colspan="5"><a href="javascript:void(0)"
+						class="default_btn5 no-line" style="float:left;"
+						onclick="upload()">浏览...</a> <!-- <input id="uploadFile" type="file"
+						style="display:none"> --></td>
+				</tr>
+			</table>
+
+			<div class="clearfloat" style="height:24px;"></div>
+			<div class="default_line"></div>
+			<div class="clearfloat" style="height:24px;"></div>
+		</form>
+
+		<form id="attachment" method="post" enctype="multipart/form-data">
+			<table id="dg" class="easyui-datagrid" cellpadding="0"
+				cellspacing="0"
+				data-options="fitColumns: true, singleSelect:true">
+				<thead>
+					<tr class="tr1 fnt_333333_13">
+						<th
+							data-options="field:'order', align:'center', formatter: generateOrder"
+							style="width:10%;">序号
+						</th>
+						<th data-options="field:'attachedFileName', align: 'center'"
+							style="width:40%;">附件名
+						</th>
+						<th data-options="field:'uploadDate', align: 'center'"
+							style="width:20%;">上传时间
+						</th>
+						<th data-options="field:'operate', align: 'center', formatter: operate"
+							style="width:30%;">操作
+						</th>
+					</tr>
+				</thead>
+			</table>
+			<input type="hidden" id="id" name="id">
+			<div id="file" style="display:none;"></div>
+		</form>
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<div>
+			<!-- <a href="#" class="default_btn6 no-line"
+				style="float:right;margin-left:10px;height:28px;line-height:32px;">确认保存</a>
+			<a href="#" class="default_btn5 no-line"
+				style="float:right;margin-left:10px;height:28px;line-height:32px;">取消</a> -->
+			<input type=button class="default_btn6 btn_height" value="确认保存"
+				onclick="add()"> <input type="button"
+				class="default_btn5 btn_height" value="重置" onclick="reset()"> <input
+				type="button" class="default_btn5 btn_height" value="返回"
+				onclick="history.back(-1)">
+		</div>
+	</div>
+	<div class="clearfloat" style="height:0px;"></div>
+	<div id="win"></div>
+	<script src="../../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../../js/calendar.js"></script>
+	<script src="../../../../../js/myjs/net.js"></script>
+<script>
+function add(){
+	var updUrl = '../../../../../rest/app/asset/handle/insu';
+	var attUrl = '../../../../../rest/app/asset/upload/insu';
+	submit(updUrl, attUrl, 'insurance_ID', null);
+}
+function validate() {
+	var flag = true;
+	if ($('#name').val().trim().length != 0) {
+		if ($('#name').val().length > 40) {
+			$('#errNameFormat').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empName').css('display', 'inline');
+		flag = false;
+	}
+
+	if($('#buy_date').val().length == 0){
+		$('#empBuyDate').css('display', 'inline');
+		flag = false;
+	}
+	
+	if($('#expire_date').val().length == 0){
+		$('#empExpireDate').css('display','inline');
+		flag = false;
+	}else if($('#expire_date').val() < $('#buy_date').val()){
+		$('#errExpireDate').css('display', 'inline');
+		flag = false;
+	}
+	
+	if ($('#shop').val().trim().length != 0) {
+		if ($('#shop').val().trim().length > 100) {
+			$('#errShop').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empShop').css('display', 'inline');
+		flag = false;
+	}
+	
+	if ($('#currency').combobox('getValue').length == 0) {
+		$('#empCurrency').css('display', 'inline');
+		flag = false;
+	}
+
+	if ($('#type').combobox('getValue').length == 0) {
+		$('#empType').css('display', 'inline');
+		flag = false;
+	}
+
+	var amount = $('#amount').val().trim();
+	//var pattrn = new RegExp("^[1-9]\d{0,9}(\\.\d{1,2})?$");
+	var pattrn = new RegExp("^[1-9]([0-9]{0,9})(\\.[0-9]{1,2})?$");
+	if (amount.length != 0) {
+		if (!pattrn.test(amount)) {
+			$('#errFormatAmount').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empAmount').css('display', 'inline');
+		flag = false;
+	}
+
+	if ($('#policyHolder').val().trim().length != 0) {
+		if ($('#policyHolder').val().trim().length > 30) {
+			$('#errPolicyHolder').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empPolicyHolder').css('display', 'inline');
+		flag = false;
+	}	
+	
+	if ($('#beneficiary').val().trim().length != 0) {
+		if ($('#beneficiary').val().trim().length > 30) {
+			$('#errBeneficiary').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empBeneficiary').css('display', 'inline');
+		flag = false;
+	}
+	
+	if($('#description').val().length > 200){
+		$('#errDescription').css('display', 'inline');
+		flag = false;
+	}
+	return flag;
+}
+</script>
+</body>
+</html>

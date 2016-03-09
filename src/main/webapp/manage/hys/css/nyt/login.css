@@ -1,0 +1,15 @@
+@charset "utf-8";
+body{background:#164D71 url(../../images/nyt/LoginBG.jpg) repeat-x; width:100%; height:100%; margin:0px; padding:0px; font-size:14px;}
+body,h1,h2,h3,h4,ul,ol,li,dl,p,form{ list-style:none; margin:0px; padding:0px;}
+.idslogin {
+	background:url(../../images/nyt/Login.png) no-repeat;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-203px 0 0 -365px;
+    width:730px;
+    height:405px;
+}
+	
+.Main a{float:left; width:60px; height:22px; display:block;}	
+.input{ border:#346f86 0px solid; height:18px; width:163px;background:transparent;}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>用户注册</title>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/net/helpPage.css">
+    <link rel="stylesheet" type="text/css" href="../../css/net/register.css">
+    <link rel="stylesheet" type="text/css" href="../../js/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../js/themes/default/easyui.css">
+    <link rel="stylesheet" href="../../css/net/helpPage.css" />
+    <style>
+        .sItem{
+           
+        }
+	    .sItem:link {
+		 color: #61b3f6;
+		 TEXT-DECORATION: none
+		}
+		.sItem:visited {
+		 COLOR: #61b3f6;
+		 TEXT-DECORATION: none
+		}
+		.sItem:hover {
+		 COLOR: #61b3f6;
+		 text-decoration: none;
+		}
+		.sItem:active {
+		 COLOR: #61b3f6;  
+		 text-decoration: none;
+		}
+        /*覆盖easyui的样式*/
+		.l-btn-text {
+		  display: inline-block;
+		  vertical-align: middle;
+		  width: auto;
+		  line-height: 24px;
+		  font-size: 15px;
+		  padding: 0;
+		  margin: 0 4px;
+		}
+		.l-btn-left {
+		  display: inline-block;
+		  position: relative;
+		  overflow: hidden;
+		  margin: auto;
+		  top:-5.5px;
+		  padding: 0;
+		}
+		.l-btn-disabled,
+		.l-btn-disabled:hover {
+		  opacity: 1.0;
+		}
+		.infoStyle{
+		    color: gray;
+    		font-size: 11px;
+    		float: right;
+    		margin-top:-3em;
+    		margin-right:3.5em;
+    		display: none;
+		}
+    </style>
+    <!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+	<script src="../../js/jquery-1.8.0.min.js"></script>
+	<script src="../../js/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <script src="../../js/jquery.easyui.min.js" ></script>
+  </head>
+  <!-- change safecode Somnus 2015-04-13-->
+  <script type="text/javascript">
+    function changeImg(){
+	  document.getElementById("imgObject").src=
+		  document.getElementById("imgObject").src+ "?nocache=" + new Date().getTime();
+  }
+  </script>
+  <body>
+     <!-- header -->
+        <div id="header" style="position:relative;">
+        	<div style="width:1024px;margin:0 auto;">
+            	<div style="float:left;width:380px;height:87px;padding-left:24px;" class="fnt_00a0e9_37_yahei">
+               		<img src="../images/logo.png" >
+                </div>
+            	<div style="float:left;width:620px;height:87px;">
+                	<nav id="nav" style="float:right;">
+                        <ul id="cssdropdown">
+                            <li><a href="../index.html" class="fnt_333333_14 no-line">首页</a></li>
+                            <li><a href="../personalDB.html" class="fnt_333333_14 no-line">个人数据银行</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝企业版</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝个人版</a></li>
+                            <li><a href="../download.html" class="fnt_333333_14 no-line">应用下载</a></li>
+                            <li  id="help">
+                            <a href="help/employ.html" class="fnt_333333_14 no-line">帮助与服务</a>
+                            <ul class="subMenu" id="subMenu">
+                            <li><a class="sub" href="help/aboutUs.html">关于我们</a></li>
+                            <li><a class="sub" href="help/employ.html">诚聘英才</a></li>
+                            <li><a class="sub" href="help/contactUs.html">联系我们</a></li>
+                            <li><a class="sub" href="help/question.html">常见问题</a></li>
+                            <li><a class="sub" href="help/serviceItem.html">服务条款</a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <div style="height:0px;" class="clearfloat"></div>
+                        <div style="width:100%;height:1px;background:#fff;margin-top:-1px;"></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    	<!-- /header -->
+
+        <section id="se_1_div" data-section-name="se_1" style="padding-top:0px;">
+            <img class="se_bg_2" src="../images/bg_5_2.png" style="width:100%;height:100%"/>
+            <div class="parentDiv" style="width:100%;top:10%;overflow-y:hidden;margin:auto;">
+            	<!-- <div class="outerDiv">
+                </div> -->
+                <div class="textContentDiv">  
+                	<form class="register_box easyui-form" id="ff" method="post" style="position:relative;margin:auto">
+                    	<div class="label select"style="width:530px">
+                        	用户注册
+                        </div> 
+                        <div class="clearfloat" style="height:0px;"></div>
+                        <div class="label_div" style="padding:20px 0 0 44px;">
+                        	<div class="input_box username">
+                           	 	<div class="left_line">
+                                	<input id="loginID" name="loginID" class="text_input fnt_999999_13" placeholder="请输入您的登录账号">
+                                </div>
+                            </div>
+                            <label class="errorMsg" style="margin-right:6em" id="errUserLength">长度在6-30位之间</label>
+                            <label class="errorMsg" style="margin-right:8em" id="errUserFormat">含有非法字符</label>
+                            <label class="infoStyle" id="WarningInfo">长度6-30位,支持字母、<br>数字、下划线</label>
+                        	<div class="clearfloat" style="height:22px;"></div>
+                        	<div class="input_box password">
+                           	 	<div class="left_line">
+                                	<input id="password" name="password" type="password" class="text_input fnt_999999_13" placeholder="请输入您的密码" autocomplete="off">
+                                </div>
+                            </div>
+                            <label class="errorMsg" style="margin-right:0.76em;" id="pwdLab">字母开头,6-20位之间(非空白)</label>
+                            <label class="infoStyle" style="margin-right:0.76em;" id="pwdWarn">字母开头,6-20位之间(非空白)</label>
+                        	<div class="clearfloat" style="height:20px;"></div>
+                        	<div class="input_box password">
+                           	 	<div class="left_line">
+                                	<input id="repassword" name="repassword" type="password" class="text_input fnt_999999_13" placeholder="请确认您的密码" autocomplete="off" >
+                                </div>
+                            </div>
+                            <label class="errorMsg" style="margin-right:5em;" id="repwdLab">必须跟密码保持一致</label>
+                            <!-- 开始 -->
+                            <div class="clearfloat" style="height:22px;"></div>
+                        	<div class="input_box email">
+                           	 	<div class="left_line">
+                                	<input id="email" name="email" class="text_input fnt_999999_13" placeholder="务必输入绑定邮箱">
+                                </div>
+                            </div>
+                            <label class="infoStyle" style="font-size:12px;margin-right:6em;" id="warEmail">务必确保邮箱有效<br>格式如xx@xx.com</label>
+                            <label class="errorMsg" style="margin-right:5.7em;" id="empEmail">务必填写绑定邮箱</label>
+                            <label class="errorMsg" style="margin-right:6em;" id="lenEmail">长度不超过30字符</label>
+                            <label class="errorMsg" style="margin-right:7.5em;" id="errEmail">邮箱格式无效</label>
+                            <!-- 结束 -->
+                            <div class="clearfloat" style="height:20px;"></div>
+                        	<div class="input_box safecode">
+                           	 	<div class="left_line">
+                                	<input id="safecode" name="safecode" class="text_input fnt_999999_13" placeholder="请输入验证码">
+                                </div>
+                            </div>
+                            <label class="errorMsg" style="margin-left:1em;" id="safecodeLab">验证码不正确</label>
+                            <div style="width:150px;float:right;margin-right:15px;margin-top:-47px">
+                                <table>
+                                  <tr><td><img id="imgObject" src="../../safecode"></td></tr>
+                                  <tr><td><a href="javascript:void(0)"  class="fnt_999999_13" onclick="changeImg()">看不清，换一张</a></td></tr>
+                                </table>
+                            </div>
+                        	<div class="clearfloat" style="height:10px;"></div>
+                        	<div style="width:312px;height:20px;line-height:20px;text-align:left;" class="fnt_999999_13">
+                            	<input id="isAgree" type="checkbox" style="height:12px;vertical-align:middle;">&nbsp;我已阅读并同意<a href="help/serviceItem.html" class="sItem">《数汇宝协议》</a>
+                            </div>
+                            <div class="clearfloat" style="height:20px;"></div>
+                            <div>
+                            	<a href="javascript:void(0)" id="register" class="easyui-linkbutton" style="float:left;margin-left:50px;" onclick="registerForm()">立即注册</a>
+                                <a href="javascript:void(0)" id="login" class="easyui-linkbutton disStyle" style="float:left;margin-left:50px;" onclick="login()">登录</a>
+                            </div>
+                        </div>                        
+                    </form>
+                </div>
+                <div class="clearfloat" style="height:0px;"></div>
+            </div>
+            
+        </section>
+        <div id="bottom2" style="height:28px;position:absolute;bottom:0px;left:0;width:100%;z-index:999;">
+                <div style="height:28px;background:#efefef;">
+                	<div style="width:1024px;height:28px;margin:0 auto;line-height:28px;text-align:left;">
+                        <div style="margin:auto;width:324px" class="fnt_999999_13">
+                        	成都数银科技有限公司©2013-2015&nbsp;蜀ICP备15451239号
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- script -->
+
+<script>
+	function init(){
+		
+		$("section").css({"height":$(window).height()-87});
+		
+		$(".container").each(function(){
+			$(this).css({"top":($(window).height()-$(this).outerHeight() - 87 - 28)/2+"px"});
+			if($(this).attr("id") == "bottom"){
+				$(this).css({"top":($(window).height()-$(this).outerHeight()-$("#bottom2").outerHeight())/2 - 87 - 28 +"px"});
+			}
+		});
+		
+	}
+	
+	$(function() {
+	    $('#loginID').blur(function(){
+	          $("#WarningInfo").css("display", "none");
+	    });
+	    $('#loginID').focus(function(){
+	          $("#errUserLength").css("display", "none");
+	          $("#errUserFormat").css("display", "none");
+	          $("#WarningInfo").css("display", "block");
+	    });
+	    /*邮箱  开始*/
+	    $('#email').blur(function(){
+	          $("#warEmail").css("display", "none");
+	    });
+	     $('#email').focus(function(){
+	          $("#empEmail").css("display", "none");
+	          $("#errEmail").css("display", "none");
+	          $("#lenEmail").css("display", "none");
+	          $("#warEmail").css("display", "block");
+	    });
+	    /*邮箱  结束*/
+	    $('#password').focus(function(){
+	         $("#pwdLab").css("display", "none");
+	          $("#pwdWarn").css("display", "block");
+	    });
+	    $('#password').blur(function(){
+	        $("#pwdWarn").css("display", "none");
+	    });
+	    $('#repassword').blur(function(){
+	    	  if($('#password').val() == $('#repassword').val())
+	    		  $('#repwdLab').css('display', 'none');
+	      });
+		$('#register').linkbutton('disable');
+		$('#register').addClass("disStyle");
+		 if ($.browser.msie) {
+		    $('input:checkbox').click(function () { 
+		        this.blur();   
+		        this.focus(); 
+		     });   
+		 };
+		 $("#isAgree").change(function() {
+		    if($("#isAgree").attr("checked")){
+		      $('#register').linkbutton('enable');
+		      $('#register').removeClass("disStyle");
+		      $('#register').addClass("ableStyle");
+		    }else{
+		      $('#register').linkbutton('disable');
+		      $('#register').removeClass("ableStyle");
+		      $('#register').addClass("disStyle");
+		    }
+		     
+		 }); 
+		init();
+		$(window).resize(function(){
+			init();
+		});
+		
+	});
+	
+</script>
+
+<!-- login&register Somnus 2015-04-13-->
+<script type="text/javascript">
+   function login(){
+      window.location= "../index.html";
+   }
+   function validate(){
+	   var flag=true;
+	   //用户名检查
+	   var IdRep=new  RegExp("^[a-zA-Z0-9_]{6,30}$");
+	   console.log("loginValue length:"+$("#loginID").val().trim().length);
+	   if($("#loginID").val().trim().length<6||$("#loginID").val().trim().length>30){
+	       $("#errUserLength").css("display", "block");
+           flag=false;
+	   }else if(!IdRep.test($("#loginID").val())){
+           $("#errUserFormat").css("display", "block");
+           flag=false;
+       }
+       //邮箱检查
+        var emailFormat= /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+		if($('#email').val().length == 0){
+			$('#empEmail').css('display', 'inline');
+			flag = false;
+		}else if($('#email').val().length > 30){
+			$('#lenEmail').css('display', 'inline');
+			flag = false;
+		}else if(!emailFormat.test($('#email').val())){
+		    $('#errEmail').css('display', 'inline');
+			flag = false;
+		}
+       //密码检查
+      var pwdRep=new RegExp("^[a-zA-Z]\\S{5,19}$");
+      if(!pwdRep.test($("#password").val())){
+       $("#pwdLab").css("display","block");
+       flag=false;
+      } 
+      if($("#password").val()!=$("#repassword").val()){
+        $("#repwdLab").css("display","block");
+        flag=false;
+      }
+      //console.log("flag="+flag);
+     return flag;
+   }
+   function registerForm(){
+	 //清除所有的错误提示
+		$('div [class="errorMsg"]').each(function(index,element){
+			$(element).css('display', 'none');
+		});
+		//console.log("validate()="+validate());
+		if(!validate())
+			return;
+	    $('#ff').form({
+	      url:'../../rest/network/user/addUserByLoginIDAndPwd',
+	      /* onSubmit:function(param){
+	    	  try {
+					var str = "param." + id + ' = ' + value;
+					eval(str);
+				} catch (err) {
+					alert('错误03-执行脚本出错');
+					return false;
+				}
+	    }, */
+	      success:function(data){
+	    	if(data=="恭喜你，注册成功！！"){
+			alert(data+"请登录！");
+			window.location="../index.html";
+			}else{
+			  alert(data);
+			}
+	      }
+	  });
+	    $('#ff').submit();
+}
+   
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+.prompt
+{
+	font-family: 宋体;
+	font-size: 9pt;
+	color:Navy;
+	line-height:16px;
+}
+.title
+{
+	font-family: 宋体;
+	font-size: 10pt;
+}
+.utitle
+{
+	font-family: 楷体_GB2312;
+	font-size: 14pt;
+	FONT-WEIGHT: bolder;
+}
+.group
+{
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: white ;
+	cursor:hand;
+}
+.group1
+{
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: white ;
+	cursor:hand;
+}
+.groupover
+{
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: #cccccc ;
+	cursor:hand;
+}
+.groupchecked
+{
+	font-family: 宋体;
+	font-size: 9pt;
+	color : red;
+	BACKGROUND-COLOR: Ivory  ;
+	cursor:hand;
+}
+.buttonsmall {
+	font-family: 宋体;
+	font-size: 9pt;
+	BORDER-BOTTOM: #cccccc 1px solid;
+	BORDER-LEFT: #cccccc 1px solid;
+	BORDER-RIGHT: #cccccc 1px solid;
+	BORDER-TOP: #cccccc 1px solid;
+	TOP: 1px;
+	cursor:hand;
+}
+IMG.button {
+	font-family: 宋体;
+	font-size: 9pt;
+	BORDER-BOTTOM: #D4D0C8 1px solid;
+	BORDER-LEFT: #D4D0C8 1px solid;
+	BORDER-RIGHT: #D4D0C8 1px solid;
+	BORDER-TOP: #D4D0C8 1px solid;
+	TOP: 1px;
+	WIDTH: 23px;
+	cursor:hand;
+}
+.buttonOver {
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: #b9c2dc;
+	BORDER-BOTTOM: buttonshadow 1px black solid;
+	BORDER-LEFT: buttonhighlight 1px black solid;
+	BORDER-RIGHT: buttonshadow 1px black solid;
+	BORDER-TOP: buttonhighlight 1px black solid;
+	cursor:hand;
+}
+IMG.buttonOver {
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: #D4D0C8;
+	BORDER-BOTTOM: buttonshadow 1px solid;
+	BORDER-LEFT: buttonhighlight 1px solid;
+	BORDER-RIGHT: buttonshadow 1px solid;
+	BORDER-TOP: buttonhighlight 1px solid;
+	WIDTH: 23px;
+	cursor:hand;
+}
+IMG.buttonDown {
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: #D4D0C8;
+	BORDER-BOTTOM: buttonhighlight 1px solid;
+	BORDER-LEFT: buttonshadow 1px solid;
+	BORDER-RIGHT: buttonhighlight 1px solid;
+	BORDER-TOP: buttonshadow 1px solid;
+	WIDTH: 23px;
+	cursor:hand;
+}
+.buttonDown {
+	font-family: 宋体;
+	font-size: 9pt;
+	BACKGROUND-COLOR: #a1a9bf;
+	BORDER-BOTTOM: buttonshadow 1px black solid;
+	BORDER-LEFT: buttonhighlight 1px black solid;
+	BORDER-RIGHT: buttonshadow 1px black solid;
+	BORDER-TOP: buttonhighlight 1px black solid;
+	cursor:hand;
+}
+.icon {
+	BORDER-LEFT: #D4D0C8 0px solid;
+	BORDER-TOP: #D4D0C8 0px solid;
+	BORDER-RIGHT: #D4D0C8 0px solid;
+	BORDER-BOTTOM: #D4D0C8 0px solid;
+}
+.edit
+{
+	BORDER-RIGHT: 0px;
+    BORDER-TOP: 0px;
+    BORDER-LEFT: 0px;
+    BORDER-BOTTOM: 0px;
+    color:red;
+	background-color:#ffffff;
+	font-size: 10pt;
+    HEIGHT:100%;
+    WIDTH:100%
+}

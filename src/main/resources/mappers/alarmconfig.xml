@@ -1,0 +1,363 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdatabank.shuhuibao.core.dao.IAlarmConfigDao">
+
+
+
+	<!-- ************** READ ************** -->
+	<select id="getAlarmConfig" resultType="AlarmConfigPo" parameterType="AlarmConfigPo" >
+		SELECT id,batchNo,devices,dy,dy_hi,dy_low,wd,wd_low,wd_hi,start,sj,REPLACE(left(devices,2),'-','') as xh,(select label from  xh_label where xh=(REPLACE(left(devices,2),'-','')))  xhname,
+		case endTime when null then '测试未结束' else endTime end as endTime,status,fp
+		,time,user
+		from alarm_config 
+	    where 1=1
+	    <if test="(start == null or start == '') and (endTime == null or endTime =='') ">
+	    	and status in (-1,0)
+	     </if>
+	    <if test="start != null and start != ''">
+			and time &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and time &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if>
+		  LIMIT #{page},#{rows}  
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getBatchFpSByXH" resultType="AlarmConfigPo" >
+		select pt.batchNo,case pt.fp WHEN 0 then (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(pt.start))/3600 else (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(pt.fp_time))/3600 end as fp_time  from 
+		(SELECT
+			id,
+			batchNo,
+			fp,
+		  case fp WHEN 0 then '' else fp_time end as fp_time,
+		  `start`,
+		   REPLACE(left(devices,2),'-','')
+		FROM
+			alarm_config
+		WHERE
+			1 = 1
+		  and `status`=0
+		  and REPLACE(left(devices,2),'-','')=#{id}) pt
+	    
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getTestInfoById" resultType="AlarmConfigPo" parameterType="String">
+		SELECT
+			a.id,
+			a.batchNo,
+			a.fp,
+		  a.`start`,
+			a.endTime,
+			(select b.label from xh_label b where b.xh=REPLACE(left(a.devices,2),'-','')) as xh,
+			a.devices
+		FROM
+			alarm_config a
+		WHERE
+			1 = 1
+		  and id=#{id}
+	    
+	</select>
+	
+	<!-- ************** READ ************** -->
+	<select id="getAlarmConfigTotal" resultType="int" parameterType="AlarmConfigPo" >
+		SELECT COUNT(id)
+		from alarm_config 
+	    where 1=1
+	    <if test="(start == null or start == '') and (endTime == null or endTime =='') ">
+	    	and status in (-1,0)
+	     </if>
+	    <if test="start != null and start != ''">
+			and time &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and time &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if> 
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getScreeninfo" resultType="AlarmConfigPo" parameterType="AlarmConfigPo" >
+		SELECT id,batchNo,devices,dy,dy_low,dy_hi,wd,wd_low,wd_hi,start,sj,REPLACE(left(devices,2),'-','') as xh,(select label from  xh_label where xh=(REPLACE(left(devices,2),'-','')))  xhname,
+		case endTime when null then '测试未结束' else endTime end as endTime,status,fp, fpcs,
+		time,user from alarm_config a left join (select COUNT(time) fpcs,bid from (select DISTINCT time,bid from alarm_log b where b.`event`=7  and REPLACE(SUBSTRING(RIGHT(b.remark,3),2),',','')&amp;1=1 )n GROUP BY bid) p on p.bid=a.id
+	    where 1=1
+	    <if test="start != null and start != ''">
+			and time &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and time &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+			and batchNo like '%${batchNo}%'
+		</if>
+		<if test="xh != null and xh != ''">
+			and REPLACE(left(devices,2),'-','') = #{xh}
+		</if>
+		 order by id desc
+		  LIMIT #{page},#{rows}  
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getScreeninfoTotal" resultType="int" parameterType="AlarmConfigPo" >
+		SELECT COUNT(id) from alarm_config a
+	    where 1=1
+	    <if test="start != null and start != ''">
+			and time &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and time &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+			and batchNo like '%${batchNo}%'
+		</if>
+		<if test="xh != null and xh != ''">
+			and REPLACE(left(devices,2),'-','') = #{xh}
+		</if>
+		  order by id desc
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getAlarmrecRodsTotal" resultType="int" parameterType="AlarmConfigPo" >
+		SELECT
+			COUNT(b.id)
+		FROM
+			alarm_config b
+		  LEFT JOIN di_log d ON b.id = d.bid
+		WHERE
+			1=1 and b.batchNo is not null and b.devices is not null and b.devices !=''
+	     <if test="start != null and start != ''">
+			and b.start is not null and b.start &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and  b.endTime is not null and b.endTime &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+			and b.batchNo is not null and b.batchNo like '%${batchNo}%'
+		</if>
+		<if test="xh != null and xh != ''">
+			AND REPLACE(left(b.devices,2),'-','') = #{xh}
+		</if>
+		order by b.id desc
+		
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getAlarmrecRods" resultType="AlarmConfigPo" parameterType="AlarmConfigPo" >
+		SELECT
+			b.id,
+			d.alarm_count AS fpcs,
+			b.batchNo,
+			b.devices,
+			b.dy,
+			b.dy_low,
+			b.dy_hi,
+			b.wd,
+			b.wd_low,
+			b.wd_hi,
+			b. START,
+			b.sj,
+			CONCAT(b.endTime,' ') as endTime ,
+			b. STATUS,
+			b.fp,
+			REPLACE (LEFT(b.devices, 2), '-', '') AS xh,
+			(
+				SELECT
+					label
+				FROM
+					xh_label
+				WHERE
+					xh = (
+						REPLACE (LEFT(b.devices, 2), '-', '')
+					)
+			) xhname,
+			b.fp_time,
+			b. USER
+		FROM
+			alarm_config b
+		  LEFT JOIN di_log d ON b.id = d.bid
+		WHERE
+			1=1 and b.batchNo is not null and b.devices is not null and b.devices !=''
+	    <if test="start != null and start != ''">
+			and b.start is not null and b.start &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and b.endTime is not null and b.endTime &lt;= DATE_ADD(#{endTime}, INTERVAL +1 DAY)
+		</if>
+		<if test="batchNo != null and batchNo != ''">
+			and b.batchNo is not null and b.batchNo like '%${batchNo}%'
+		</if>
+		<if test="xh != null and xh != ''">
+			AND REPLACE(left(b.devices,2),'-','') = #{xh}
+		</if>
+		order by b.id desc
+		LIMIT #{page},#{rows}  
+		
+		
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getalarmresing" resultType="AlarmConfigPo" parameterType="AlarmConfigPo" >
+		select time as start,batchno,TO_SECONDS(time) as time from alarm_log a   where a.`event`=#{flag} and a.bid =#{id} order by id asc	
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getCanselectXH" resultType="com.cdatabank.shuhuibao.core.po.XhLabelPo"  >
+		select m.xh as xh_id, b.label as xh_name
+ 		from module_config m left join xh_label b on m.xh=b.xh
+	</select>
+	<select id="getUserChanle" resultType="AlarmConfigPo" parameterType="AlarmConfigPo" >
+		select a.devices from alarm_config a where LEFT(a.devices,(INSTR(a.devices, '-')-1))=#{xh} and a.status in ('-1','0')
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getAlarmConfigByXh" resultType="AlarmConfigPo" >
+		SELECT 
+		a.id,
+		a.batchNo,
+		a.devices,
+		a.dy,
+		a.wd,
+	    ROUND(IFNULL((a.sj*3600 - (TO_SECONDS(SYSDATE())-TO_SECONDS(a.`start`))),a.sj*3600),0) as sj
+		
+		FROM
+		alarm_channel b
+		left join alarm_config a ON (a.batchNo = b.batchNo)
+	where 
+	b.xh = #{xh} and a.`status` != -2
+	order by a.id desc LIMIT 0,1
+
+	</select>
+	<select id="getmoduleconfig" resultType="AlarmConfigPo" >
+		SELECT 
+	  	d.flag
+		FROM
+		module_config d
+		WHERE
+		d.xh = #{xh}
+
+	</select>
+	<select id="getTempNow" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		SELECT 
+	  	d.ad_21 as wd,
+      	d.logtime as sj
+		FROM
+		module_data d
+		WHERE
+		d.xh = #{id}
+		order by id desc LIMIT 0,1
+	</select>
+	<select id="gettempList" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		SELECT 
+	  	d.ad_21 as wd,
+      	d.logtime as sj from 
+   		(SELECT * from 
+		module_data de
+		WHERE
+		de.xh = #{id}
+    	order by de.id desc 
+    	LIMIT 0,720) d where 1=1
+		and ((select TO_SECONDS(logtime) from module_data where xh = #{id} order by id desc LIMIT 0,1)-TO_SECONDS(d.logtime))/3600 &lt;= 1.0
+		ORDER BY sj asc 
+	</select>
+	<select id="getVleftList" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		SELECT 
+	  	*,
+	  	d.logtime as sj from 
+   		(SELECT * from 
+		module_data de
+		WHERE
+		de.xh = #{id}
+    	order by de.id desc 
+    	LIMIT 0,720) d where 1=1
+		and ((select TO_SECONDS(logtime) from module_data where xh = #{id} order by id desc LIMIT 0,1)-TO_SECONDS(d.logtime))/3600 &lt;= 1.0
+    	ORDER BY sj asc 
+
+	</select>
+	<select id="getBhAllinfo" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		SELECT 
+	  	*,
+	  	d.logtime as sj
+		FROM
+		module_data d 
+		WHERE
+		d.xh = #{id}
+		
+		<if test="start != null and start != ''">
+			and d.logtime &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and d.logtime &lt;=#{endTime}
+		</if>
+		ORDER BY d.id ASC
+    	
+
+	</select>
+	<select id="getWarrinAllinfo" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		select   RIGHT(remark,1)*1&amp;1 as event ,d.remark,d.time as sj from alarm_log d where batchNo=#{batchNo} and xh=#{id} and d.event='7'
+		
+		<if test="start != null and start != ''">
+			and d.time &gt;= #{start}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			and d.time &lt;=#{endTime}
+		</if>
+		ORDER BY d.id ASC
+    	
+
+	</select>
+	<select id="getWarrinAllinfoByBid" resultType="AlarmConfigPo"  parameterType="String">
+		select   RIGHT(remark,1)*1&amp;1 as event ,d.remark,d.time as sj from alarm_log d where d.bid=#{bid} and d.event='7'
+		ORDER BY d.id ASC
+    	
+
+	</select>
+		<select id="getfpbcByBid" resultType="AlarmConfigPo"  parameterType="String">
+		select  d.time as sj,remark as event from alarm_log d where d.bid=#{bid} and d.event='9'
+		ORDER BY d.id ASC
+    	
+
+	</select>
+	<select id="getVleftNewinfo" resultType="AlarmConfigPo"  parameterType="AlarmConfigPo">
+		SELECT 
+	  	*,
+	  	d.logtime as sj
+		FROM
+		module_data d
+		WHERE
+		d.xh = #{id}
+    	order by id desc LIMIT 0,1
+	</select>
+	<select id="getmoduledata" resultType="AlarmConfigPo" >
+	SELECT 
+	ROUND(c.ad_1, 1)  as ad_1,
+  	ROUND(c.ad_2, 1)  as ad_2, 
+  	ROUND(c.ad_3, 1)  as ad_3,
+  	ROUND(c.ad_4, 1)  as ad_4,
+	ROUND(c.ad_5, 1)  as ad_5,
+  	ROUND(c.ad_6, 1)  as ad_6, 
+  	ROUND(c.ad_7, 1)  as ad_7,
+  	ROUND(c.ad_8, 1)  as ad_8,
+	ROUND(c.ad_9, 1)  as ad_9,
+  	ROUND(c.ad_10, 1) as ad_10, 
+  	ROUND(c.ad_11, 1) as ad_11,
+  	ROUND(c.ad_12, 1) as ad_12, 
+  	ROUND(c.ad_13, 1) as ad_13,
+  	ROUND(c.ad_14, 1) as ad_14,
+	ROUND(c.ad_15, 1) as ad_15,
+  	ROUND(c.ad_16, 1) as ad_16, 
+  	ROUND(c.ad_17, 1) as ad_17,
+  	ROUND(c.ad_18, 1) as ad_18,
+	ROUND(c.ad_19, 1) as ad_19,
+  	ROUND(c.ad_20, 1) as ad_20, 
+  	ROUND(c.ad_21, 1) as ad_21
+	FROM
+	module_data c
+	WHERE
+	c.xh = #{xh}
+	order by c.id desc LIMIT 0,1
+
+	</select>
+	<!-- ************** READ ************** -->
+	<select id="getalarmlog" resultType="com.cdatabank.shuhuibao.core.vo.alarmlogVo" parameterType="String">
+		select a.event status  ,
+		       a.event ,	      
+		 a.time as acttime ,a.remark,a.user from alarm_log a
+		 where  a.batchNo = #{batchNo}
+		 
+		 
+	</select>
+
+</mapper>

@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>数汇宝模板</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../../css/common.css" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css" />
+<style>
+#work{
+    width:178px !important;
+}
+td div {
+	padding: 2.2px 0;
+}
+#preview{overflow:hidden;}
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">朋友明细</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<form method="post" id="data" enctype="multipart/form-data"> 
+			<table class="data_tab" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>名称：</td>
+					<td width="35%" >
+						<div style="float:left;width:160px;" class="default_box ">
+							<input class="default_input" style="width:150px" id="name"
+								name="name" placeholder="长度不能超过20">
+							
+						</div>
+						<span class="errorMsg" id="empName">×必填</span>
+						<span class="errorMsg" id="errNameFormat">×长度不超过20</span>
+					</td>
+					<td colspan="2" rowspan="2"  width="50%" align="center">
+						<div style="border:1px dotted #3d3d3d;width:99px;height:99px;display:inline-block;" id="preview">
+							<img src="../../../../../images/defaultPhoto.png" style="width:100%;max-height:100%" id="image">
+						</div>
+						<input type="button" value="上传头像" onclick="$('#photo').click()">
+						<input type="file"  style="display:none" id="photo" onchange="uploadPhoto(this)" name="image" accept="image/*">
+						<span id="errMsg" class="errorMsg" style="display:none"></span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>与本人关系：</td>
+					<td width="35%">
+						<input class="easyui-combobox" id="relation" name="relation" data-options="
+							url: '../../../../../rest/getType/10',
+							valueField: 'type_ID',
+							textField: 'typeName',
+							editable: false,
+							onLoadSuccess: function(data){
+									for(i in data){
+										if(data[i].typeName == '好友'){
+											$('#relation').combobox('select', data[i].type_ID);
+										}
+									}
+								}
+						">
+						<span class="errorMsg" id="empRelation">×必选</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>性别：</td>
+					<td width="35%">
+						<input class="easyui-combobox" id="gender" name="gender" data-options="
+							valueField: 'id',
+							textFiled: 'text',
+							data: [
+								{'id': 'M', 'text': '男'},
+								{'id': 'F', 'text': '女'}
+							],
+							editable: false
+						">
+						<span class="errorMsg" id="empGender">×必选</span>
+					</td>
+					<td width="10%" class="fnt_333333_13" align="right">生日：</td>
+					<td width="40%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input icon_date_input2" style="width:180px"
+								readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)"
+								id="birthday" name="birthday">
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><span class="necessity">*</span>亲密度：</td>
+					<td width="35%">
+						<div style="float:left;width:150px;">
+							<input class="easyui-combobox" id="friend" name="friend"
+								data-options="
+								url: '../../../../../rest/getType/11',
+								valueField: 'type_ID',
+								textField: 'typeName',
+								editable: false,
+								onLoadSuccess: function(data){
+									for(i in data){
+										if(data[i].typeName == '一般'){
+											$('#friend').combobox('select', data[i].type_ID);
+										}
+									}
+								}
+								">
+						</div>
+						<span class="errorMsg" id="empFriend">×必选</span>
+					</td>
+					<td width="10%" class="fnt_333333_13" align="right">工作单位：</td>
+					<td width="40%">
+						<input class="easyui-textbox" id="work" name="work">
+						<span class="errorMsg" id="errCompany">×长度不超过50</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">家庭住址：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="home_address" name="homeAddress"
+								name="issuer">
+						</div>
+						<span class="errorMsg" id="errHomeAddress">×长度不超过100</span>
+					</td>
+					<td width="10%" class="fnt_333333_13" align="right"><span class="necessity">*</span>电话：</td>
+					<td width="40%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="phone" 
+								name="phone">
+						</div>
+						<span id="errPhone" class="errorMsg">×格式错误</span>
+						<span id="empPhone" class="errorMsg">×必填</span>
+					</td>
+				</tr>
+					
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right"><!-- <span class="necessity">*</span> -->邮箱：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="email"
+								name="email" type="email" placeholder="格式如xx@xx.com">
+						</div>
+						<span class="errorMsg" id="errEmail">×长度不超过30</span>
+						<span class="errorMsg" id="errFormatEmail">×格式错误</span>
+						<!-- <span class="errorMsg" id="empEmail">×必填</span> -->
+					</td>
+					<td width="10%" class="fnt_333333_13" align="right">微信：</td>
+					<td width="40%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="weixin"
+								name="weixin" >
+						</div>
+						<span class="errorMsg" id="errWeixin">×长度不超过30</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">QQ号：</td>
+					<td width="35%">
+						<div style="float:left;width:180px;" class="default_box ">
+							<input class="default_input" style="width:160px" id="qq"
+								name="qq">
+						</div>
+						<span class="errorMsg" id="errQQ">×格式错误</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">备注：</td>
+					<td width="85%" colspan="3">
+						<div style="float:left;width:451px;">
+							<input class="easyui-textbox" data-options="multiline:true"
+								style="width:430px;height:50px" id="description" name="description">
+						</div>
+						<span class="errorMsg" id="errDescription">×长度不超过200</span>
+					</td>
+				</tr>
+				<tr>
+					<td width="15%" class="fnt_333333_13" align="right">添加附件：</td>
+					<td width="85%" colspan="5"><a href="javascript:void(0)"
+						class="default_btn5 no-line" style="float:left;"
+						onclick="upload()">浏览...</a> <!-- <input id="uploadFile" type="file"
+						style="display:none"> --></td>
+				</tr>
+			</table>
+
+			<div class="clearfloat" style="height:24px;"></div>
+			<div class="default_line"></div>
+			<div class="clearfloat" style="height:24px;"></div>
+		</form>
+
+		<form id="attachment" method="post" enctype="multipart/form-data">
+			<table id="dg" class="easyui-datagrid" cellpadding="0"
+				cellspacing="0"
+				data-options="fitColumns: true, singleSelect:true">
+				<thead>
+					<tr class="tr1 fnt_333333_13">
+						<th
+							data-options="field:'order', align:'center', formatter: generateOrder"
+							style="width:10%;">序号
+						</th>
+						<th data-options="field:'attachedFileName', align: 'center'"
+							style="width:40%;">附件名
+						</th>
+						<th data-options="field:'uploadDate', align: 'center'"
+							style="width:20%;">上传时间
+						</th>
+						<th data-options="field:'operate', align: 'center', formatter: operate"
+							style="width:30%;">操作
+						</th>
+					</tr>
+				</thead>
+			</table>
+			<input type="hidden" id="id" name="contact_ID">
+			<div id="file" style="display:none;"></div>
+		</form>
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<div>
+			<!-- <a href="#" class="default_btn6 no-line"
+				style="float:right;margin-left:10px;height:28px;line-height:32px;">确认保存</a>
+			<a href="#" class="default_btn5 no-line"
+				style="float:right;margin-left:10px;height:28px;line-height:32px;">取消</a> -->
+			<input type=button class="default_btn6 btn_height" value="确认保存"
+				onclick="add()"> <input type="button"
+				class="default_btn5 btn_height" value="重置" onclick="reset()"> <input
+				type="button" class="default_btn5 btn_height" value="返回"
+				onclick="history.back(-1)">
+		</div>
+	</div>
+	<div class="clearfloat" style="height:0px;"></div>
+	<div id="win"></div>
+	<script src="../../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../../js/calendar.js"></script>
+	<script src="../../../../../js/myjs/net.js"></script>
+	<script src="../../../../../js/myjs/picPreview.js"></script>
+<script>
+function add(){
+	var updUrl = '../../../../../rest/app/contact/handleFormAndFile';
+	var attUrl = '../../../../../rest/app/contact/upload';
+	submit(updUrl, attUrl, 'contact_ID', null);
+}
+function validate() {
+	var flag = true;
+	try{
+	
+	var pattrn = /\D+/g;//匹配非数字字符
+	if ($('#name').val().trim().length != 0) {
+		if ($('#name').val().trim().length > 20) {
+			$('#errNameFormat').css('display', 'inline');
+			flag = false;
+		}
+	} else {
+		$('#empName').css('display', 'inline');
+		flag = false;
+	}
+
+	var relation = $('#relation').combobox('getValue');
+	if(relation.length == 0 || pattrn.test(relation)){
+		$('#empRelation').css('display', 'inline');
+		flag = false;
+	}
+	
+	var gender = $('#gender').combobox('getValue');
+	if(gender.length == 0){
+		$('#empGender').css('display','inline');
+		flag = false;
+	}
+	
+	var friend=$('#friend').combobox('getValue');
+	if (friend.length == 0 || pattrn.test(friend)) {
+		$('#empFriend').css('display', 'inline');
+		flag = false;
+	}
+	//errCompany
+	var company=$('#work').val().trim();
+	if(company.length > 50){
+	    $('#errCompany').css('display', 'inline');
+			flag = false;
+	}
+	var home_address = $('#home_address').val().trim();
+	if (home_address.length != 0) {
+		if(home_address.length > 100){
+			$('#errHomeAddress').css('display', 'inline');
+			flag = false;
+		}
+	}
+
+	var phone = $('#phone').val().trim();
+	var phoneFormat = /^1[3|4|5|8|7][0-9]\d{8}$/;
+	if (phone.length == 0) {
+		$('#empPhone').css('display', 'inline');
+		flag = false;
+	}else if(!phoneFormat.test(phone)){
+		$('#errPhone').css('display', 'inline');
+		flag = false;
+	}
+	//Email
+    var emailFormat= /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+    var emailVal=$('#email').val().trim();
+	/* if(emailVal.length == 0){
+		$('#empEmail').css('display', 'inline');
+		flag = false;
+	}else  */
+	if(emailVal.length > 30){
+		$('#errEmail').css('display', 'inline');
+		flag = false;
+	}else if(emailVal.length != 0){
+	    if(!emailFormat.test(emailVal)){
+	      $('#errFormatEmail').css('display', 'inline');
+		  flag = false;
+	    }
+	    
+	}
+	
+	
+	if($('#weixin').val().trim().length > 30){
+		$('#errWeixin').css('display', 'inline');
+		flag = false;
+	}
+	
+	var QQ_format = new RegExp("^[1-9][0-9]{4,19}$");
+	var qq = $('#qq').val().trim();
+	if(qq.length != 0 && !QQ_format.test(qq)){
+		$('#errQQ').css('display', 'inline');
+		flag = false;
+	}
+		
+	if($('#description').val().trim().length > 200){
+		$('#errDescription').css('display', 'inline');
+		flag = false;
+	}}catch(err){alert(err);}
+	return flag;
+}
+
+/* function change(){
+	if($('#photo').val().length != 0){
+		try{alert(document.getElementById('photo').value);}catch(err){alert(err);}
+		$('#image').attr('src', $('#photo').val());
+	}
+} */
+function uploadPhoto(target){
+	switch(checkFile(target, 2)){
+	case 0:
+		previewImage(target);
+		$('#errMsg').css('display', 'none');
+		break;
+	case 1:
+		$('#errMsg').html('x图片大小不能超过2MB');
+		$('#errMsg').css('display', 'inline');
+		break;
+	case 2:
+		$('#errMsg').html('x格式不支持');
+		$('#errMsg').css('display', 'inline');
+		break;
+	}
+}
+</script>
+</body>
+</html>

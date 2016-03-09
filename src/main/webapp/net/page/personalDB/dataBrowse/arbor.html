@@ -1,0 +1,55 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>数据浏览</title>
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+	<meta name="description" content="a graph visualization library using web workers and jQuery">
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Christian Swinehart">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	
+	<link rel="stylesheet" href="../../../css/common.css" />
+	<link rel="stylesheet" href="../../../css/style.css" />
+	<link rel="stylesheet" href="../../../../css/net/mycss.css" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../../js/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="../../../../js/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="databrowse.css">
+	
+	<script src="../../../../js/jquery-1.8.0.min.js"></script>
+	<script src="../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../js/locale/easyui-lang-zh_CN.js"></script> 
+	
+	<script src="js/echarts-all.js"></script>
+	<script src="js/echarts.js"></script>
+	
+    <script src="js/arbor/mxh7kqd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="js/arbor/js/jquery.address-1.4.min.js"></script>
+    <script src="js/arbor/js/arbor.js"></script>
+    <script src="js/arbor/js/arbor-tween.js"></script>
+    <script src="js/arbor/js/arbor-graphics.js"></script>
+    
+    <script src="../../../../js/myjs/list.js"></script>
+    <script src="js/arbor/site.js"></script>
+    <!-- 
+    <script type="text/javascript">
+	function getdata(){
+		var startTime = parent.window.document.getElementsByName('startTime')[0].value;
+		var endTime = parent.window.document.getElementsByName('endTime')[0].value;
+		var top = parent.window.document.getElementsByName('item')[0].value;
+		var url = "../../../../rest/common/income/browse?startTime="+startTime+"&endTime="+endTime+"&top="+top;
+		var staClass='income';
+		window.parent.getdata0(url,staClass);
+	}
+    </script> -->
+</head>
+<body>
+  <div id="right_content">
+  <canvas id="sitemap" width="830" height="800"></canvas>
+</div>
+</body>
+</html>

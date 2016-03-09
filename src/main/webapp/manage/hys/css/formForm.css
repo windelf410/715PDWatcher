@@ -1,0 +1,78 @@
+.edit
+{
+	SCROLLBAR-FACE-COLOR: white; 
+	SCROLLBAR-HIGHLIGHT-COLOR: white; 
+	SCROLLBAR-SHADOW-COLOR: white; 
+	SCROLLBAR-3DLIGHT-COLOR: white; 
+	SCROLLBAR-ARROW-COLOR: white; 
+	SCROLLBAR-TRACK-COLOR: white; 
+	SCROLLBAR-DARKSHADOW-COLOR: white; 
+	SCROLLBAR-BASE-COLOR: white;
+	BORDER-RIGHT: 0px;
+    BORDER-TOP: 0px;
+    BORDER-LEFT: 0px;
+    BORDER-BOTTOM: 0px;
+    color:#000099;
+	background-color:#ffffcc ;
+	font-family: ËÎÌå; 
+	font-size: 15px;
+    HEIGHT:90%;
+    WIDTH:100%;
+	border:0px solid #000099;
+}
+.editnormal
+{
+	SCROLLBAR-FACE-COLOR: white; 
+	SCROLLBAR-HIGHLIGHT-COLOR: white; 
+	SCROLLBAR-SHADOW-COLOR: white; 
+	SCROLLBAR-3DLIGHT-COLOR: white; 
+	SCROLLBAR-ARROW-COLOR: white; 
+	SCROLLBAR-TRACK-COLOR: white; 
+	SCROLLBAR-DARKSHADOW-COLOR: white; 
+	SCROLLBAR-BASE-COLOR: white;
+	BORDER-RIGHT: 0px;
+    BORDER-TOP: 0px;
+    BORDER-LEFT: 0px;
+    BORDER-BOTTOM: 0px;
+    color:#000099;
+	background-color:#ffffcc ;
+	font-family: ËÎÌå; 
+	font-size: 15px;
+    HEIGHT:90%;
+    WIDTH:100%;
+	border:0px solid #000099;
+}
+.div
+{
+	SCROLLBAR-FACE-COLOR: white; 
+	SCROLLBAR-HIGHLIGHT-COLOR: white; 
+	SCROLLBAR-SHADOW-COLOR: white; 
+	SCROLLBAR-3DLIGHT-COLOR: white; 
+	SCROLLBAR-ARROW-COLOR: white; 
+	SCROLLBAR-TRACK-COLOR: white; 
+	SCROLLBAR-DARKSHADOW-COLOR: white; 
+	SCROLLBAR-BASE-COLOR: white;
+	VERTICAL-ALIGN: middle;
+	font-family: ËÎÌå; 
+	font-size: 15px;
+}
+A{COLOR: SlateBlue ;font-size:15px;TEXT-DECORATION: NONE}
+A:link{COLOR: SlateBlue ;TEXT-DECORATION: NONE}
+A:visited{COLOR: SlateBlue ;TEXT-DECORATION: NONE}
+A:hover{COLOR: red ;TEXT-DECORATION: underline}
+
+TD.Normal
+{
+    FONT-SIZE: 15px;
+	font-family:·ÂËÎ_GB2312;
+}
+
+TR.maintr
+{
+	height:36px;background-color:ffffff;
+}
+TR.remarktr
+{
+	height:100px;background-color:ffffff;
+}
+.maintable{background-color:000000}

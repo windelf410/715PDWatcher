@@ -1,0 +1,63 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdatabank.shuhuibao.core.dao.IUserDao">
+
+
+
+	<!-- ************** READ ************** -->
+	<select id="getAll" resultType="OrigUser">
+		SELECT * FROM user where id !='1' LIMIT #{page},#{rows}  
+	</select>
+
+	<select id="getSizeall" resultType="int">
+		SELECT COUNT(id) FROM user
+	</select>
+	<select id="getObjectByName" resultType="OrigUser" parameterType="String">
+		SELECT * FROM user where name=#{name} order by id desc limit 0,1
+	</select>
+
+	<select id="getObjectById" resultType="OrigUser" parameterType="int">
+		SELECT * FROM user where name=#{name}
+	</select>
+
+
+	 
+	<delete id="deleteObjects" >
+		DELETE FROM user WHERE ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- ************** CREATE ************** -->
+ 	<insert id="addObject" parameterType="OrigUser" useGeneratedKeys="true" keyProperty="user_ID">
+		INSERT 
+			INTO user
+		SET 
+			name = #{name},
+			realname = #{realname},
+			pwd = #{pwd},
+			remark = #{remark}
+ 	</insert>  
+ 	
+ 	
+ 	<update id="updateObject" parameterType="OrigUser">
+		UPDATE 
+			user
+		SET 
+			name = #{name}
+			<if test="pwd != null">
+				,realname = #{realname}
+			</if>
+			<if test="pwd != null">
+				,pwd = #{pwd}
+			</if>
+			<if test="remark != null">
+				,remark = #{remark}
+			</if>	
+		WHERE
+			id = #{id}
+ 	</update>   	
+</mapper>

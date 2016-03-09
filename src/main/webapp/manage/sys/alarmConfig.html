@@ -1,0 +1,1748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>恒益达数控监测预警平台</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="">
+<meta http-equiv="description" content="">
+<link rel="stylesheet" type="text/css" href="../../css/default.css" />
+<link rel="stylesheet" type="text/css"href="../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../js/themes/icon.css" />
+<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../js/myjs/index.js"></script>
+<script type="text/javascript" src="../../js/json2.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+					
+					/**
+					 *	初始化数据表格  
+					 */
+					$('#t_user').datagrid({
+							idField:'id' ,		//只要创建数据表格 就必须要加 ifField
+							title:'任务管理' ,
+							//width:1300 ,
+							fit:true ,
+							height:450 ,
+							url:'../../rest/manage/user/getalarmconfig' ,
+							fitColumns:true ,  
+							striped: true ,					//隔行变色特性 
+							//nowrap: false ,				//折行显示 为true 显示在一会 
+							loadMsg: '数据正在加载,请耐心的等待...' ,
+							rownumbers:true ,
+							singleSelect:true,				//单选模式 
+							//remoteSort: false ,
+							//sortName: 'salary' ,
+							//sortOrder: 'desc' ,
+							
+							frozenColumns:[[				//冻结列特性 ,不要与fitColumns 特性一起使用 
+								{
+									field:'ck' ,
+									width:50 ,
+									checkbox: true
+								}
+							]],
+							columns:[[
+							
+								{
+									field:'id' ,
+									title:'id' ,
+									hidden:true
+									
+								},
+								{
+									field:'batchNo' ,
+									title:'批次号' ,
+									width:75 ,
+									align:'center' 
+									
+								},
+								{
+									field:'xhname' ,
+									title:'箱号' ,
+									width:75 ,
+									align:'center' 
+									
+								},
+								
+								{
+									field:'devices' ,
+									title:'占用工位' ,
+									width:200 ,
+									align:'center', 
+									sortable : true,
+									formatter:togetdevices
+									
+								},
+								{
+									field:'dy' ,
+									title:'试验电压' ,
+									align:'center', 
+									width:50 ,
+									sortable : true
+									
+								}
+								,{
+									field:'dy_hi' ,
+									title:'高压报警' ,
+									align:'center' ,
+									width:50 
+									
+								},{
+									field:'dy_low' ,
+									title:'低压报警' ,
+									align:'center' ,
+									width:50 
+									
+								}
+								,{
+									field:'wd' ,
+									title:'试验温度' ,
+									align:'center', 
+									width:50
+									
+								}
+								,{
+									field:'wd_low' ,
+									title:'低温报警温度' ,
+									align:'center',
+									width:50
+									
+								}
+								,{
+									field:'wd_hi' ,
+									title:'高温报警温度' ,
+									align:'center',
+									width:50
+									
+								}
+								,{
+									field:'start' ,
+									title:'起始时间' ,
+									align:'center', 
+									width:100 
+									
+								}
+								,{
+									field:'sj' ,
+									title:'试验时长' ,
+									align:'center', 
+									width:50
+									
+								}
+								,{
+									field:'endTime' ,
+									title:'结束时间' ,
+									align:'center', 
+									width:100
+									
+								}
+								,{
+									field:'status' ,
+									title:'完成状态' ,
+									align:'center',
+									hidden:true,
+									width:50
+									
+								}
+								,{
+									field:'fp' ,
+									title:'废品数量' ,
+									align:'center',
+									
+									//formatter:togetPaytime,
+									width:50
+									
+								}
+							]] ,
+							pagination: true , 
+							pageSize: 10 ,
+							pageList:[5,10,15,20,50] ,
+							toolbar:[
+							/*	{
+									text:'分析报表',
+									iconCls:'icon-add', 
+									handler:function(){
+										var arr =$('#t_user').datagrid('getSelections');
+										if(arr.length != 1){
+											$.messager.show({
+												title:'提示信息!',
+												msg:'请选择一条测试记录!'
+											});
+										} else {
+											var ids = '';
+											for(var i =0 ;i<arr.length;i++){
+												if(arr.length==(i+1)){
+													ids += arr[i].batchNo  ;
+												}else{
+													ids += arr[i].batchNo+ ',' ;
+												}
+											}
+											window.parent.addtabsformson(ids);
+										}
+										
+									
+									}
+									
+								}
+							*/
+						   {
+								text:'<b>创建任务</b>' ,
+								iconCls:'icon-add' , 
+								handler:function(){
+									
+									//openPwd();
+									$('#mydialog').window('open');
+										
+										//$('#myform').find('input[name!=sex]').val("");
+										//$('#myform').get(0).reset();
+									$('#myform').form('clear');
+									$('#mydialog').dialog('open');
+									$('#myform').form('load',{	   //调用load方法把所选中的数据load到表单中,非常方便
+										//xh:"8",
+										strartsum:"0",
+										endsum:"29"
+									});
+									//$('#myform').find('input[name!=sex]').val("");
+									//$('#myform').get(0).reset();
+									$("input[name='batchNo']").attr("disabled",false); 
+									$("input[name='batchNo']").attr("width","90"); 
+									$("textarea[name='devices']").attr("disabled","true");
+									$("textarea[name='showin']").attr("disabled","true");
+									$("input[name='sj']").attr("disabled",false);
+									$("input[name='sj']").attr("width","90"); 
+									$("input[name='remod']").attr("disabled","disabled");
+									$("input[name='remod']").attr("width","90"); 
+									document.getElementById("reselect").style.display='none';
+									document.getElementById("selectrow").style.display="block";
+									 document.getElementById("buts").style.display="block";
+									 $('#xh').combobox('reload','../../rest/manage/user/getcanselectXH');
+									//$("#retext").css('display','none');
+									//$("#reselect").css('display','none');
+								
+								}
+								
+							}, 
+							{
+								text:'<b>修改任务</b>' ,
+								iconCls:'icon-edit' , 
+								handler:function(){
+									var arr =$('#t_user').datagrid('getSelections');
+									
+									if(arr.length != 1){
+										$.messager.show({
+											title:'提示信息!',
+											msg:'只能选择一行记录进行修改!'
+										});
+									} else {
+									//alert(arr[0].supkey);
+										$('#mydialog').dialog({
+											title:'修改'
+										});
+										$('#mydialog').dialog('open'); //打开窗口
+										$('#myform').get(0).reset();   //清空表单数据 
+										$('#myform').form('load',{	   //调用load方法把所选中的数据load到表单中,非常方便
+											id:arr[0].id ,
+											batchNo:arr[0].batchNo ,
+											dy:arr[0].dy ,
+											dy_hi:arr[0].dy_hi ,
+											dy_low:arr[0].dy_low ,
+											wd:arr[0].wd, 
+											wd_low:arr[0].wd_low, 
+											wd_hi:arr[0].wd_hi, 
+											sj:arr[0].sj, 
+											devices:arr[0].devices
+										});
+										$("input[name='batchNo']").attr("disabled","true"); 
+										$("input[name='xh']").css('display','block'); 
+										$("input[name='strartsum']").attr("disabled","true"); 
+										$("input[name='endsum']").attr("disabled","true"); 
+										$("input[name='batchNo']").attr("width","90"); 
+										$("textarea[name='devices']").attr("disabled","true");
+										$("textarea[name='showin']").attr("disabled","true");
+										$("input[name='sj']").attr("disabled","disabled");
+										$("input[name='sj']").attr("width","90"); 
+										$("input[name='remod']").attr("disabled",false);
+										$("input[name='remod']").attr("width","90"); 
+										//$("#remarktr").css('display','block');
+										//$("#retext").css('display',"block");
+										//$("#reselect").css('display',"block");
+										 document.getElementById("selectrow").style.display="none";
+										 document.getElementById("buts").style.display="none";
+										 document.getElementById("reselect").style.display="bloc";
+									}
+								
+								}
+								
+							}, 
+							{
+								text:'<b>取消任务</b>' ,
+								iconCls:'icon-remove' , 
+								handler:function(){
+									var arr =$('#t_user').datagrid('getSelections');
+									if(arr.length != 1){
+										$.messager.show({
+											title:'提示信息!',
+											msg:'请选择一行记录!'
+										});
+									} else {
+										var xx = window.parent.getusername();
+										
+										var set_data="data="+xx+","+arr[0].id+","+arr[0].batchNo;
+										//alert(set_data);
+										$.ajax({
+											dataType: 'jsonp',		
+											data:set_data,
+											contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+											url: 'http://192.168.5.1:9090/ajax/batch/delete',		
+											success: function(data){
+												$.messager.show({
+													title:'提示信息!' , 
+													msg:"删除成功"
+												});
+												$('#xh').combobox('reload');
+												$('#t_user').datagrid('load' ,{});
+											},
+											error: function(){
+												$.messager.show({
+													title:'提示信息!' , 
+													msg:"删除成功"
+												});
+												$('#xh').combobox('reload');
+												$('#t_user').datagrid('load' ,{});
+											}	
+											});
+									}
+									
+								
+								}
+							},{
+							text:'<b>完成任务</b>' ,
+							iconCls:'icon-add' , 
+							handler:function(){
+								var arr =$('#t_user').datagrid('getSelections');
+								if(arr.length < 1){
+									$.messager.show({
+										title:'提示信息!',
+										msg:'请选择一行记录!'
+									});
+								} else {
+									var xx = window.parent.getusername();
+									
+									var set_data="data="+xx+","+arr[0].id+","+arr[0].batchNo;
+									//alert(set_data);
+									$.ajax({
+										dataType: 'jsonp',		
+										data:set_data,
+										contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+										url: 'http://192.168.5.1:9090/ajax/batch/complete',		
+										success: function(data){
+										},
+										error: function(){
+				
+										}	
+										});
+									$('#t_user').datagrid('load' ,{});
+								}
+								
+							
+							}
+						},
+							{
+								text:'<b>启动报警</b>' ,
+								iconCls:'icon-add' , 
+								handler:function(){
+									var arr =$('#t_user').datagrid('getSelections');
+									if(arr.length != 1){
+										$.messager.show({
+											title:'提示信息!',
+											msg:'请选择一行记录!'
+										});
+									} else {
+										var xx = window.parent.getusername();
+										
+										var set_data="data="+xx+","+arr[0].id+","+arr[0].batchNo;
+										//alert(set_data);
+										$.ajax({
+											dataType: 'jsonp',		
+											data:set_data,
+											contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+											url: 'http://192.168.5.1:9090/ajax/batch/start',		
+											success: function(data){
+												$.messager.show({
+													title:'提示信息!' , 
+													msg:"启动成功"
+												});
+												$('#t_user').datagrid('load' ,{});
+											},
+											error: function(){
+												$.messager.show({
+													title:'提示信息!' , 
+													msg:"启动成功"
+												});
+												$('#t_user').datagrid('load' ,{});
+											}	
+											});
+									}
+									
+								
+								}
+							}
+							   ,{
+									text:'<b>延长试验时间</b>' ,
+									iconCls:'icon-add' , 
+									handler:function(){
+										var arr =$('#t_user').datagrid('getSelections');
+										
+										if(arr.length != 1){
+											$.messager.show({
+												title:'提示信息!',
+												msg:'请选择一行记录!'
+											});
+										} else {
+										//openPwd();
+										$('#myaddsj').window('open');
+										$('#myaddsjform').get(0).reset();   //清空表单数据 
+										$('#myaddsjform').form('load',{	   //调用load方法把所选中的数据load到表单中,非常方便
+											pch:arr[0].batchNo,	
+											pchid:arr[0].id	
+										});
+									
+									
+									}
+								
+								}
+							   }
+							   ,{
+									text:'<b>废品数量管理</b>' ,
+									iconCls:'icon-add' , 
+									handler:function(){
+										var arr =$('#t_user').datagrid('getSelections');
+										
+										if(arr.length != 1){
+											$.messager.show({
+												title:'提示信息!',
+												msg:'请选择一行记录!'
+											});
+										} else {
+										//openPwd();
+										$('#myaddfpsl').window('open');
+										$('#myaddfpslform').get(0).reset();   //清空表单数据 
+										$('#myaddfpslform').form('load',{	   //调用load方法把所选中的数据load到表单中,非常方便
+											pch1:arr[0].batchNo,	
+											pchid1:arr[0].id	
+										});
+									
+									
+									}
+								
+								}
+							   }
+							]
+					});
+					
+					
+					$('#myform').form({   
+					    //url:...,   
+					    onSubmit: function(){   
+					    
+					    },   
+					    success:function(data){
+					    
+							$.messager.show({
+								title:'提示信息' , 
+								msg:"保存成功"
+							}); 
+					    },error:function(result){
+					    	$.messager.show({
+								title:'提示信息' , 
+								msg:"保存成功"
+							}); 
+					    }  
+					}); 
+					
+					/* $("#xh").combobox({
+						onChange: function (n,o) {
+							pushAdTd(n);
+						}
+					}); 取消已选不能再选的判断  */
+					$('#btn1').click(function(){
+						var batchNo = $("input[name='batchNo']").val(); 
+						
+						var dy =$("input[name='dy']").val();
+						var wd =$("input[name='wd']").val();
+						var wd_low =$("input[name='wd_low']").val();
+						var wd_hi =$("input[name='wd_hi']").val();
+						var sj =$("input[name='sj']").val();
+						var remod =$("input[name='remod']").val();
+						var id =$("input[name='id']").val();
+						var dy_hi =$("input[name='dy_hi']").val();
+						var dy_low =$("input[name='dy_low']").val();
+						var xx = window.parent.getusername();
+						var urls = "";
+						var datarest = "";
+						$("textarea[name='devices']").val(sumdelvce());
+						var devices = ($("textarea[name='devices']").val());
+						if(devices==null||devices==""||devices==undefined){
+							alert("通道数据不能为空！");
+							return false;
+						}
+						if(batchNo==null||batchNo==""||batchNo==undefined){
+							alert("批次号不能为空");
+							return false;
+						}
+						if(dy==null||dy==""||dy==undefined){
+							alert("电压不能为空");
+							return false;
+						}
+						if(dy_hi==null||dy_hi==""||dy_hi==undefined){
+							alert("高压报警不能为空");
+							return false;
+						}
+						if(dy_low==null||dy_low==""||dy_low==undefined){
+							alert("低压报警不能为空");
+							return false;
+						}
+						if(wd==null||wd==""||wd==undefined){
+							alert("温度不能为空");
+							return false;
+						}
+						if(wd_hi==null||wd==""||wd_hi==undefined){
+							alert("高温报警不能为空");
+							return false;
+						}
+						if(wd_low==null||wd_low==""||wd_low==undefined){
+							alert("低温报警不能为空");
+							return false;
+						}
+						if(sj==null||sj==""||sj==undefined){
+							alert("测试时间不能为空");
+							return false;
+						}
+						
+						if(id==null||id==""||id==undefined){
+							urls = "http://192.168.5.1:9090/ajax/batch/create";
+							datarest = "data="+xx+","+batchNo
+							+","+dy
+							+","+dy_low
+							+","+dy_hi
+							+","+wd
+							+","+wd_low
+							+","+wd_hi
+							+","+sj
+							+","+devices;
+						}else{
+							urls = "http://192.168.5.1:9090/ajax/batch/reconfig";
+							datarest = "data="+xx+","+id
+							+","+batchNo
+							+","+dy
+							+","+dy_low
+							+","+dy_hi
+							+","+wd
+							+","+wd_low
+							+","+wd_hi
+							+","+remod;
+						}
+						/*  alert(urls);
+						alert(datarest);  */
+						
+						$.ajax({
+							url: urls,
+							type: 'post',
+							dataType: 'jsonp',		
+							contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+							data: datarest,
+							success: function(data){
+								//1 刷新数据表格 
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								if(id==null||id==""||id==undefined){
+									$.messager.show({
+										title:'提示信息!' , 
+										msg:"创建成功"
+									});
+								}else{
+									$.messager.show({
+										title:'提示信息!' , 
+										msg:"修改成功"
+									});
+								}
+								
+								$('#mydialog').dialog('close');
+							},
+							error: function(err){
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								if(id==null||id==""||id==undefined){
+									$.messager.show({
+										title:'提示信息!' , 
+										msg:"创建成功"
+									});
+								}else{
+									$.messager.show({
+										title:'提示信息!' , 
+										msg:"修改成功"
+									});
+								}
+								
+								$('#mydialog').dialog('close');
+							}
+						});
+					
+					});
+					$('#cleardvice').click(function(){
+						$("textarea[name='devices']").val('');
+						$("textarea[name='showin']").val('');
+						pushAdTd($("textarea[name='xh']").val());
+						$('#xh').combobox('reload');
+					});
+					$('#btn2').click(function(){
+						$('#mydialog').dialog('close');
+					});
+					
+					$('#btn3').click(function(){
+						
+						var batchNo = $("input[name='pch']").val(); 
+						var batchid = $("input[name='pchid']").val(); 
+						var sj =$("input[name='addsj']").val();
+						var xx = window.parent.getusername();
+						var datarest = "data="+xx+","+batchid+","+batchNo+","+sj;
+						//alert(datarest);
+						$.ajax({
+							url: 'http://192.168.5.1:9090/ajax/batch/change',		
+							type: 'post',
+							dataType: 'jsonp',		
+							contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+							data: datarest,
+							success: function(data){
+								//1 刷新数据表格 
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								$.messager.show({
+									title:'提示信息!' , 
+									msg:"延迟成功"
+								});
+								$('#myaddsj').dialog('close');
+							},
+							error: function(err){
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								$.messager.show({
+									title:'提示信息!' , 
+									msg:"延迟成功"
+								});
+								$('#myaddsj').dialog('close');
+							}
+						});
+					
+					});
+					$('#btn4').click(function(){
+						$('#myaddsj').dialog('close');
+					});
+					$('#btn5').click(function(){
+						
+						var batchNo = $("input[name='pch1']").val(); 
+						var batchid = $("input[name='pchid1']").val(); 
+						var jzsl =$("input[name='jzsl']").val();
+						if (isNaN(jzsl)){
+							$.messager.show({
+								title:'提示信息!' , 
+								msg:"废品数量必须为数字"
+							});
+							return false;
+						}
+						//alert("1");
+						var xx = window.parent.getusername();
+						var datarest = "data="+xx+","+batchid+","+batchNo+","+jzsl;
+						//alert(datarest);
+						$.ajax({
+							url: 'http://192.168.5.1:9090/ajax/batch/reject',		
+							type: 'post',
+							dataType: 'jsonp',		
+							contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+							data: datarest,
+							success: function(data){
+								//1 刷新数据表格 
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								$.messager.show({
+									title:'提示信息!' , 
+									msg:"废品数量校正成功"
+								});
+								$('#myaddsj').dialog('close');
+							},
+							error: function(err){
+								$('#t_user').datagrid('reload');
+								$('#xh').combobox('reload');
+								//2 清空idField   
+								$('#t_user').datagrid('unselectAll');
+								//3 给提示信息 
+								$.messager.show({
+									title:'提示信息!' , 
+									msg:"废品数量校正成功"
+								});
+								$('#myaddfpsl').dialog('close');
+							}
+						});
+					
+					});
+					$('#btn6').click(function(){
+						$('#myaddfpsl').dialog('close');
+					});
+					
+					$('#searchbtn').click(function(){
+						$('#t_user').datagrid('load' ,serializeForm($('#mysearch')));
+					});
+					
+					
+					$('#clearbtn').click(function(){
+						$('#mysearch').form('clear');
+						$('#t_user').datagrid('load' ,{});
+					});
+					$('#clearbsuntn').click(function(){
+						$('#mysearch').form('clear');
+						$('#t_user').datagrid('load' ,{});
+						
+					});
+					$('#sum').click(function(){
+						//$('#mydialog').dialog('close');
+						
+						$("textarea[name='devices']").val(sumdelvce());
+						
+					});
+					$('#add').click(function(){
+                        var batchNo = $("input[name='batchNo']").val(); 
+						var dy =$("input[name='dy']").val();
+						var wd =$("input[name='wd']").val();
+						var wd_low =$("input[name='wd_low']").val();
+						var wd_hi =$("input[name='wd_hi']").val();
+						var sj =$("input[name='sj']").val();
+						var remod =$("input[name='remod']").val();
+						var id =$("input[name='id']").val();
+						var dy_hi =$("input[name='dy_hi']").val();
+						var dy_low =$("input[name='dy_low']").val();
+						var xx = window.parent.getusername();
+						var urls = "";
+						var datarest = "";
+						$("textarea[name='devices']").val(sumdelvce());
+						var devices = ($("textarea[name='devices']").val());
+						
+						if(batchNo==null||batchNo==""||batchNo==undefined){
+							alert("批次号不能为空");
+							return false;
+						}
+						if(dy==null||dy==""||dy==undefined){
+							alert("电压不能为空");
+							return false;
+						}
+						if(dy_hi==null||dy_hi==""||dy_hi==undefined){
+							alert("高压报警不能为空");
+							return false;
+						}
+						if(dy_low==null||dy_low==""||dy_low==undefined){
+							alert("低压报警不能为空");
+							return false;
+						}
+						if(wd==null||wd==""||wd==undefined){
+							alert("温度不能为空");
+							return false;
+						}
+						if(wd_hi==null||wd_hi==""||wd_hi==undefined){
+							alert("高温报警不能为空");
+							return false;
+						}
+						if(wd_low==null||wd_low==""||wd_low==undefined){
+							alert("低温报警不能为空");
+							return false;
+						}
+						if(sj==null||sj==""||sj==undefined){
+							alert("测试时间不能为空");
+							return false;
+						}
+						var strart = ($("input[name='strartsum']").val())*1; 
+						var end = ($("input[name='endsum']").val())*1;
+						if(strart==99){
+							alert("当前选中筛选箱无可选通道，请更换筛选箱或清空列表！");
+							return;
+						}
+						var xh = ($("input[name='xh']").val())*1;
+						var devices = ($("textarea[name='devices']").val());
+						var devices1 = ($("textarea[name='showin']").val());
+						var pch = ($("input[name='batchNo']").val());
+						var res ="";
+						var res1="";
+						if(xh==null||xh==""||xh==undefined){
+							alert("请选择箱号");
+							return;
+						}else if(pch==null||pch==""||pch==undefined){
+							alert("请录入批次号");
+							return;
+						}else if(strart>end){
+							alert("起始通道不能小于终止通道");
+							return;
+						}else if(strart==null||end==null){
+							alert("请输入起始通道或结束通道");
+							return;
+						}else{
+							for (var int = strart; int <= end; int++) {
+								if(int<10||int>19){
+									if(res==""){
+										if(int==0){
+											res="0";
+											res1=ttoid(0)
+										}else{
+											res=int;
+											res1 = ttoid(int);
+										}
+										
+									}else{
+										res=res+"-"+int;
+										res1=res1+"-"+ttoid(int);
+									}
+								}
+								
+							
+							}
+							if(devices!=null&&devices!=""&&devices!=undefined){
+								devices =devices+",\n"+ xh+"-"+res;
+								devices1 =devices1+",\n"+pch+" "+ xhid(xh*1)+" "+ttoid(strart)+"-"+ttoid(end);
+							}else{
+								devices = xh+"-"+res;
+								devices1 = pch+" "+xhid(xh*1)+" "+ttoid(strart)+"-"+ttoid(end);
+							}
+							$("textarea[name='showin']").val(devices1);
+							$("textarea[name='devices']").val(devices);
+							//pushAdTd(xh);排除已选 
+							
+							
+
+						}
+						
+						
+					});
+					　  var curr_time = new Date();     
+					 　 $("#end").datebox("setValue",myformatter(curr_time));  
+	});
+	function togetPaytime(value,row,index){  
+		var editButton = '<a id="edit' + index 
+		+ ' href="#" onclick="editTotalinfoView(this)"'
+		+ 'class="fnt_333333_14 no-line" ><font style="color: blue;">'+row.fp
+		+ '</font></a>';
+		return editButton;
+
+	}  
+	function togetdevices(value,row,index){  
+		var editButton = row.devices;
+		var res ="";
+		if(editButton!=null&&editButton!=""&&editButton!=undefined){
+			var barray = editButton.split(",");
+			var num = barray.length;
+			for(var j = 0; j < barray.length; j++){
+				var aarray = barray[j].split("-");
+				if(j==(num-1)){
+					res =res+ttoid(aarray[1]*1)+"到"+ttoid(aarray[aarray.length-1]*1);
+				}else{
+					res =res+ttoid(aarray[1]*1)+"到"+ttoid(aarray[aarray.length-1]*1)+",";
+				}
+				
+				
+			}
+			
+		}
+		
+		
+		return res;
+
+	}  
+	function editTotalinfoView(element){
+    	var index = element.id.match(/\d+/g).toString();
+		var row = $('#t_user').datagrid('getRows')[index];		
+		var content = JSON.stringify(row.id);
+		window.open("../sys/alarmresing.html?bid="+content,'各次处理废品时长',"height=400, width=600, top=350, left=400,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=n o, status=no");
+    }       
+	//通道下拉框排除数据
+	function pushAdTd(xh){
+		var devices = $("textarea[name='devices']").val();
+		$.ajax({
+			type:'POST',
+			url:'../../rest/manage/user/getxhDevice',
+			dataType : 'json',
+			data: {
+				XH: xh
+			},
+			dataType: 'json',
+			success:function(data){
+				for(var o in data){
+					if(devices!=null&&devices!=""){
+						devices=devices+",\n"+data[o].devices;
+					}else{
+						devices=data[o].devices;
+					}
+					
+				}
+				devices.replace(",\n",",");
+				
+				var res = ""
+					var arrylist = devices.split(",");
+					var allArray= [];
+			    	for (var int = 0; int < arrylist.length; int++) {
+			    		
+						var array1 = arrylist[int].split("-");
+						if(array1[0]==xh){
+							for (var int2 = 1; int2 < array1.length; int2++) {
+								var array2= array1[int2];
+								allArray.push(array2);	
+							}
+						}
+					}
+			    	
+			    	allArray = unique(allArray);
+			    	if(allArray.length<1){
+			    		var data1=[];
+						for (var int3 = 0; int3 < 30; int3++) {
+							if(int3<10||int3>19){
+								if(int3==0){
+					    			data1.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1),"selected":true})
+					    			
+					    		}else{
+					    			data1.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1)})
+					    		}
+							}
+						}
+						
+						var data2=[];
+						for (var int3 = 0; int3 < resArray.length; int3++) {
+							if(int3<10||int3>19){
+					    		if(int3==(resArray.length-1)){
+					    			data2.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1),"selected":true});
+					    		}else{
+					    			data2.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1)});
+					    		}
+							}
+							
+						}
+						$("#strartsum").combobox("loadData", data1);
+						$("#endsum").combobox("loadData", data2);
+						return;
+			    	}
+			    	var resArray = [];
+			    	for (var i = 0; i < 30; i++) {
+			    		var isin = 0;
+			    		
+			    		if(i<10||i>19){
+			    			for (var int3 = 0; int3 < allArray.length; int3++) {
+								if(allArray[int3]==i){
+									isin = 1;
+									break;
+								}
+							}
+			    		}else{
+			    			isin = 1;
+			    		}
+			    		
+			    		if(isin==0){
+			    			resArray.push(i);
+			    		}
+					}
+			    	
+					var data1=[];
+					for (var int3 = 0; int3 < resArray.length; int3++) {
+			    		if(int3==0){
+			    			data1.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1),"selected":true})
+			    			
+			    		}else{
+			    			data1.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1)})
+			    		}
+						
+					}
+					
+					var data2=[];
+					for (var int3 = 0; int3 < resArray.length; int3++) {
+			    		if(int3==(resArray.length-1)){
+			    			data2.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1),"selected":true})
+			    			
+			    		}else{
+			    			data2.push({"lable":resArray[int3],"value":ttoid(resArray[int3]*1)})
+			    		}
+						
+					}
+					if(data1.length>0){
+						$("#strartsum").combobox("loadData", data1);
+						$("#endsum").combobox("loadData", data2);
+					}else{
+						data2.push({"lable":'99',"value":'无可选通道',"selected":true})
+						$("#strartsum").combobox("loadData", data2);
+						$("#endsum").combobox("loadData", data2);
+					}
+			},
+			error:function(){
+		    }
+		});
+		
+			
+			
+	}
+	
+	//通道对应表
+	function ttoid(id){
+		switch (id){
+			case 0:
+			return "左1";
+			break;
+			case 1:
+			return "左2";
+			break;
+			case 2:
+			return "左3";
+			break;
+			case 3:
+			return "左4";
+			break;
+			case 4:
+			return "左5";
+			break;
+			case 5:
+			return "左6";
+			case 6:
+			return "左7";
+			break;
+			case 7:
+			return "左8";
+			break;
+			case 8:
+			return "左9";
+			break;
+			case 9:
+			return "左10";
+			case 20:
+			return "右1";
+			break;
+			case 21:
+			return "右2";
+			break;
+			case 22:
+			return "右3";
+			break;
+			case 23:
+			return "右4";
+			break;
+			case 24:
+			return "右5";
+			break;
+			case 25:
+			return "右6";
+			case 26:
+			return "右7";
+			break;
+			case 27:
+			return "右8";
+			break;
+			case 28:
+			return "右9";
+			break;
+			case 29:
+			return "右10";
+			break;
+			default:
+			return "";
+			break;
+		}
+	}
+	//箱号对应
+	function xhid(id){
+		switch (id){
+			case 1:
+			return "筛选A-004";
+			break;
+			case 2:
+			return "筛选A-003";
+			break;
+			case 3:
+			return "国债-12";
+			break;
+			case 4:
+			return "筛选A-002";
+			break;
+			case 5:
+			return "筛选A-001";
+			break;
+			case 6:
+			return "筛选A-005";
+			case 7:
+			return "片A-S-127";
+			break;
+			case 8:
+			return "片A-S-142";
+			break;
+			case 9:
+			return "片A-S-144";
+			break;
+			case 10:
+			return "片A-S-103";
+			break;
+			case 11:
+			return "片A-S-104";
+			break;
+			case 12:
+			return "片A-S-105";
+			break;
+			case 13:
+			return "片A-S-128";
+			break;
+			case 14:
+			return "片A-S-141";
+			break;
+			case 15:
+			return "片A-S-123";
+			break;
+			case 16:
+			return "片A-S-146";
+			break;
+			case 17:
+			return "片A-S-113";
+			break;
+			case 18:
+			return "片A-S-119";
+			break;
+			case 19:
+			return "片A-S-114";
+			break;
+			case 20:
+			return "片A-S-117";
+			break;
+			case 21:
+			return "片A-S-116";
+			break;
+			case 22:
+			return "片A-S-118";
+			break;
+			case 23:
+			return "片A-S-115";
+			break;
+			case 24:
+			return "片A-S-120";
+			break;
+			case 25:
+			return "片A-S-138";
+			case 26:
+			return "片A-S-145";
+			break;
+			case 27:
+			return "片A-S-131";
+			break;
+			case 28:
+			return "片A-S-129";
+			break;
+			case 29:
+			return "片A-S-106";
+			break;
+			case 30:
+			return "片A-S-124";
+			break;
+			case 31:
+			return "片A-S-125";
+			break;
+			case 32:
+			return "片A-S-123";
+			break;
+			case 33:
+			return "片A-S-099";
+			break;
+			case 34:
+			return "片A-S-100";
+			break;
+			case 35:
+			return "片A-S-101";
+			break;
+			case 36:
+			return "片A-S-102";
+			break;
+			case 37:
+			return "片A-S-126";
+			break;
+			case 38:
+			return "片A-S-137";
+			break;
+			case 39:
+			return "片A-S-130";
+			break;
+			case 40:
+			return "片A-S-136";
+			break;
+			case 41:
+			return "片A-S-139";
+			break;
+			case 42:
+			return "片A-S-086";
+			break;
+			case 43:
+			return "片A-S-087";
+			break;
+			case 44:
+			return "片A-S-140";
+			break;
+			case 45:
+			return "片A-S-111";
+			break;
+			case 46:
+			return "片A-S-112";
+			break;
+			case 47:
+			return "片A-S-109";
+			break;
+			case 48:
+			return "片A-S-108";
+			break;
+			case 49:
+			return "片A-S-152";
+			break;
+			default:
+			return "";
+			break;
+		}
+	}
+	//js方法：序列化表单 			
+	function serializeForm(form){
+		var obj = {};
+		$.each(form.serializeArray(),function(index){
+			if(obj[this['name']]){
+				obj[this['name']] = obj[this['name']] + ','+this['value'];
+			} else {
+				obj[this['name']] =this['value'];
+			}
+		});
+		return obj;
+	}
+	function unique(arr,removeAll){
+	    arr.sort(function(a,b){return a-b});//先排序
+	    
+	    var s=arr.join(',')+',';
+	    arr= s.replace(/(\d+,)\1+/g,removeAll?'':'$0').replace(/,$/,'').split(',');
+	    for(var i=0;i<arr.length;i++)
+	    arr[i]=parseInt(arr[i],10);//重新转为数字
+	    return arr
+	}	
+	function sumdelvce(){
+		var devices = ($("textarea[name='devices']").val());
+		//alert(devices);
+		
+		devices.replace(",\n",",");
+		
+		var res = ""
+		var arrylist = devices.split(",");
+		var cetArray = [];
+		for(i=1;i<50;i++){
+			
+				var allArray= [];
+		    	for (var int = 0; int < arrylist.length; int++) {
+					var array1 = arrylist[int].split("-");
+					if(array1[0]*1==i){
+						for (var int2 = 1; int2 < array1.length; int2++) {
+							var array2= array1[int2];
+							allArray.push(array2);	
+						}
+					}
+				} 
+		    	if(allArray.length>0){
+		    		var newArray = unique(allArray);
+					var resArray =[];
+					var res1 ="";
+					for (var int = 0; int < newArray.length; int++) {
+						if(int==0){
+							res1 = newArray[int];
+							resArray.push(res1);
+						}else{
+							if(res1!=newArray[int]){
+								res1 = newArray[int];
+								resArray.push(res1);
+							}
+						}
+						
+					}
+					var res2 = ""
+					for (var int3 = 0; int3 < resArray.length; int3++) {
+						res2=res2+"-"+resArray[int3];
+					}
+					res2=i+res2;
+					cetArray.push(res2);
+		    	}
+				
+		}
+		var resval = "";
+		var resretrun = "";
+		for (var i = 0; i < cetArray.length; i++) {
+			if(i==(cetArray.length-1)){
+				resretrun =resretrun+ cetArray[i];
+			}else{
+				resretrun = resretrun+cetArray[i]+","
+			}
+			
+		}
+	    return (resretrun);
+	}	
+	//设置修改密码窗口
+	function openPwd() {
+		$('#mydialog').window({
+	
+			modal : true,
+			shadow : true,
+			closed : true,
+			
+			resizable : false
+		});
+	}
+	function myformatter(date){  
+		    var y = date.getFullYear();  
+		    var m = date.getMonth()+1;  
+		    var d = date.getDate();  
+		    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);  
+		}  
+		          
+	function myparser(s){  
+		    if (!s) return new Date();  
+		    var ss = (s.split('-'));  
+		    var y = parseInt(ss[0],10);  
+		    var m = parseInt(ss[1],10);  
+		    var d = parseInt(ss[2],10);  
+		    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){  
+		        return new Date(y,m-1,d);  
+		    } else {  
+		        return new Date();  
+		    }  
+		}  
+	
+		
+
+	</script>
+</head>
+
+<body>
+<div id="lay" class="easyui-layout" style="width: 100%;height:100%" fit="true">
+				 <div region="north" title="条件查询" style="width: 100%;height:90px;" disabled="true" collapsible="true">
+					<form id="mysearch" method="post">
+						<table>
+								<tr>
+									<td>开始时间:</td>
+									<td>
+										<input id="start" name="start" class="easyui-datebox"></input> 
+									</td>
+									<td>结束时间:</td>
+									<td>
+										<input id="end" name="end" class="easyui-datebox"></input> 
+									</td>
+	    							<td width="20">&nbsp;</td>
+	    							<td>
+	    								<a id="searchbtn" class="easyui-linkbutton" iconCls="icon-search">查询</a> 
+										<a id="clearbtn" class="easyui-linkbutton" iconCls="icon-reload">清空</a>
+	    							</td>
+								</tr>
+							</table>
+					</form>
+				</div>
+				<div region="center" >
+					<table id="t_user"></table>
+				</div>
+			</div>
+			 
+	<div id="mydialog" title="创建任务" class="easyui-window" collapsible="false" modal="true"
+		minimizable="false" maximizable="false" icon="icon-save"  closed="true">
+		
+	    		<form id="myform" action="../../rest/app/user/edit" method="post" >
+	    				<input type="hidden" name="id" value="" />
+	    				<table style="width:700px">
+	    					   <input type="hidden" name="id"/>
+	    					
+	    					<tr>
+	    						
+	    						<td style="width:110px" align="right">批次号:</td>
+	    						<td>
+	    							<input type="text" name='batchNo' style="width:90px"/>
+	    						</td>
+	    						<td style="width:110px" align="right">测试电压:</td>
+	    						<td>
+	    							<input type="text" name='dy' style="width:90px"/>
+	    						</td>
+	    						<td style="width:110px" align="right">低压报警:</td>
+	    						<td>
+	    							<input type="text" name='dy_low' style="width:90px"/>
+	    						</td>
+	    						<td style="width:110px" align="right">高压报警:</td>
+	    						<td>
+	    							<input type="text" name='dy_hi' style="width:90px"/>
+	    						</td>
+	    					</tr>
+	    					<tr>
+	    						<td style="width:100px" align="right">测试温度:</td>
+	    						<td>
+	    							<input type="text" name='wd' style="width:90px"/>
+	    						</td>
+	    						<td style="width:120px" align="right">低温报警温度:</td>
+	    						<td>
+	    							<input type="text" name='wd_low' style="width:90px"/>
+	    						</td>
+	    						<td style="width:120px" align="right">高温报警温度:</td>
+	    						<td>
+	    							<input type="text" name='wd_hi' style="width:90px"/>
+	    						</td>
+	    						<td style="width:120px" align="right">测试时间长度:</td>
+	    						<td>
+	    							<input type="text" name='sj' style="width:90px"/>
+	    						</td>
+	    					</tr>
+	    					
+	    					<tr id="selectrow" >
+	    						<td align="right">箱号:</td>
+	    						<td ><input class="easyui-combobox"  id="xh" name="xh"  url='../../rest/manage/user/getcanselectXH' 
+	    						    valueField="xh_id" textField="xh_name" value="" data-options="width:90"/>
+	    						</td>
+	    						<td align="right">起始:</td>
+	    						<td >
+	    							<input class="easyui-combobox"  id="strartsum"  name="strartsum"
+	    							data-options="valueField:'lable',textField:'value' ,width:90 ,editable:false,data:[
+	    								{
+										 lable:'0',
+										 value:'左01'
+										 },
+										 {
+										 lable:'1',
+										 value:'左02'
+										 }
+										 ,
+										 {
+										 lable:'2',
+										 value:'左03'
+										 }
+										 ,
+										 {
+										 lable:'3',
+										 value:'左04'
+										 }
+										 ,
+										 {
+										 lable:'4',
+										 value:'左05'
+										 }
+										 ,
+										 {
+										 lable:'5',
+										 value:'左06'
+										 }
+										 ,
+										 {
+										 lable:'6',
+										 value:'左07'
+										 }
+										 ,
+										 {
+										 lable:'7',
+										 value:'左08'
+										 }
+										 ,
+										 {
+										 lable:'8',
+										 value:'左09'
+										 }
+										  ,
+										 {
+										 lable:'9',
+										 value:'左10'
+										 },
+										 {
+										 lable:'20',
+										 value:'右01'
+										 },
+										 {
+										 lable:'21',
+										 value:'右02'
+										 }
+										 ,
+										 {
+										 lable:'22',
+										 value:'右03'
+										 }
+										 ,
+										 {
+										 lable:'23',
+										 value:'右04'
+										 }
+										 ,
+										 {
+										 lable:'24',
+										 value:'右05'
+										 }
+										 ,
+										 {
+										 lable:'25',
+										 value:'右06'
+										 }
+										 ,
+										 {
+										 lable:'26',
+										 value:'右07'
+										 }
+										 ,
+										 {
+										 lable:'27',
+										 value:'右08'
+										 }
+										 ,
+										 {
+										 lable:'28',
+										 value:'右09'
+										 }
+										 ,
+										 {
+										 lable:'29',
+										 value:'右10'
+										 }
+										 
+										
+										 ]"/>
+	    						</td>
+	    						<td align="right">终止:</td>
+	    						<td >
+	    							<input class="easyui-combobox" id="endsum"  name="endsum"
+	    							data-options="valueField:'lable',textField:'value',width:90 ,editable:false,data:[
+	    								{
+										 lable:'0',
+										 value:'左01'
+										 },
+										 {
+										 lable:'1',
+										 value:'左02'
+										 }
+										 ,
+										 {
+										 lable:'2',
+										 value:'左03'
+										 }
+										 ,
+										 {
+										 lable:'3',
+										 value:'左04'
+										 }
+										 ,
+										 {
+										 lable:'4',
+										 value:'左05'
+										 }
+										 ,
+										 {
+										 lable:'5',
+										 value:'左06'
+										 }
+										 ,
+										 {
+										 lable:'6',
+										 value:'左07'
+										 }
+										 ,
+										 {
+										 lable:'7',
+										 value:'左08'
+										 }
+										 ,
+										 {
+										 lable:'8',
+										 value:'左09'
+										 }
+										  ,
+										 {
+										 lable:'9',
+										 value:'左10'
+										 },
+										 {
+										 lable:'20',
+										 value:'右01'
+										 },
+										 {
+										 lable:'21',
+										 value:'右02'
+										 }
+										 ,
+										 {
+										 lable:'22',
+										 value:'右03'
+										 }
+										 ,
+										 {
+										 lable:'23',
+										 value:'右04'
+										 }
+										 ,
+										 {
+										 lable:'24',
+										 value:'右05'
+										 }
+										 ,
+										 {
+										 lable:'25',
+										 value:'右06'
+										 }
+										 ,
+										 {
+										 lable:'26',
+										 value:'右07'
+										 }
+										 ,
+										 {
+										 lable:'27',
+										 value:'右08'
+										 }
+										 ,
+										 {
+										 lable:'28',
+										 value:'右09'
+										 }
+										 ,
+										 {
+										 lable:'29',
+										 value:'右10'
+										 }
+										
+										 ]"/>
+	    						</td>
+	    						
+	    					</tr>
+	    					<tr  id="buts" align="center">
+	    						<td colspan="6">
+	    							<a id="add" class="easyui-linkbutton" icon="icon-mini-add">添加</a>
+	    							<!--a id="sum" class="easyui-linkbutton" icon="icon-sum">计算</a-->
+	    							<a id="cleardvice" class="easyui-linkbutton" icon="icon-reload">清空</a>
+	    							
+	    						</td>
+	    					</tr>   		
+	    					<tr align="center" style="display: none">
+	    						<td colspan="6">
+	    							<textarea name='devices' rows=5  class="textarea easyui-validatebox" 
+	    							style="width: 90%; height: 90%" 
+	    							>
+	    							</textarea> 
+	    						</td>
+	    					</tr>
+	    					<tr align="center" >
+	    						<td colspan="6">
+	    							<textarea name='showin' rows=5  class="textarea easyui-validatebox" 
+	    							style="width: 90%; height: 90% ;" 
+	    							>
+	    							</textarea> 
+	    						</td>
+	    					</tr>
+	    					<tr style="height:30;">
+	    						<td id="reselect" colspan="6">修改原因:
+	    							<input class="easyui-combobox"  name="remod" value="原因1"
+	    							data-options="valueField:'lable',width:150,textField:'value',data:[{
+										 lable:'原因1',
+										 value:'原因1'
+										 },
+										 {
+										 lable:'原因2',
+										 value:'原因2'
+										 },
+										 {
+										 lable:'原因3',
+										 value:'原因3'
+										 }
+										 ]"/>
+	    						</td>
+	    					</tr>
+	    					<tr align="center">
+	    						<td colspan="6">
+	    							<a id="btn1" class="easyui-linkbutton" icon="icon-ok">确定</a>
+	    							<a id="btn2" class="easyui-linkbutton" icon="icon-cancel">关闭</a>
+	    							
+	    							
+	    						</td>
+	    					</tr>   					 					    					    					    					    					    					    					    					
+	    				</table>
+	    		</form> 
+	    		</div>	
+	  <div id="myaddsj" title="延长操作时间" class="easyui-window" collapsible="false" modal="true"
+		minimizable="false" maximizable="false" icon="icon-save"  closed="true">
+		
+	    		<form id="myaddsjform" action="../../rest/app/user/edit" method="post" >
+	    				<input type="hidden" name="id" value="" />
+	    				<table style="width:200px">
+	    					   <input type="hidden" name="pchid"/>
+	    					
+	    					<tr>
+	    						<td>批次号:</td>
+	    						<td>
+	    							<input type="text" name='pch' style="width:90px" />
+	    						</td>
+	    						
+	    					</tr>
+	    					<tr>
+	    						<td>延长时间:</td>
+	    						<td>
+	    							<input type="text" name='addsj' style="width:90px" />小时
+	    						</td>
+	    						
+	    					</tr>
+	    					<tr align="center">
+	    						<td colspan="6">
+	    							<a id="btn3" class="easyui-linkbutton" icon="icon-ok">确定</a>
+	    							<a id="btn4" class="easyui-linkbutton" icon="icon-cancel">关闭</a>
+	    							
+	    							
+	    						</td>
+	    					</tr>   					 					    					    					    					    					    					    					    					
+	    				</table>
+	    		</form> 
+	    		</div>		
+	    		 	
+	    <div id="myaddfpsl" title="废品数量管理" class="easyui-window" collapsible="false" modal="true"
+		minimizable="false" maximizable="false" icon="icon-save"  closed="true">
+		
+	    		<form id="myaddfpslform" action="../../rest/app/user/edit" method="post" >
+	    				<input type="hidden" name="id" value="" />
+	    				<table style="width:200px" >
+	    					   <input type="hidden" name="pchid1"/>
+	    					
+	    					<tr>
+	    						<td>批次号:</td>
+	    						<td>
+	    							<input type="text" name='pch1' style="width:90px" />
+	    						</td>
+	    						
+	    					</tr>
+	    					<tr>
+	    						<td>校正数量:</td>
+	    						<td>
+	    							<input type="text" name='jzsl' style="width:90px" />次
+	    						</td>
+	    						
+	    					</tr>
+	    					<tr align="center">
+	    						<td colspan="6">
+	    							<a id="btn5" class="easyui-linkbutton" icon="icon-ok">确定</a>
+	    							<a id="btn6" class="easyui-linkbutton" icon="icon-cancel">关闭</a>
+	    							
+	    							
+	    						</td>
+	    					</tr>   					 					    					    					    					    					    					    					    					
+	    				</table>
+	    		</form> 
+	    		</div>				
+</body>
+</html>

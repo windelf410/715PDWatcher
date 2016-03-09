@@ -1,0 +1,62 @@
+
+.ButtonTable
+{
+	BACKGROUND-IMAGE: url(../../images/view/b02.gif);
+	BORDER:0;
+}
+.MainTable
+{
+	BACKGROUND-COLOR: #729450;
+	BORDER:0;
+}
+TR.MainTR1
+{
+    FONT-SIZE: 12px;
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+	BACKGROUND-COLOR:#ffffff;
+}
+TR.MainTR2
+{
+    FONT-SIZE: 12px;
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+	BACKGROUND-COLOR:#e4eddc;
+}
+
+TR.TitleTR
+{
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+    FONT-SIZE: 12px;  
+	BACKGROUND-COLOR: #92b371;
+	color:#ffffff;
+}
+TD.TitleTD
+{
+    FONT-SIZE: 12px;
+	FILTER: dropshadow(color=#ffffff,offx=1,offy=1);
+	color:#333333; font-weight: 800;
+	cursor:hand;
+}
+.onmouseover{
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px;
+	FONT-SIZE: 12px;	BACKGROUND-COLOR:#ccddbb;
+}
+
+
+TD.TitleTDOver
+{
+    FONT-SIZE: 12px;
+	FILTER: dropshadow(color=#cccccc,offx=0,offy=0);
+	color:#666666; font-weight: 800;
+	cursor:hand;
+}
+TD.TitleTDDown
+{
+    FONT-SIZE: 12px;
+	FILTER: dropshadow(color=#ffffff,offx=1,offy=1);
+	color:#333333; font-weight: 800;
+	cursor:hand;
+}
+A{COLOR: #0000ff ;font-size:12px;TEXT-DECORATION: NONE}
+A:link{COLOR: #0000ff ;TEXT-DECORATION: NONE}
+A:visited{COLOR: #0000ff ;TEXT-DECORATION: NONE}
+A:hover{COLOR: red ;}

@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdatabank.shuhuibao.core.dao.IChanlesDao">
+
+
+
+	<!-- ************** READ ************** -->
+	<select id="getChannelInfo" resultType="ChanlesPo">
+		SELECT xh,channel,batchno,
+		case STATUS when 0 then '6571211' else '6571200' end as imagid ,
+		 status,
+		 event 
+		from alarm_channel
+		<where>
+			 XH=#{id}
+			 order by event asc  
+		</where>
+	</select>
+	<select id="getisOnline" resultType="ChanlesPo">
+		select a.xh,a.`online` as event from module_log a 
+		<where>
+			 a.xh =#{id} order by a.id desc LIMIT 0,1  
+		</where>
+	</select>
+	<select id="getisreson3mm" resultType="ChanlesPo">
+		select time from (SELECT
+		logtime as time
+		FROM
+		module_data md
+		where  md.xh  =#{id}
+			 order by md.id desc LIMIT 0,1)  md where 
+ 		md.time > DATE_SUB(NOW(), INTERVAL '3' MINUTE)
+	</select>
+
+
+</mapper>

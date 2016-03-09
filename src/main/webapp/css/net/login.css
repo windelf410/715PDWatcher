@@ -1,0 +1,8 @@
+.login_box .username{
+	background:url(../../net/images/icon_user.png) no-repeat;
+	background-position:10px 8px;
+}
+.login_box .password{
+	background:url(../../net/images/icon_pwd.png) no-repeat;
+	background-position:10px 8px;
+}

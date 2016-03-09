@@ -1,0 +1,232 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>数据分析</title>
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->  
+<link rel="stylesheet" href="../../../css/common.css" />
+<link rel="stylesheet" href="../../../css/style.css" />
+<link rel="stylesheet" href="../../../../css/net/mycss.css" />
+	
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/icon.css">
+
+<script src="../../../js/jquery-1.11.1.min.js"></script>
+<script src="../../../../js/jquery.easyui.min.js"></script>
+<script src="../../../../js/locale/easyui-lang-zh_CN.js"></script> 
+	
+<script src="../dataBrowse/js/echarts-all.js"></script>
+<script src="../dataBrowse/js/echarts.js"></script>
+<script type="text/javascript" src="../../../../js/myjs/initpage.js"></script>
+</head>
+<body>
+<div id="header2" style="background:#e2f2fb;">
+</div>
+	<div id="right_content" style="width:800px;height:800px">
+	 <table id="tab1" style="width:480px;height:28px;position:relative;float:center;text-align:center;">
+	  <tr>
+	    <td>
+	                起始时间:
+	    </td>
+	    
+	    <td>
+	      <input id="startTime" type="text" class="easyui-datebox" size="10" maxlength="10" data-options="editable:false"/>
+	    </td>
+	    <td style="width:10px"></td>
+	    <td>
+	                结束时间:
+	    </td>
+	    <td>
+	      <input id="endTime" type="text" class="easyui-datebox" size="10" maxlength="10" data-options="editable:false"/>
+	    </td>
+	     <td>
+	       <input type="button" class="default_btn4" value="显示" onClick="getdata()" />
+	     </td>
+	  </tr>
+	</table>
+	<p></p>
+	<div class="default_line"></div>
+	<div id="chartShow" style="width:640px;height:270px;position:relative;text-align:center;top:20px"></div>
+	<div style="width:160px;height:270px;position:relative;text-align:center;float:right;margin-top:-270px;margin-right:0px">
+	   <img alt="" src="note1.png" style="width:160px;height:auto;position:relative;margin-top:20%;z-level:30;">
+	   
+	   <p id="sugInfo" style="width:140px;height:auto;position:relative;text-align:center;float:right;margin-top:-90%;margin-right:10px;z-level:33">
+       </p>
+	</div>
+	</div>
+    
+	<script type="text/javascript">
+	window.data1=[];
+	window.data2=[];
+	window.dateTab=[];
+	/*******初始化参数 开始  王继茹*******/
+	function timeInit(){
+		var now=new Date();
+		var nyear=now.getFullYear();
+		var nmonth=now.getMonth()+1;
+		var nday=now.getDate();
+		$('#endTime').datebox('setValue',nyear+"-"+nmonth+"-"+nday);
+		var backWord;
+		var byear;
+		var bmonth;
+		for(var i=0;i<=6;i++){
+			bmonth=nmonth-i;
+			if(bmonth==0){
+				bmonth=12;
+				byear=nyear-1;
+			}else{
+				byear=nyear;
+			}
+			//window.dateTab.push(backWord);
+		}
+		backWord=byear+"-"+bmonth+"-"+nday;
+		$('#startTime').datebox('setValue',backWord);
+	}
+	$(function(){
+		timeInit();
+		getdata();
+	});
+	/********初始化参数 结束********/
+	function getdata()
+	{   
+	    var myChart = echarts.init(document.getElementById('chartShow'));
+	    /***************折线图设置 开始*****************/
+		var option={
+		  title:{
+		      text:'消费趋势',
+		      x:'left'
+		  },
+		  tooltip:{
+		      trigger:'axis',
+		      formatter : function (params) {
+		    	  var income=0;
+		    	  var consume=0;
+		    	  var sugInfo="";
+		    	  var startTime=$('#startTime').datebox('getValue');
+		    	  var date=params[0][1];
+		    	  var dataIndex=params[0].dataIndex;
+		    	  for(var i=0;i<=dataIndex;i++){
+		    		  income=income+params[0].series.data[i];
+		    		  consume=consume+params[1].series.data[i];
+		    	  }
+		    	  if(consume > income){
+		    	      sugInfo=sugInfo+"入不敷出，需要合理规划消费，节省开支哦！";
+		    	  }else if(consume<income){
+		    		  sugInfo=sugInfo+"消费有结余，可以做理财或者投资！";
+		    	  }else{
+		    		  sugIngo=sugInfo+"收支相抵，需要开源节流，勿做月光族！";
+		    	  }
+		    	  var iName=params[0][0]+"累计:";
+		    	  var cName=params[1][0]+"累计:";
+		    	  var data=startTime+"至"+date+'<br/>'+iName+income+' '+cName+consume+'<br/>'+sugInfo;
+		    	  return data;
+	          }
+		  },
+		  legend:{
+		    data:['收入','支出']
+		  },
+		  /* toolbox: {
+	        show : true,
+	        feature : {
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	      }, */
+	      xAxis : [
+	        {
+	            type : 'category',
+	            boundaryGap:false
+	        }
+	      ],
+	      yAxis : [
+	        {
+	        	name:'单位:元',
+	            type : 'value'
+	        }
+	      ],
+	      series : [
+	        {
+	            name: '收入',
+	            type: 'line'
+	        },
+	        {
+	            name: '支出',
+	            type: 'line'
+	        }
+	      ]
+		}; 
+		/***************折线图设置 结束*****************/
+		getdata0();
+		
+		option.series[0].data=window.data1;
+		option.series[1].data=window.data2;
+		option.xAxis[0].data=window.dateTab;
+		console.log("axis date:"+option.xAxis[0].data);
+		console.log("window.dateTab"+window.dateTab);
+		myChart.setOption(option);
+		/**********根据支出和收入的情况给出合理化的建议Somnus  开始************/
+		var dataLen=window.data1.length;
+		var totalIncome=0;
+		var totalConsume=0;
+		for(var i=0;i<dataLen;i++){
+			totalIncome=totalIncome+window.data1[i];
+			totalConsume=totalConsume+window.data2[i];
+		}
+		if(totalIncome>totalConsume){
+			//收入大于支出；
+			$('#sugInfo').html("这段时间手头略微宽绰，可以适当消费哦！");
+			//console.log("");
+		}else if(totalIncome<totalConsume){
+			//收入小于支出；
+			$('#sugInfo').html("这段时间支出太多，小心入不敷出哦！");
+			//console.log("");
+		}else if(totalIncome=totalConsume){
+			//收入等于支出
+			$('#sugInfo').html("这段时间收支相当，该省钱咯！");
+			//console.log("");
+		}
+		/**********根据支出和收入的情况给出合理化的建议Somnus  结束************/
+	}
+	function getdata0(){
+		var startTime = $('#startTime').datebox('getValue');
+		var endTime = $('#endTime').datebox('getValue');
+		var url="../../../../rest/dataAnalysis/incomeAndConsumeAnalysis";
+		$.ajax({
+			url:url,
+			type:'get',
+			data:{
+				startDate:startTime,
+				endDate:endTime
+			},
+			async:false,
+			dataType:'json',
+			success:function(data){
+				var jLen=0;
+				for(var i in data){
+					jLen++;
+				}
+				window.data1=[];
+				window.data2=[];
+				window.dateTab=[];
+				console.log("after pop:");
+				console.log("window.data1="+window.data1);
+				console.log("window.data2="+window.data2);
+				console.log("window.dateTab="+window.dateTab);
+				for(var j=0;j<jLen;j++){
+					
+					window.data1.push(data[j].incomeAmount);
+					window.data2.push(data[j].consumeAmount);
+					window.dateTab.push(data[j].date);
+				}
+			},
+			error:function(xhr,msg){
+				alert(msg);
+			}
+		});
+	}
+	</script> 
+  
+</body>  
+</html>  

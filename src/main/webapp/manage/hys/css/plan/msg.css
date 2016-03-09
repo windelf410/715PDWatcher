@@ -1,0 +1,11 @@
+/* CSS Document */
+#msgInfo { width:718px; height:400px; margin:0 auto; }
+#msgInfo .title { width:718px; height:40px; margin:0 auto; background:url(../img/tzggBG.jpg) repeat-x;}
+ #msgInfo .title .titleContent { width:650px; height:40px; padding:0 0 0 40px; background:url(../img/tzggIcon.jpg) no-repeat;
+ 								 text-align:left; line-height:40px; font-size:16px; font-weight:bold; color:#039;}
+#msgInfo .info { width:718px; height:24px; background:#f9fdfe; border-top:1px dashed #CCC; border-bottom:1px dashed #CCC;
+				  line-height:24px; color:#666;}
+ #msgInfo .info .item { margin:0 10px;}
+#msgInfo .content { width:716px; height:298px;border:1px solid #e8f5fb; background:#f9fdfe; margin:10px auto 0 auto; text-align:center; }
+  #msgInfo .content .txt { width:690px; height:280px; margin:10px auto 0 auto; font-size:14px; line-height:30px; text-align:left; color:#666;}
+ 

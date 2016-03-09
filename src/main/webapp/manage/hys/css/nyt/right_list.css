@@ -1,0 +1,74 @@
+/* CSS Document */
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0;padding:0;border:0;}
+ul,ol,li{list-style:none;}
+html,body{width:100%; height:100%;font-family:"ËÎÌו";}
+body {background:url(../../images/nyt/webbg.jpg) repeat-x; padding:0px;}
+a {noFocusLine: expression(this.onFocus = this.blur () );}
+:focus {-moz-outline-style: none}
+a{color:#333;text-decoration: none;}
+a:hover {color:#cc0000;text-decoration: none;}
+
+.xtRightB {
+	width:100%;
+	margin:0px auto;
+	margin-bottom:5px;
+	overflow: hidden;
+	padding:0px;
+}
+.location{
+	width:45%;
+	height:22px;
+	border: 1px solid #638699; background:#DBE6EA; float:left; margin-right:1%;
+	overflow: hidden;
+	text-align:left;
+	padding-top:3px;
+}
+.time{
+	width:25%;
+	height:22px;
+	border: 1px solid #638699; background:#DBE6EA; float:right;
+	overflow: hidden;
+	text-align:left;
+}
+
+.xtRightB span {
+	font-size: 12px;
+	color:#333;
+	padding-top:2px;
+	float:left;
+}
+.searchbg{background:#EDF5F7; font-size:12px; height:30px;}
+.input{border:#246f95 1px solid; color:#333333; background-color:transparent; width:80%;;background:url(../../images/nyt/search_r3_c2.jpg) no-repeat 5px 2px;padding-left:20px; height:18px; }
+.red{ color:#ff0000; font-family:Arial, Helvetica, sans-serif; font-weight:bolder;}
+
+
+.leftNav{position:absolute;background: #fff url(../../images/nyt/link_r5_c4.jpg) repeat-x;; height:97%;left:0px; right:0; bottom:0; border-left:#78BAD2 0px solid;border-right:#78BAD2 0px solid;width:100%;height:100%;
+padding:0xp;margin:0px;}
+.leftMenuNav{background: url(../../images/nyt/link_r7_c4.jpg) repeat-x;font-size:12px;color:#003561;border:#BCDBF0 1px solid;border-collapse: collapse;}
+.leftMenuNav td{height:28px; text-align:center;border:#BCDBF0 1px solid;}
+.leftMenuNav th{ background:url(../../images/nyt/link_r7_c2.jpg) no-repeat right top; height:28px; text-align:center;}
+.linkBG{ background:#F6FBFF;}
+.xtRightDivB {
+	border-left:#78BAD2 1px solid;border-right:#78BAD2 1px solid;
+	height:25px;
+	padding:0px;
+	margin:0px auto;
+	background: url(../../images/nyt/linktitlebg.jpg) repeat-x;
+	overflow:hidden;
+}
+html>body .xtRightDivB .icon01{margin-left:6px;background:url(../../images/nyt/iconall.png) no-repeat 0px 2px;}
+*html .xtRightDivB .icon01{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/nyt/iconall.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon02{margin-left:6px;background:url(../../images/nyt/icon02.png) no-repeat 0px 2px;}
+*html .xtRightDivB .icon02{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/nyt/icon02.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon03{margin-left:6px;background:url(../../images/nyt/icon03.png) no-repeat 0px 0px;}
+*html .xtRightDivB .icon03{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/nyt/icon03.png",sizingMethod=crop);}
+html>body .xtRightDivB .icon04{margin-left:6px;background:url(../../images/nyt/icon04.png) no-repeat 0px 0px;}
+*html .xtRightDivB .icon04{width:25px; margin-left:6px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../images/nyt/icon04.png",sizingMethod=crop);}
+
+.xtRightDivB .title {
+	font-size: 14px;
+	color: #246f95;
+	font-weight:900;
+	padding:0px;
+}
+.heightbot{height:30px;overflow:hidden;}

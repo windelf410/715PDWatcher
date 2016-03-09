@@ -1,0 +1,7 @@
+A{text-decoration:none}
+TD{font-size:12px}
+.textMode{border-top: 1px black solid;font-size:12px}
+.NOBORDER TD{border:1px gray solid}
+BODY{border:1px black solid;border-top:none;font-size:9pt}
+del{cursor:hand}
+ins{cursor:hand}

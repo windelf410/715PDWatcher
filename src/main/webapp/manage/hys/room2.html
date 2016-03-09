@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="Web Page Maker (unregistered version)">
+
+<style type="text/css">
+/*----------Text Styles----------*/
+.ws6 {font-size: 8px;}
+.ws7 {font-size: 9.3px;}
+.ws8 {font-size: 11px;}
+.ws9 {font-size: 12px;}
+.ws10 {font-size: 13px;}
+.ws11 {font-size: 15px;}
+.ws12 {font-size: 16px;}
+.ws14 {font-size: 19px;}
+.ws16 {font-size: 21px;}
+.ws18 {font-size: 24px;}
+.ws20 {font-size: 27px;}
+.ws22 {font-size: 29px;}
+.ws24 {font-size: 32px;}
+.ws26 {font-size: 35px;}
+.ws28 {font-size: 37px;}
+.ws36 {font-size: 48px;}
+.ws48 {font-size: 64px;}
+.ws72 {font-size: 96px;}
+.wpmd {font-size: 13px;font-family: 'Arial';font-style: normal;font-weight: normal;}
+/*----------Para Styles----------*/
+DIV,UL,OL /* Left */
+{
+ margin-top: 0px;
+ margin-bottom: 0px;
+}  
+</style>
+<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../js/myjs/index.js"></script>
+</head>
+<script type="text/javascript">
+				    $(document).ready(function () { 
+				    	startRequest();   	   
+			        	setInterval("startRequest()", 5000);  
+			        	//setInterval("changeimagle()", 1000);
+				    });  
+				 /*   var red= 0;
+				   function changeimagle(){
+					   var pt =  numstr.split(numstr, ",");
+					   for (var int = 0; int < pt.length; int++) {
+						   if(red==1){
+							  	  $("#"+pt[i]).attr("src","img/docO72VU/shapeSKO2M.gif");
+						  		  red= 0;
+						  	  }
+						  	  else{
+						  		 $("#"+pt[i]).attr("src","img/docO72VU/shape608AT.gif");
+						  		  red= 1;
+						  	  }
+						}
+		  	  
+				    }  */
+				     function changeimgred(name){
+				  		$("#"+name).attr("src","img/docO72VU/shape96R9R.gif");
+				    } 
+				    function changeimggreen(name){	
+				  		$("#"+name).attr("src","img/docO72VU/shapeUN9LR.gif");
+				    } 
+				    function changeimgyellow(name){	
+				  		$("#"+name).attr("src","img/docO72VU/shapeLMSJ5.gif");
+				    } 
+					function startRequest(){
+						var as = window.parent.getTabsselct();
+						if(as=="宇高楼二号筛选室"){
+							$.ajax({
+								type:'POST',
+								url:'../../rest/app/user/room2readoncunmt',
+								dataType : 'json',
+								success:function(data){
+									var isred = 0;
+									var isyellow=0;
+									for(var o in data){
+										var name =  data[o].xh;
+										var status =  data[o].status;
+										var batchNo =  data[o].batchNo;
+										var isstart =  data[o].isstart;
+										
+										if(status==1){
+											changeimgred(name);
+											isred=1;
+											
+										}else if(status==0&&batchNo!=""&&batchNo!=null&&batchNo!=undefined&&isstart>0){
+											changeimgyellow(name);
+											
+											isyellow=1;
+										}else{
+											changeimggreen(name);
+											
+										}
+									}
+									if(isred==1){
+										window.parent.setwarring("2s","#F00");
+									}else if(isyellow==1){
+										window.parent.setwarring("2s","#000000");
+									}else{
+										window.parent.setwarring("2s","#000000");
+									}
+								},
+								error:function(){
+						    			
+							    }
+							});
+						}
+						
+					
+					//在元素内部追加内容
+					
+					
+					}
+					function newsnext(a,b){
+						window.parent.sonaddtabsd(a,b);	
+					}
+					
+					</script> 
+<body>
+
+<div id="image1" style="position:absolute; overflow:hidden; left:60px; top:0px; width:1262px; height:400px; z-index:0"><img src="img/room31.jpg" alt="" title="" border=0 width=1262 height=400></div>
+
+<div id="shape1" style="position:absolute; overflow:hidden; left:420px; top:100px; width:61px; height:34px; z-index:1"><img border=0 width="100%" id="片A-S-115" onclick="newsnext('23','片A-S-115')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape2" style="position:absolute; overflow:hidden; left:540px; top:100px; width:61px; height:34px; z-index:2"><img border=0 width="100%" id="片A-S-118" onclick="newsnext('22','片A-S-118')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape3" style="position:absolute; overflow:hidden; left:660px; top:100px; width:61px; height:34px; z-index:3"><img border=0 width="100%" id="片A-S-116" onclick="newsnext('21','片A-S-116')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape4" style="position:absolute; overflow:hidden; left:800px; top:100px; width:61px; height:34px; z-index:4"><img border=0 width="100%" id="片A-S-117" onclick="newsnext('20','片A-S-117')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape5" style="position:absolute; overflow:hidden; left:1180px; top:100px; width:61px; height:34px; z-index:5"><img border=0 width="100%" id="片A-S-113" onclick="newsnext('17','片A-S-113')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape6" style="position:absolute; overflow:hidden; left:920px; top:100px; width:61px; height:34px; z-index:6"><img border=0 width="100%" id="片A-S-119" onclick="newsnext('19','片A-S-114')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape7" style="position:absolute; overflow:hidden; left:1060px; top:100px; width:61px; height:34px; z-index:7"><img border=0 width="100%" id="片A-S-119" onclick="newsnext('18','片A-S-119')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape8" style="position:absolute; overflow:hidden; left:420px; top:280px; width:61px; height:34px; z-index:8"><img border=0 width="100%" id="片A-S-101" onclick="newsnext('35','片A-S-101')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape9" style="position:absolute; overflow:hidden; left:540px; top:280px; width:61px; height:34px; z-index:9"><img border=0 width="100%" id="片A-S-100" onclick="newsnext('34','片A-S-100')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape10" style="position:absolute; overflow:hidden; left:660px; top:280px; width:61px; height:34px; z-index:10"><img border=0 width="100%" id="片A-S-099" onclick="newsnext('33','片A-S-099')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape11" style="position:absolute; overflow:hidden; left:800px; top:280px; width:61px; height:34px; z-index:11"><img border=0 width="100%" id="片A-S-123" onclick="newsnext('32','片A-S-123')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape12" style="position:absolute; overflow:hidden; left:920px; top:280px; width:61px; height:34px; z-index:12"><img border=0 width="100%" id="片A-S-125" onclick="newsnext('31','片A-S-125')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape13" style="position:absolute; overflow:hidden; left:1060px; top:280px; width:61px; height:34px; z-index:13"><img border=0 width="100%" id="片A-S-124" onclick="newsnext('30','片A-S-124')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape14" style="position:absolute; overflow:hidden; left:1180px; top:280px; width:61px; height:34px; z-index:14"><img border=0 width="100%" id="片A-S-106" onclick="newsnext('29','片A-S-106')"  height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape15" style="position:absolute; overflow:hidden; left:420px; top:200px; width:61px; height:34px; z-index:15"><img border=0 width="100%" id="片A-S-129" onclick="newsnext('28','片A-S-129')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape16" style="position:absolute; overflow:hidden; left:540px; top:200px; width:61px; height:34px; z-index:16"><img border=0 width="100%" id="片A-S-131" onclick="newsnext('27','片A-S-131')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape17" style="position:absolute; overflow:hidden; left:800px; top:200px; width:61px; height:34px; z-index:17"><img border=0 width="100%" id="片A-S-145" onclick="newsnext('26','片A-S-145')" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape18" style="position:absolute; overflow:hidden; left:1060px; top:200px; width:61px; height:34px; z-index:18"><img border=0 width="100%" id="片A-S-138" onclick="newsnext('25','片A-S-138')"  height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape19" style="position:absolute; overflow:hidden; left:1180px; top:200px; width:61px; height:34px; z-index:19"><img border=0 width="100%" id="片A-S-120" onclick="newsnext('24','片A-S-120')"  height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="text1" style="position:absolute; overflow:hidden; left:420px; top:320px; width:73px; height:26px; z-index:20">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-101</font></div>
+</div></div>
+
+<div id="text2" style="position:absolute; overflow:hidden; left:540px; top:320px; width:73px; height:26px; z-index:21">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-100</font></div>
+</div></div>
+
+<div id="text3" style="position:absolute; overflow:hidden; left:660px; top:320px; width:73px; height:26px; z-index:22">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-099</font></div>
+</div></div>
+
+<div id="text4" style="position:absolute; overflow:hidden; left:800px; top:320px; width:73px; height:26px; z-index:23">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-123</font></div>
+</div></div>
+
+<div id="text5" style="position:absolute; overflow:hidden; left:920px; top:320px; width:73px; height:26px; z-index:24">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-125</font></div>
+</div></div>
+
+<div id="text6" style="position:absolute; overflow:hidden; left:1060px; top:320px; width:73px; height:26px; z-index:25">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-124</font></div>
+</div></div>
+
+<div id="text7" style="position:absolute; overflow:hidden; left:1180px; top:320px; width:73px; height:26px; z-index:26">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-106</font></div>
+</div></div>
+
+<div id="text8" style="position:absolute; overflow:hidden; left:420px; top:240px; width:73px; height:26px; z-index:27">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-129</font></div>
+</div></div>
+
+<div id="text9" style="position:absolute; overflow:hidden; left:540px; top:240px; width:73px; height:26px; z-index:28">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-131</font></div>
+</div></div>
+
+<div id="text10" style="position:absolute; overflow:hidden; left:800px; top:240px; width:73px; height:26px; z-index:29">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-145</font></div>
+</div></div>
+
+<div id="text11" style="position:absolute; overflow:hidden; left:1060px; top:240px; width:73px; height:26px; z-index:30">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-138</font></div>
+</div></div>
+
+<div id="text12" style="position:absolute; overflow:hidden; left:1180px; top:240px; width:73px; height:26px; z-index:31">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-120</font></div>
+</div></div>
+
+<div id="text13" style="position:absolute; overflow:hidden; left:420px; top:140px; width:73px; height:26px; z-index:32">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-115</font></div>
+</div></div>
+
+<div id="text14" style="position:absolute; overflow:hidden; left:540px; top:140px; width:73px; height:26px; z-index:33">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-118</font></div>
+</div></div>
+
+<div id="text15" style="position:absolute; overflow:hidden; left:660px; top:140px; width:73px; height:26px; z-index:34">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-116</font></div>
+</div></div>
+
+<div id="text16" style="position:absolute; overflow:hidden; left:800px; top:140px; width:73px; height:26px; z-index:35">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-117</font></div>
+</div></div>
+
+<div id="text17" style="position:absolute; overflow:hidden; left:920px; top:140px; width:73px; height:26px; z-index:36">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-114</font></div>
+</div></div>
+
+<div id="text18" style="position:absolute; overflow:hidden; left:1060px; top:140px; width:73px; height:26px; z-index:37">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-119</font></div>
+</div></div>
+
+<div id="text19" style="position:absolute; overflow:hidden; left:1180px; top:140px; width:73px; height:26px; z-index:38">
+<div class="wpmd">
+<div><font face="微软雅黑">&#29255;A-S-113</font></div>
+</div></div>
+
+<div id="shape20" style="position:absolute; overflow:hidden; left:920px; top:405px; width:72px; height:29px; z-index:33"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape72ML5.gif"></div>
+
+<div id="shape21" style="position:absolute; overflow:hidden; left:1020px; top:405px; width:72px; height:29px; z-index:34"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeIEUR7.gif"></div>
+
+<div id="shape22" style="position:absolute; overflow:hidden; left:1120px; top:405px; width:72px; height:29px; z-index:35"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeLMSJ5.gif"></div>
+
+<div id="shape23" style="position:absolute; overflow:hidden; left:1220px; top:405px; width:72px; height:29px; z-index:36"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape608AT.gif"></div>
+
+<div id="text20" style="position:absolute; overflow:hidden; left:936px; top:410px; width:78px; height:23px; z-index:37">
+<div class="wpmd">
+<div><font face="微软雅黑">&#26410;&#30417;&#27979;</font></div>
+</div></div>
+
+<div id="text21" style="position:absolute; overflow:hidden; left:1043px; top:410px; width:78px; height:23px; z-index:38">
+<div class="wpmd">
+<div><font face="微软雅黑">&#24453;&#21629;</font></div>
+</div></div>
+
+<div id="text22" style="position:absolute; overflow:hidden; left:1146px; top:410px; width:78px; height:25px; z-index:39">
+<div class="wpmd">
+<div><font face="微软雅黑">&#36816;&#34892;</font></div>
+</div></div>
+
+<div id="text23" style="position:absolute; overflow:hidden; left:1243px; top:410px; width:78px; height:23px; z-index:40">
+<div class="wpmd">
+<div><font face="微软雅黑">&#35686;&#25253;</font></div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* CSS Document */
+
+* {margin:0; padding:0; font-size:12px; }
+body { margin:0 auto 0 auto; text-align:center;}
+img { border:0;}
+
+.txtBold { font-weight:bold;}
+
+.txt000 { color:#000;}
+.txt999 { color:#999;}
+.txt666 { color:#666;}
+.txtFFF { color:#FFF;}
+.txtF00 { color:#F00;}
+.txtC00 { color:#C00;}
+.txtFF0 { color:#FF0;}
+.txtF30 { color:#F30;}
+.txtF60 { color:#F60;}
+.txt06C { color:#06C;}
+
+
+.left { float:left;}
+.right { float:right;}

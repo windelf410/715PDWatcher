@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<script src="js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="../../js/myjs/index.js"></script>
+
+	</head>
+	<script type="text/javascript">
+	var xdata ;
+		
+	
+	</script>
+	<body>
+		<div class="container">
+				
+			<div id="cbp-pgcontainer" class="cbp-pgcontainer">
+				<ul class="cbp-pggrid" id="like">
+				<script type="text/javascript">
+				
+				    $(document).ready(function () { 
+				    	startRequest();   
+			        	//setInterval("startRequest()", 1000); 
+			        	
+				    });  
+				    (function ($) {
+		                $.getUrlParam = function (name) {
+		                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		                    var r = window.location.search.substr(1).match(reg);
+		                    if (r != null) return unescape(r[2]); return null;
+		                }
+		            })(jQuery);
+
+		            //方法二：
+		             
+		          
+
+					function startRequest(){
+						$("ul").empty(); 
+
+						$.ajax({
+							type:'POST',
+							url:'../../rest/app/user/channel',
+							dataType : 'json',
+							data: {
+								XH: $.getUrlParam('id')
+							},
+							dataType: 'json',
+							success:function(data){
+								for(var o in data){
+									 //alert("text:"+data[o].imagid+" value:"+data[o].batchno);  
+									 $("#like").append("<li id=\"item\">"+                 
+												"	<div class=\"cbp-pgcontent\">                              "+
+												"		<span class=\"cbp-pgrotate\">通道："+data[o].channel+"</span>        "+
+												"		<div class=\"cbp-pgitem\">                             "+
+												"			<div class=\"cbp-pgitem-flip\">                    "+
+												"				<img onclick=\"newsnext("+data[o].id+")\" src=\"images/"+data[o].imagid+".png\" />             "+
+												"			</div>                                           "+
+												"		</div><!-- /cbp-pgitem -->                           "+
+												"		                       "+
+												"	<div class=\"cbp-pginfo\">                                 "+
+												"		<h3>批次号：</h3>                               "+
+												"		<span class=\"cbp-pgprice\">"+data[o].batchno+"</span>                 "+
+												"	</div>                                                   "+
+												"	<div class=\"cbp-pginfo\">                                 "+
+												"		<h3>状态：</h3>                               "+
+												"		<span class=\"cbp-pgprice\">"+data[o].status+"</span>                 "+
+												"	</div>                                                   "+
+												"	<div class=\"cbp-pginfo\">                                 "+
+												"		<h3>报警原因</h3>                               "+
+												"		<span class=\"cbp-pgprice-baojin\" style=\"color:red\">"+data[o].event+"</span>                 "+
+												"	</div>                                                   "+
+												"</li>    "      
+													);
+									 
+								}
+							},
+							error:function(){
+						    }
+						});
+					
+					//在元素内部追加内容
+					
+						
+					}
+					function newsnext(a){
+						
+						window.parent.sonaddtabs(a);
+						
+					
+						
+						
+					}
+					</script> 
+					
+					
+					
+				
+					
+					
+					
+				</ul><!-- /cbp-pggrid -->
+			</div><!-- /cbp-pgcontainer -->
+		</div>
+		<script src="js/cbpShop.min.js"></script>
+		<script>
+			var shop = new cbpShop( document.getElementById( 'cbp-pgcontainer' ) ); 
+		</script>
+	</body>
+</html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/default.css" />
+		<link rel="stylesheet" type="text/css"href="../../js/themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../../js/themes/icon.css" />
+		<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="../../js/myjs/index.js"></script>
+		<script type="text/javascript" src="../../js/jquery.mousewheel.js"></script>
+		<script type="text/javascript" src="../../js/json2.js"></script>
+		<script type="text/javascript" src="../..js/radialindicator.js"></script> 
+		<style type="text/css">
+		${demo.css}
+		</style>
+		<!--script type="text/javascript">鼠标滚动出发事件
+			$(function() {
+				$('#container').html(navigator.userAgent);
+				
+				$(document).bind('mousewheel', function(event, delta, deltaX, deltaY){
+					//delta为1向上滚动  delta为-1向下滚动
+					alert("delta="+delta+"   deltaX="+deltaX+"   deltaY="+deltaY);
+				});
+
+				/*$(document.body).bind('mousewheel', function(event, delta, deltaX, deltaY){
+					//delta为1向上滚动  delta为-1向下滚动
+					alert("delta="+delta+"   deltaX="+deltaX+"   deltaY="+deltaY);
+				});*/
+
+			});
+		</script-->
+		<script type="text/javascript">
+		(function ($) {
+		    $.getUrlParam = function (name) {
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		        var r = window.location.search.substr(1).match(reg);
+		        if (r != null) return unescape(r[2]); return null;
+		    }
+		})(jQuery);
+		
+
+		jQuery(function($) {
+		    $('div.mousewheel_example')
+		        .bind('mousewheel', function(event, delta) {
+		            var dir = delta > 0 ? 'Up' : 'Down',
+		                vel = Math.abs(delta);
+		            $(this).text(dir + ' at a velocity of ' + vel);
+		            return false;
+		        });
+		});
+		 var data1 = new Array();
+		 var data2 = new Array();
+		 var data3 = new Array();
+		 var data4 = new Array();
+		 var data5 = new Array();
+		 var data6 = new Array();
+		 var data7 = new Array();
+		 var data8 = new Array();
+		 var data9 = new Array();
+		 var data10 = new Array();
+		 var data11 = new Array();
+		 var data12 = new Array();
+		 var data13 = new Array();
+		 var data14 = new Array();
+		 var data15 = new Array();
+		 var data16 = new Array();
+		 var data17 = new Array();
+		 var data18 = new Array();
+		 var data19 = new Array();
+		 var data20 = new Array();
+		 var data21 = new Array();
+		 var data22 = new Array();
+
+		var chart;  
+		var timer;
+		var timerreq;
+		var timeoe;
+		function stopIn(){
+			clearInterval(timerreq);
+		}
+		function search(){
+			
+			
+		
+		}
+		$(document).ready(function() {
+			
+			$("a[name='left1']").click(function(){
+				/* $("span[name='lc']").css("color","#A8A8A8");
+				
+				$('#1l').css("color","red"); */
+				var series=chart.series;
+				if(series[0].selected==false){
+					series[0].select(true);
+					$('#1l').css("color","red");
+					series[0].show(); 
+					series[21].setData(data1);
+				}else{
+					series[0].select(false);
+					$('#1l').css("color","#A8A8A8");
+					series[0].hide(); 
+				}
+
+				
+				
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left2']").click(function(){
+				var series=chart.series;
+				if(series[1].selected==false){
+					series[1].select(true);
+					$('#2l').css("color","red");
+					series[1].show(); 
+					series[21].setData(data2);
+				}else{
+					series[1].select(false);
+					$('#2l').css("color","#A8A8A8");
+					series[1].hide(); 
+				}
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left3']").click(function(){
+				var series=chart.series;
+				if(series[2].selected==false){
+					series[2].select(true);
+					$('#3l').css("color","red");
+					series[2].show(); 
+					series[21].setData(data3);
+				}else{
+					series[2].select(false);
+					$('#3l').css("color","#A8A8A8");
+					series[2].hide(); 
+				} 
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left4']").click(function(){
+				var series=chart.series;
+				if(series[3].selected==false){
+					series[3].select(true);
+					$('#4l').css("color","red");
+					series[3].show(); 
+					series[21].setData(data4);
+				}else{
+					series[3].select(false);
+					$('#4l').css("color","#A8A8A8");
+					series[3].hide(); 
+				} 
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left5']").click(function(){
+				var series=chart.series;
+				if(series[4].selected==false){
+					series[4].select(true);
+					$('#5l').css("color","red");
+					series[4].show(); 
+					series[21].setData(data5);
+				}else{
+					series[4].select(false);
+					$('#5l').css("color","#A8A8A8");
+					series[4].hide(); 
+				} 
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left6']").click(function(){
+				var series=chart.series;
+				if(series[5].selected==false){
+					series[5].select(true);
+					$('#6l').css("color","red");
+					series[5].show(); 
+					series[21].setData(data6);
+				}else{
+					series[5].select(false);
+					$('#6l').css("color","#A8A8A8");
+					series[5].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left7']").click(function(){
+				var series=chart.series;
+				if(series[6].selected==false){
+					series[6].select(true);
+					$('#7l').css("color","red");
+					series[6].show(); 
+					series[21].setData(data7);
+				}else{
+					series[6].select(false);
+					$('#7l').css("color","#A8A8A8");
+					series[6].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left8']").click(function(){
+				var series=chart.series;
+				if(series[7].selected==false){
+					series[7].select(true);
+					$('#8l').css("color","red");
+					series[7].show(); 
+					series[21].setData(data8);
+				}else{
+					series[7].select(false);
+					$('#8l').css("color","#A8A8A8");
+					series[7].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left9']").click(function(){
+				var series=chart.series;
+				if(series[8].selected==false){
+					series[8].select(true);
+					$('#9l').css("color","red");
+					series[8].show(); 
+					series[21].setData(data9);
+				}else{
+					series[8].select(false);
+					$('#9l').css("color","#A8A8A8");
+					series[8].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='left10']").click(function(){
+				var series=chart.series;
+				if(series[9].selected==false){
+					series[9].select(true);
+					$('#10l').css("color","red");
+					series[9].show(); 
+					series[21].setData(data10);
+				}else{
+					series[9].select(false);
+					$('#10l').css("color","#A8A8A8");
+					series[9].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right1']").click(function(){
+				var series=chart.series;
+				if(series[10].selected==false){
+					series[10].select(true);
+					$('#11l').css("color","red");
+					series[10].show(); 
+					series[21].setData(data11);
+				}else{
+					series[10].select(false);
+					$('#11l').css("color","#A8A8A8");
+					series[10].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right2']").click(function(){
+				var series=chart.series;
+				if(series[11].selected==false){
+					series[11].select(true);
+					$('#12l').css("color","red");
+					series[11].show(); 
+					series[21].setData(data12);
+				}else{
+					series[11].select(false);
+					$('#12l').css("color","#A8A8A8");
+					series[11].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right3']").click(function(){
+				var series=chart.series;
+				if(series[12].selected==false){
+					series[12].select(true);
+					$('#13l').css("color","red");
+					series[12].show(); 
+					series[21].setData(data13);
+				}else{
+					series[12].select(false);
+					$('#13l').css("color","#A8A8A8");
+					series[12].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right4']").click(function(){
+				var series=chart.series;
+				if(series[13].selected==false){
+					series[13].select(true);
+					$('#14l').css("color","red");
+					series[13].show(); 
+					series[21].setData(data14);
+				}else{
+					series[13].select(false);
+					$('#14l').css("color","#A8A8A8");
+					series[13].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right5']").click(function(){
+				var series=chart.series;
+				if(series[14].selected==false){
+					series[14].select(true);
+					$('#15l').css("color","red");
+					series[14].show(); 
+					series[21].setData(data15);
+				}else{
+					series[14].select(false);
+					$('#15l').css("color","#A8A8A8");
+					series[14].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right6']").click(function(){
+				var series=chart.series;
+				if(series[15].selected==false){
+					series[15].select(true);
+					$('#16l').css("color","red");
+					series[15].show(); 
+					series[21].setData(data16);
+				}else{
+					series[15].select(false);
+					$('#16l').css("color","#A8A8A8");
+					series[15].hide(); 
+				}   
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right7']").click(function(){
+				var series=chart.series;
+				if(series[16].selected==false){
+					series[16].select(true);
+					$('#17l').css("color","red");
+					series[16].show(); 
+					series[21].setData(data17);
+				}else{
+					series[16].select(false);
+					$('#17l').css("color","#A8A8A8");
+					series[16].hide(); 
+				}   
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right8']").click(function(){
+				var series=chart.series;
+				if(series[17].selected==false){
+					series[17].select(true);
+					$('#18l').css("color","red");
+					series[17].show(); 
+					series[21].setData(data18);
+				}else{
+					series[17].select(false);
+					$('#18l').css("color","#A8A8A8");
+					series[17].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right9']").click(function(){
+				var series=chart.series;
+				if(series[18].selected==false){
+					series[18].select(true);
+					$('#19l').css("color","red");
+					series[18].show(); 
+					series[21].setData(data19);
+				}else{
+					series[18].select(false);
+					$('#19l').css("color","#A8A8A8");
+					series[18].hide(); 
+				}   
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			$("a[name='right10']").click(function(){
+				var series=chart.series;
+				if(series[19].selected==false){
+					series[19].select(true);
+					$('#20l').css("color","red");
+					series[19].show(); 
+					series[21].setData(data20);
+				}else{
+					series[19].select(false);
+					$('#20l').css("color","#A8A8A8");
+					series[19].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"电压量程V"});     
+				});
+			
+			$("a[name='temp']").click(function(){
+				var series=chart.series;
+				if(series[20].selected==false){
+					series[20].select(true);
+					$('#21l').css("color","red");
+					series[20].show(); 
+					series[21].setData(data21);
+					/*  nseries.addSeries({                      
+		                 data:data1
+		             },false);  */
+				}else{
+					series[20].select(false);
+					$('#21l').css("color","#A8A8A8");
+					series[20].hide(); 
+				}  
+				var yAxis = chart.yAxis[0];
+				 yAxis.setTitle({text:"温度量程 °C"});                   
+				});
+			$("a[name='fpcs']").click(function(){
+				var series=chart.series;
+			    if(series.length==22){
+			    	 chart.addSeries({                       
+		                 id:1,
+		                 name:"排废",
+		                 visible:false,
+		                 data:data22//[{x: 1450444330000, y: 100, marker:{ fillColor: 'red'} }]
+		             },false);  
+			    	var xAxis = chart.xAxis[0];
+		             
+		             for(var i=0;i<data22.length;i++){
+		            	 
+		            	 xAxis.addPlotLine({
+					    		color:'red',
+					    		id:'p1',//线的颜色，定义为红色
+					            dashStyle:'solid',     //默认值，这里定义为实线
+					            value:data22[i][0],               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+					            width:2  ,
+					            label: {
+			                         text: '废品产生'
+			                     }  //标示线的宽度，2px//标示线的宽度，2px
+					    	})
+		             }
+			    	
+			    	
+			    	$('#22l').css("color","red");
+			    }else{
+			    	for(var i=22;i<series.length;i++){
+			    		 series[i].remove(false);
+			    	}
+			    		chart.xAxis[0].removePlotLine("p1"); 
+			    	$('#22l').css("color","#A8A8A8");
+			    }
+				
+				 chart.redraw();          
+				});
+			time = setInterval("getups()", 500);  
+			 $.ajax({
+ 				type:'POST',
+ 				url:'../../rest/manage/user/getbhallinfo',
+ 				data: {
+ 					XH: $.getUrlParam('xh'),
+ 					batchNo: $.getUrlParam('batchNo'),
+ 					start: $.getUrlParam('start'),
+ 					end: $.getUrlParam('endtime'),
+ 					ID: $.getUrlParam('id')
+ 				},
+ 				dataType : 'json',
+ 				success:function(data){  
+ 					var sonnex =null;
+ 					var sonnex1 =null;
+ 					var sonnex2 =null;
+ 					var sonnex3 =null;
+ 					var sonnex4 =null;
+ 					var sonnex5 =null;
+ 					var sonnex6 =null;
+ 					var sonnex7 =null;
+ 					var sonnex8 =null;
+ 					var sonnex9 =null;
+ 					var sonnex10 =null;
+ 					var sonnex11 =null;
+ 					var sonnex12 =null;
+ 					var sonnex13 =null;
+ 					var sonnex14 =null;
+ 					var sonnex15 =null;
+ 					var sonnex16 =null;
+ 					var sonnex17 =null;
+ 					var sonnex18 =null;
+ 					var sonnex19 =null;
+ 					var sonnex20 =null;
+ 					
+ 					var allcount = data.length;
+ 					var event0 ="";
+ 					var event1 ="";
+ 					 for (var i = 0; i < data.length; i++) {
+ 						var ar = data[i];
+						var da =ar.sj;
+						
+						
+						
+ 						da=da.replace("-","/");
+ 						da=da.substring(0,da.length-2);
+ 						var date = new Date(da); 
+ 						var res = date.getTime()
+ 						if(i==0){
+							event0 = ar.event;
+							event1 = ar.event;
+						}else{
+							event1 = ar.event;
+							if(event1=="1"){
+								var son22 = new Array();
+								son22.push(res);
+		 						son22.push(100);
+		 						data22.push(son22);
+							}
+						}
+ 						
+ 						if(sonnex1==null||allcount<2000||i==(data.length-1)){
+ 							sonnex1=ar.ad_1*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_1*1);
+ 							data1.push(son);
+ 						}else if(ar.ad_1>(sonnex1+2)||ar.ad_1<(sonnex1-2)){
+ 							sonnex1=ar.ad_1*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_1*1);
+ 							data1.push(son);
+ 						}
+ 						if(sonnex2==null||allcount<2000||i==(data.length-1)){
+ 							sonnex2=ar.ad_2*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_2*1);
+ 							data2.push(son);
+ 						}else if(ar.ad_2>(sonnex2+2)||ar.ad_2<(sonnex2-2)){
+ 							sonnex2=ar.ad_2*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_2*1);
+ 							data2.push(son);
+ 						}
+ 						if(sonnex3==null||allcount<2000||i==(data.length-1)){
+ 							sonnex3=ar.ad_3*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_3*1);
+ 							data3.push(son);
+ 						}else if(ar.ad_3>(sonnex3+2)||ar.ad_2<(sonnex3-2)){
+ 							sonnex3=ar.ad_3*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_3*1);
+ 							data3.push(son);
+ 						}
+ 						if(sonnex4==null||allcount<2000||i==(data.length-1)){
+ 							sonnex4=ar.ad_4*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_4*1);
+ 							data4.push(son);
+ 						}else if(ar.ad_4>(sonnex4+2)||ar.ad_2<(sonnex4-2)){
+ 							sonnex4=ar.ad_4*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_4*1);
+ 							data4.push(son);
+ 						}
+ 						if(sonnex5==null||allcount<2000||i==(data.length-1)){
+ 							sonnex5=ar.ad_5*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_5*1);
+ 							data5.push(son);
+ 						}else if(ar.ad_5>(sonnex5+2)||ar.ad_2<(sonnex5-2)){
+ 							sonnex5=ar.ad_5*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_5*1);
+ 							data5.push(son);
+ 						}
+ 						if(sonnex6==null||allcount<2000||i==(data.length-1)){
+ 							sonnex6=ar.ad_6*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_6*1);
+ 							data6.push(son);
+ 						}else if(ar.ad_6>(sonnex6+2)||ar.ad_2<(sonnex6-2)){
+ 							sonnex6=ar.ad_6*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_6*1);
+ 							data6.push(son);
+ 						}
+ 						if(sonnex7==null||allcount<2000||i==(data.length-1)){
+ 							sonnex7=ar.ad_7*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_7*1);
+ 							data7.push(son);
+ 						}else if(ar.ad_7>(sonnex7+2)||ar.ad_2<(sonnex7-2)){
+ 							sonnex7=ar.ad_7*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_7*1);
+ 							data7.push(son);
+ 						}
+ 						if(sonnex8==null||allcount<2000||i==(data.length-1)){
+ 							sonnex8=ar.ad_8*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_8*1);
+ 							data8.push(son);
+ 						}else if(ar.ad_8>(sonnex8+2)||ar.ad_2<(sonnex8-2)){
+ 							sonnex8=ar.ad_8*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_8*1);
+ 							data8.push(son);
+ 						}
+ 						if(sonnex9==null||allcount<2000||i==(data.length-1)){
+ 							sonnex9=ar.ad_9*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_9*1);
+ 							data9.push(son);
+ 						}else if(ar.ad_9>(sonnex9+2)||ar.ad_2<(sonnex9-2)){
+ 							sonnex9=ar.ad_9*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_9*1);
+ 							data9.push(son);
+ 						}
+ 						if(sonnex10==null||allcount<2000||i==(data.length-1)){
+ 							sonnex10=ar.ad_10*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_10*1);
+ 							data10.push(son);
+ 						}else if(ar.ad_10>(sonnex10+2)||ar.ad_2<(sonnex10-2)){
+ 							sonnex10=ar.ad_10*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_10*1);
+ 							data10.push(son);
+ 						}
+ 						if(sonnex11||allcount<2000||i==(data.length-1)){
+ 							sonnex11=ar.ad_11*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_11*1);
+ 							data11.push(son);
+ 						}else if(ar.ad_11>(sonnex11+2)||ar.ad_2<(sonnex11-2)){
+ 							sonnex11=ar.ad_11*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_11*1);
+ 							data11.push(son);
+ 						}
+ 						if(sonnex12||allcount<2000||i==(data.length-1)){
+ 							sonnex12=ar.ad_12*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_12*1);
+ 							data12.push(son);
+ 						}else if(ar.ad_12>(sonnex12+2)||ar.ad_2<(sonnex12-2)){
+ 							sonnex12=ar.ad_12*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_12*1);
+ 							data12.push(son);
+ 						}
+ 						if(sonnex13||allcount<2000||i==(data.length-1)){
+ 							sonnex13=ar.ad_13*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_13*1);
+ 							data13.push(son);
+ 						}else if(ar.ad_13>(sonnex13+2)||ar.ad_2<(sonnex13-2)){
+ 							sonnex13=ar.ad_13*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_13*1);
+ 							data13.push(son);
+ 						}
+ 						if(sonnex14||allcount<2000||i==(data.length-1)){
+ 							sonnex14=ar.ad_14*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_14*1);
+ 							data14.push(son);
+ 						}else if(ar.ad_14>(sonnex14+2)||ar.ad_2<(sonnex14-2)){
+ 							sonnex14=ar.ad_14*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_14*1);
+ 							data14.push(son);
+ 						}
+ 						if(sonnex15||allcount<2000||i==(data.length-1)){
+ 							sonnex15=ar.ad_15*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_15*1);
+ 							data15.push(son);
+ 						}else if(ar.ad_15>(sonnex15+2)||ar.ad_2<(sonnex15-2)){
+ 							sonnex15=ar.ad_15*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_15*1);
+ 							data15.push(son);
+ 						}
+ 						if(sonnex16||allcount<2000||i==(data.length-1)){
+ 							sonnex16=ar.ad_16*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_16*1);
+ 							data16.push(son);
+ 						}else if(ar.ad_16>(sonnex16+2)||ar.ad_2<(sonnex16-2)){
+ 							sonnex16=ar.ad_16*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_16*1);
+ 							data16.push(son);
+ 						}
+ 						if(sonnex17||allcount<2000||i==(data.length-1)){
+ 							sonnex17=ar.ad_17*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_17*1);
+ 							data17.push(son);
+ 						}else if(ar.ad_17>(sonnex17+2)||ar.ad_2<(sonnex17-2)){
+ 							sonnex17=ar.ad_17*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_17*1);
+ 							data17.push(son);
+ 						}
+ 						if(sonnex18||allcount<2000||i==(data.length-1)){
+ 							sonnex18=ar.ad_18*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_18*1);
+ 							data18.push(son);
+ 						}else if(ar.ad_18>(sonnex18+2)||ar.ad_2<(sonnex18-2)){
+ 							sonnex18=ar.ad_18*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_18*1);
+ 							data18.push(son);
+ 						}
+ 						if(sonnex19||allcount<2000||i==(data.length-1)){
+ 							sonnex19=ar.ad_19*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_19*1);
+ 							data19.push(son);
+ 						}else if(ar.ad_19>(sonnex19+2)||ar.ad_2<(sonnex19-2)){
+ 							sonnex19=ar.ad_19*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_19*1);
+ 							data19.push(son);
+ 						}
+ 						if(sonnex20||allcount<2000||i==(data.length-1)){
+ 							sonnex20=ar.ad_20*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_20*1);
+ 							data20.push(son);
+ 						}else if(ar.ad_20>(sonnex20+2)||ar.ad_2<(sonnex20-2)){
+ 							sonnex20=ar.ad_20*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_20*1);
+ 							data20.push(son);
+ 						}
+						if(sonnex||allcount<50000||i==(data.length-1)){
+ 							sonnex=ar.ad_21*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_21*1);
+ 							data21.push(son);
+ 						}else if(ar.ad_21>(sonnex+2)||ar.ad_21<(sonnex-2)){
+ 							sonnex=ar.ad_21*1;
+ 							var son = new Array();
+ 							son.push(res);
+ 							son.push(ar.ad_21*1);
+ 							data21.push(son);
+ 						}
+ 					}
+ 		           },  
+ 		           //显示错误                                         
+ 		           error:function (err){  
+ 		        }  
+ 		     });
+			});  
+		
+		function getups(){
+			if(data1.length>0){
+				 $('#jqmeter-container').jQMeter({
+						goal:'1000',
+		    			raised:'1000',
+		    			width:'300px',
+		    			height:'50px',
+		    			displayTotal:true,
+		    			animationSpeed:5000,
+		    			counterSpeed:5000
+					}); 
+				 
+				 
+				timeoe = setInterval("dolaod()", 5100);  
+				clearInterval(time);
+				
+			}
+		}
+		function dolaod(){
+			clearInterval(timeoe); 
+			$('#jqmeter-container').remove();
+			 $("#container").show();
+			 chart = new Highcharts.StockChart({
+		        	chart: {
+		                renderTo: 'container'
+		             },
+		             rangeSelector: {
+		                selected: 1,
+		                enabled:false
+		             },
+		             tooltip: {
+		                 formatter: function () {
+		                     return ' 时间点：<b>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'</b><br/>'+ 
+		                         '数据：<b>' + Highcharts.numberFormat(this.y, 2); + '</b>';
+		                 }
+		             },
+		             navigator: {
+		                 series: {
+		                	 type: 'areaspline',
+		                		color: '#FF000',
+		                		fillOpacity: 0.05,
+		                		dataGrouping: {
+		                			smoothed: true
+		                		},
+		                		lineWidth: 1,
+		                		marker: {
+		                			enabled: false
+		                		},
+
+		                     data: data21
+		                 }
+		             },
+		             /* xAxis: { 
+		                 plotLines: [{
+		                     value: 1450549643000,
+		                     width: 3,
+		                     color: 'red',
+		                     label: {
+		                         text: '废品产生'
+		                     }
+		                 },{
+		                     value: 1450549643000,
+		                     width: 3,
+		                     color: 'red',
+		                     label: {
+		                         text: '废品产生'
+		                     }
+		                 },{
+		                     value: 1450609643000,
+		                     width: 3,
+		                     color: 'red',
+		                     label: {
+		                         text: '废品产生'
+		                     }
+		                 },{
+		                     value: 1450699643000,
+		                     width: 3,
+		                     color: 'red',
+		                     label: {
+		                         text: '废品产生'
+		                     }
+		                 }]
+		             }, */ 
+			        series: [
+			                 {  
+			        	type: 'line',
+			        	name: '左1', 
+			        	visible:false,
+			            data: data1  
+			        },{  
+			        	type: 'line',
+			        	name: '左2',
+			        	visible:false,
+			            data: data2  
+			        },{  
+			        	type: 'line',
+			        	name: '左3',
+			        	visible:false,
+			            data: data3  
+			        },{  
+			        	type: 'line',
+			        	name: '左4',
+			        	visible:false,
+			            data: data4  
+			        },{  
+			        	type: 'line',
+			        	name: '左5',
+			        	visible:false,
+			            data: data5 
+			        },{  
+			        	type: 'line',
+			        	name: '左6', 
+			        	visible:false,
+			            data: data6  
+			        },{  
+			        	type: 'line',
+			        	name: '左7', 
+			        	visible:false,
+			            data: data7  
+			        },{  
+			        	type: 'line',
+			        	name: '左8',
+			        	visible:false,
+			            data: data8  
+			        },{  
+			        	type: 'line',
+			        	name: '左9',
+			        	visible:false,
+			            data: data9  
+			        },{  
+			        	type: 'line',
+			        	name: '左10',
+			        	visible:false,
+			            data: data10  
+			        },{  
+			        	type: 'line',
+			        	name: '右1', 
+			        	visible:false,
+			            data: data11  
+			        },{  
+			        	type: 'line',
+			        	name: '右2',
+			        	visible:false,
+			            data: data12  
+			        },{  
+			        	type: 'line',
+			        	name: '右3',
+			        	visible:false,
+			            data: data13  
+			        },{  
+			        	type: 'line',
+			        	name: '右4',
+			        	visible:false,
+			            data: data14  
+			        },{  
+			        	type: 'line',
+			        	name: '右5',
+			        	visible:false,
+			            data: data15 
+			        },{  
+			        	type: 'line',
+			        	name: '右6', 
+			        	visible:false,
+			            data: data16  
+			        },{  
+			        	type: 'line',
+			        	name: '右7', 
+			        	visible:false,
+			            data: data17  
+			        },{  
+			        	type: 'line',
+			        	name: '右8',
+			        	visible:false,
+			            data: data18  
+			        },{  
+			        	type: 'line',
+			        	name: '右9',
+			        	visible:false,
+			            data: data19  
+			        },{  
+			        	type: 'line',
+			        	name: '右10',
+			        	visible:false,
+			            data: data20  
+			        },{  
+			        	type: 'line',
+			        	name: '温度',
+			        	visible:true,
+			            data: data21  
+			        }]  
+			    }); 
+		}
+		function doremovechanle(){ 
+			
+			var devices = $.getUrlParam('divices');
+			$('a').hide();
+			 $("#container").hide();
+			if(devices!=null&&devices!=""&&devices!=undefined){
+				
+				 $('#jqmeter-container').jQMeter({
+						goal:'1000',
+		    			raised:'100',
+		    			width:'300px',
+		    			height:'50px'
+					}); 
+				var arrylist = devices.split("-");
+				var n = 99;
+				for (var i = 1; i < arrylist.length; i++) {
+					n=arrylist[i]*1;
+					switch(n)
+					{
+					case 0:
+					 $("a[name='left1']").show();
+					  break;
+					case 1:
+					 $("a[name='left2']").show();
+					  break;
+					case 2:
+					 $("a[name='left3']").show();
+					  break;
+					case 3:
+					 $("a[name='left4']").show();
+					  break;
+					case 4:
+					 $("a[name='left5']").show();
+					  break;
+					case 5:
+					 $("a[name='left6']").show();
+					  break;
+					case 6:
+					 $("a[name='left7']").show();
+					  break;
+					case 7:
+					 $("a[name='left8']").show();
+					  break;
+					case 8:
+					 $("a[name='left9']").show();
+					  break;
+					case 9:
+					 $("a[name='left10']").show();
+					  break;
+					case 20:
+					 $("a[name='right1']").show();
+					  break;
+					case 21:
+					 $("a[name='right2']").show();
+					  break;
+					case 22:
+					 $("a[name='right3']").show();
+					  break;
+					case 23:
+					 $("a[name='right4']").show();
+					  break;
+					case 24:
+					 $("a[name='right5']").show();
+					  break;
+					case 25:
+					 $("a[name='right6']").show();
+					  break;
+					case 26:
+					 $("a[name='right7']").show();
+					  break;
+					case 27:
+					 $("a[name='right8']").show();
+					  break;
+					case 28:
+					 $("a[name='right9']").show();
+					  break;
+					case 29:
+					 $("a[name='right10']").show();
+					  break;
+					default:
+					  break
+					}
+
+				}
+				 $("a[name='temp']").show();
+				 $("a[name='fpcs']").show();
+				
+			}
+			
+		}
+		</script>
+	</head>
+	<body onload="doremovechanle()" >
+<script src="js/highstock.js"></script>
+<script src="js/modules/exporting.js"></script>
+<script type="text/javascript" src="../progressBar/js/jqmeter.min.js"></script>
+
+		<div class="htmleaf-container" style="min-width: 310px;border-left:400;  margin: 0 auto;" >
+		<div class="htmleaf-content bgcolor-3">
+			<div id="jqmeter-container"></div>
+		</div>
+	</div>
+<div id="container" style="min-width: 310px; height: 300px; margin: 0 auto;"></div>
+
+<table style="width:800px;" border="1">
+						<tr >
+	    						<td align="right" rowspan="3" >绘图参数:</td>
+	    						<td align="center" colspan="5">左1到左10</td>
+	    						<td align="center" colspan="5">右1到右10</td>
+	    						<td align="center" colspan="1">温度</td>
+	    						<td align="center" colspan="1">排废</td>
+	    				</tr>
+						<tr >
+								
+	    						<td >
+	    							<a  name="left1"><span id=1l name="lc" style="color: #A8A8A8" ><B>-·-左1</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left2"><span id=2l name="lc" style="color: #A8A8A8"><B>-·-左2<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left3"><span id=3l name="lc" style="color: #A8A8A8"><B>-·-左3<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left4"><span id=4l name="lc" style="color: #A8A8A8"><B>-·-左4<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left5"><span id=5l name="lc" style="color: #A8A8A8"><B>-·-左5<B></span></a>
+	    						</td>
+	    						
+								<td >
+	    							<a name="right1"><span id=11l name="lc" style="color: #A8A8A8" ><B>-·-右1</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right2"><span id=12l name="lc" style="color: #A8A8A8"><B>-·-右2<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right3"><span id=13l name="lc" style="color: #A8A8A8"><B>-·-右3<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right4"><span id=14l name="lc" style="color: #A8A8A8"><B>-·-右4<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right5"><span id=15l name="lc" style="color: #A8A8A8"><B>-·-右5<B></span></a>
+	    						</td>
+	    						<td  rowspan="2">
+	    							<a name="temp"><span id=21l name="lc" style="color: red"><B>-·-温度<B></span></a>
+	    						</td>
+	    						<td  rowspan="2">
+	    							<a name="fpcs"><span id=22l name="lc" style="color: #A8A8A8"><B>-·-排废<B></span></a>
+	    						</td>
+	    					</tr>
+	    					<tr >
+	    						
+	    						<td >
+	    							<a name="left6"><span id=6l name="lc" style="color: #A8A8A8"><B>-·-左6</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left7"><span id=7l name="lc" style="color: #A8A8A8"><B>-·-左7<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left8"><span id=8l name="lc" style="color: #A8A8A8"><B>-·-左8<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left9"><span id=9l name="lc" style="color: #A8A8A8"><B>-·-左9<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="left10"><span id=10l name="lc" style="color: #A8A8A8"><B>-·-左10<B></span></a>
+	    						</td>
+	    						
+								<td >
+	    							<a name="right6"><span id=16l name="lc" style="color: #A8A8A8"><B>-·-右6</B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right7"><span id=17l name="lc" style="color: #A8A8A8"><B>-·-右7<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right8"><span id=18l name="lc" style="color: #A8A8A8"><B>-·-右8<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right9"><span id=19l name="lc" style="color: #A8A8A8"><B>-·-右9<B></span></a>
+	    						</td>
+	    						<td >
+	    							<a name="right10"><span id=20l name="lc" style="color: #A8A8A8"><B>-·-右10<B></span></a>
+	    						</td>
+	    					</tr>
+	    					</table>
+	</body>
+</html>
+

@@ -1,0 +1,776 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>基本信息维护</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../css/common.css" />
+<link rel="stylesheet" href="../../../css/style.css" />
+<link rel="stylesheet" href="../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/icon.css" />
+<style>
+td div {
+	padding: 2.2px 0;
+}
+#preview{overflow:hidden;}
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script type="text/javascript">
+   function checkFileSize2(target,size){
+   $('#imgSize').css('display','none');
+   $('#imgFormat').css('display','none');
+	if(checkFile(target,size)==1){
+		//文件大小不正确
+		$('#imgSize').css('display','inline');
+		return;
+	}else if(checkFile(target,size)==2){
+		//文件格式不正确
+		$('#imgFormat').css('display','inline');
+		return;
+	}
+	previewImage(target);
+}
+   
+</script>
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">基本信息</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<form method="post" id="data" class="easyui-form" enctype="multipart/form-data"> 
+			<table class="data_tab" style="cellpadding:0;cellspacing:0;border:0;width:100%">
+				<tr>
+					<td style="width:10%;align:right" class="fnt_333333_13" ><span class="necessity">*</span>登录ID:</td>
+					<td style="width:25%" >
+						<div style="float:left;width:150px;">
+							<input class="default_input" style="width:140px" id="loginID"
+								name="loginID" readonly>
+							
+						</div>
+						<!-- <span class="errorMsg" id="empLoginID">×必填</span>
+						<span class="errorMsg" id="errLogLengthFormat">×长度不能小于6</span>
+						<span class="errorMsg" id="errLogFormat">×格式错误</span> -->
+						
+					</td>
+					<td style="width:10%;align:right" class="fnt_333333_13"><!-- <span class="necessity">*</span> -->姓名:</td>
+					<td style="width:25%" >
+						<div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="name"
+								name="name" placeholder="长度不能超过20">
+							
+						</div>
+						<!-- <span class="errorMsg" id="empName">↑名称必须填写</span> -->
+						
+					</td>
+					<td colspan="2" rowspan="3"  style="width:35%;align:center" >
+						<div style="border:1px dotted #3d3d3d;width:65px;height:65px;display:inline-block;" id="preview">
+							<img src="../../../../images/defaultPhoto.png" style="width:100%;max-height:100%" id="image">
+						</div>
+						<input type="button" value="上传头像" onclick="$('#photo').click()">
+						<input type="file"  style="display:none" id="photo" onchange="checkFileSize2(this, 2);" accept="image/*"  name="image">
+					</td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				   <td>
+				       <!--  <span class="errorMsg" id="empLoginID">↑必填</span>
+						<span class="errorMsg" id="errLogLengthFormat">↑长度在6-40位之间</span>
+						<span class="errorMsg" id="errLogFormat">↑格式错误</span> 
+						<span class="errorMsg" id="errRename">↑该用户名已存在</span> -->
+				   </td>
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				   <td>
+				      <span class="errorMsg" id="errNameFormat">↑长度不超过20</span>  
+				   </td>
+				</tr>
+				<tr>
+					<td style="width:10%;align:right" class="fnt_333333_13"><span class="necessity">*</span>性别:</td>
+					<td style="width:25%">
+						<input class="easyui-combobox"  style="width:150px;height:25px" id="gender" name="gender" data-options="
+							valueField: 'id',
+							textFiled: 'text',
+							data: [
+								{'id': 'M', 'text': '男'},
+								{'id': 'F', 'text': '女'}
+							],
+							editable : false
+						">
+						
+					</td>
+					<td style="width:10%;align:right" class="fnt_333333_13">生日:</td>
+					<td style="width:25%">
+						<div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input icon_date_input2" style="width:140px"
+								readonly onClick="SelectDate(this,'yyyy-MM-dd',0,-150)"
+								id="birthday" name="birthday">
+						</div>
+						
+					</td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				   <td>
+				     <span class="errorMsg" id="empGender">↑必选</span>
+				   </td>
+				   <td>
+				     
+				   </td>
+				   <td>
+				     <span class="errorMsg" id="nowDate">↑不能大于当前日期</span>
+				   </td>
+				   <td colspan="2">
+				     <span class="errorMsg" id="imgSize">↑图片大小限制为2MB以内</span>
+				     <span class="errorMsg" id="imgFormat">↑图片格式不正确</span>
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">证件类型:</td>
+				    <td style="width:25%">
+				         <input class="easyui-combobox" style="width:150px;height:25px;" id="idType" name="idType" data-options="
+				            url:'../../../../rest/getType/21',
+				            valueField:'type_ID',
+				            textField:'typeName',
+				            editable : false
+				         ">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">证件号码:</td>
+				    <td style="width:25%" >
+						<div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="idNumber"
+								name="idNumber" placeholder="长度不超过40位">
+							
+						</div>
+						<!-- <span class="errorMsg" id="empName">↑名称必须填写</span> -->
+						
+					</td>
+					<td style="width:10%;align:right" class="fnt_333333_13">学历:</td>
+					<td style="width:25%">
+				         <input class="easyui-combobox" id="education" style="width:150px;height:25px" name="education" data-options="
+				            url:'../../../../rest/getType/22',
+				            valueField:'type_ID',
+				            textField:'typeName',
+				            editable : false
+				         ">
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				    
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="idNumberLen">↑长度不超过40位</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				    
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">学校:</td>
+				    <td style="width:25%">
+				       <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="school"
+								name="school" placeholder="长度不超过50位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">专业:</td>
+				    <td style="width:25%">
+				       <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="prof"
+								name="prof" placeholder="长度不超过50位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">工作单位:</td>
+				    <td style="width:25%">
+				       <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="work"
+								name="work" placeholder="长度不超过100位">
+						</div>
+						
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="schoolLen">↑长度不超过50位</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="profLen">↑长度不超过50位</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="workLen">↑长度不超过100位</span>
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">婚姻状况:</td>
+				    <td style="width:25%">
+				      <input class="easyui-combobox" id="marriage" style="width:150px;height:25px" name="marriage" data-options="
+				            url:'../../../../rest/getType/23',
+				            valueField:'type_ID',
+				            textField:'typeName',
+				            editable : false
+				            
+				         ">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">国家:</td>
+				    <td style="width:25%">
+				       <input class="easyui-combobox" id="country" style="width:150px;height:25px" name="country" data-options="
+				            url:'../../../../rest/network/user/getCountry',
+							valueField: 'country_ID',
+							textField: 'countryName',
+							onSelect:function(rec){
+							   $('#province').combobox('clear');
+							   ProUrl='../../../../rest/network/user/getProvince?country_ID='+rec.country_ID;
+							   $('#province').combobox('reload',ProUrl);
+							},
+							editable : false
+							
+						">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">省份:</td>
+				    <td style="width:25%">
+				        <!-- url:'../../../../rest/getProvince', -->
+				        <input class="easyui-combobox" id="province" style="width:150px;height:25px" name="province" data-options="
+				            url:'../../../../rest/network/user/getProvince',
+							valueField: 'regionCode',
+							textField: 'regionName',
+							onSelect:function(rec){
+							   $('#city').combobox('clear');
+							   cityUrl='../../../../rest/network/user/getCity?provinceCode='+rec.regionCode;
+							   $('#city').combobox('reload',cityUrl);
+							},
+							onLoadSuccess:function(){
+							  var data=$('#province').combobox('getData');
+							  if(data){
+							     $('#city').combobox('clear');
+							     $('#district').combobox('clear');
+							  }
+							},
+							editable : false
+						">
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">市:</td>
+				    <td style="width:25%">
+				        <!-- url:'../../../../rest/getCity', -->
+				        <input class="easyui-combobox" id="city" style="width:150px;height:25px" name="city" data-options="
+				            url:'../../../../rest/network/user/getCity',
+							valueField: 'regionCode',
+							textField: 'regionName',
+							onSelect:function(rec){
+							   $('#district').combobox('clear');
+							   regUrl='../../../../rest/network/user/getRegion?cityCode='+rec.regionCode;
+							   $('#district').combobox('reload',regUrl);
+							},
+							onLoadSuccess:function(){
+							  var data=$('#city').combobox('getData');
+							  if(data){
+							     $('#district').combobox('clear');
+							  }
+							},
+							editable : false
+						">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">区/县:</td>
+				    <td style="width:25%">
+				        <input class="easyui-combobox" id="district" style="width:150px;height:25px" name="district" data-options="
+							url:'../../../../rest/network/user/getRegion',
+							valueField: 'regionCode',
+							textField: 'regionName',
+							editable : false
+						">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">地址:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="homeAddress"
+								name="homeAddress" placeholder="长度不超过100">
+						</div>
+						
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				    
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="addressLen">↑长度不超过100</span>
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">爱好:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="hobby"
+								name="hobby" placeholder="长度不超过200位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13"><span class="necessity">*</span>Email:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="email"
+								name="email" placeholder="长度不超过20位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">QQ:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="qq"
+								name="qq" placeholder="长度5-20位">
+						</div>
+						
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="hobbyLen">↑长度不超过200位</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				        <span class="errorMsg" id="empEmail">↑不能为空</span>
+				        <span class="errorMsg" id="lenEmail">↑不超过30字符</span>
+						<span class="errorMsg" id="errEmail">↑邮箱格式无效</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="errQQ">↑格式错误</span>
+				     <span class="errorMsg" id="lenQQ">↑长度5-20位</span>
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">微信:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="weixin"
+								name="weixin" placeholder="长度不超过20位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">手机号:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="mobile"
+								name="mobile" placeholder="">
+							
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">个人主页:</td>
+				    <td style="width:25%">
+				        <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="myHome"
+								name="myHome" placeholder="长度不超过120位">
+						</div>
+						
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				    <span class="errorMsg" id="weixinLen">↑长度不超过20字符</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="errMobile">↑格式错误</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="errUrlFormat">↑格式错误</span>
+				      <span class="errorMsg" id="lenUrl">↑不超过120字符</span>
+				   </td>
+				</tr>
+				<tr>
+				    <td style="width:10%;align:right" class="fnt_333333_13">开户行:</td>
+				    <td style="width:25%">
+				       <input class="easyui-combobox" id="openingBank" style="width:150px;height:25px" name="openingBank" data-options="
+				            url:'../../../../rest/getType/20',
+				            valueField:'type_ID',
+				            textField:'typeName',
+				            editable : false
+				         ">
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">银行账号:</td>
+				    <td style="width:25%">
+				    <div style="float:left;width:150px;" class="default_box ">
+							<input class="default_input" style="width:140px" id="accountNo"
+								name="accountNo" placeholder="长度不超过30位">
+						</div>
+						
+				    </td>
+				    <td style="width:10%;align:right" class="fnt_333333_13">数据托管:</td>
+				    <td style="width:25%">
+				    <input class="easyui-combobox" id="trusteeship" style="width:150px;height:25px" name="trusteeship" placeholder="默认:是" data-options="
+							valueField: 'id',
+							textFiled: 'text',
+							data: [
+								{'id': 'T', 'text': '是'},
+								{'id': 'F', 'text': '否'}
+							],
+							editable : false
+						">
+				    </td>
+				</tr>
+				<tr style="height:10px;">
+				   <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				    
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     <span class="errorMsg" id="accountNoLen">↑不超过30位</span>
+				   </td>
+				    <td>
+				     <div class="clearfloat" style="height:10px;"></div>
+				   </td>
+				    <td>
+				     
+				   </td>
+				</tr>
+			</table>
+		</form>
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<div style="float:left;width:320px;margin-left:35%">
+			<input type=button class="default_btn6 btn_height" value="确认保存"
+				onclick="save()">     <input
+				type="button" class="default_btn5 btn_height" value="取消"
+				onclick="history.back(-1)">
+		</div>
+	</div>
+	<div class="clearfloat" style="height:0px;"></div>
+	<div id="win"></div>
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../js/calendar.js"></script>
+	<script src="../../../../js/myjs/list.js"></script>
+	<script src="../../../../js/myjs/net.js"></script>
+	<script src="../../../../js/myjs/picPreview.js"></script>
+	<script src="../../../../js/myjs/index.js"></script>
+	
+<script type="text/javascript">
+$(function(){
+   $.post('../../../../rest/network/user/getUserInfo',{},function(data){
+       $('#loginID').val(data.loginID);
+       $('#name').val(data.name);
+       $('#birthday').val(data.birthday);
+       $('#idNumber').val(data.idNumber);
+       $('#school').val(data.school);
+       $('#prof').val(data.prof);
+       $('#work').val(data.work);
+       $('#homeAddress').val(data.homeAddress);
+       $('#hobby').val(data.hobby);
+       $('#email').val(data.email);
+       $('#qq').val(data.qq);
+       $('#weixin').val(data.weixin);
+       $('#mobile').val(data.mobile);
+       $('#myHome').val(data.myHome);
+       $('#accountNo').val(data.accountNo);
+       $('#gender').combobox('setValue',data.gender);
+       $('#idType').combobox('setValue',data.idType);
+       $('#education').combobox('setValue',data.education);
+       $('#marriage').combobox('setValue',data.marriage);
+       $('#country').combobox('setValue',data.country);
+       $('#province').combobox('setValue',data.province);
+       if(data.havePhoto == 1)
+    	   $('#image').attr('src','../../../../rest/network/user/downloadForm');
+       if(data.city==110100||data.city==120100||data.city==310100||data.city==500100){
+    	   var cityName=null;
+           switch(data.city){
+           case 110100:
+        	   cityName="北京市";
+        	   break;
+           case 120100:
+        	   cityName="天津市";
+        	   break;
+           case 310100:
+        	   cityName="上海市";
+        	   break;
+           case 500100:
+        	   cityName="重庆市";
+        	   break;
+           default:
+        	   cityName="";
+           }
+           $('#city').combobox('setText',cityName); 
+       }else{
+    	   $('#city').combobox('setValue',data.city);
+       }
+       
+       $('#district').combobox('setValue',data.district);
+       $('#openingBank').combobox('setValue',data.openingBank);
+       $('#trusteeship').combobox('setValue',data.trusteeship);
+   },'json');
+});
+</script>
+<script>
+function save(){
+	//清除所有的错误提示
+	$('td [class="errorMsg"]').each(function(index,element){
+		$(element).css('display', 'none');
+	});
+	if(!validate())
+		return;
+	var updUrl = '../../../../rest/network/user/handleFormAndFile';
+	$('#data').form('submit', {
+		url: updUrl,
+		onSubmit: function(){
+		},
+		success: function(data){
+		    if(data.indexOf("1")!=-1){
+		      alert("修改成功！！");
+		    }else{
+		      alert("修改失败");
+		    }
+			
+			
+		}
+	});
+}
+
+	function validate() {
+		var flag = true;
+		/* //登录ID验证
+		var pattern1 = new RegExp("^[a-zA-Z0-9_]{6,40}$");//大于6字符，只允许字母开头，包含字母数字下划线
+		var loginValue = $('#loginID').val().trim();
+		if (loginValue.length == 0) {
+			$('#empLoginID').css('display', 'inline');
+			flag = false;
+		} else if (loginValue.length<6||loginValue.length>40) {
+			$('#errLogLengthFormat').css('display', 'inline');
+			flag = false;
+		} else if (!pattern1.test(loginValue)) {
+			$('#errLogFormat').css('display', 'inline');
+			flag = false;
+
+		} else if ($('#errRename').css('display') == 'inline') {
+			flag = false;
+		} */
+		//姓名验证
+		if ($('#name').val().trim().length > 20) {
+			$('#errNameFormat').css('display', 'inline');
+			flag = false;
+		}
+		//性别验证
+		var gender = $('#gender').combobox('getValue');
+		if (gender.length == 0) {
+			$('#empGender').css('display', 'inline');
+			flag = false;
+		}
+		//出生日期验证
+		if ($('#birthday').val().trim() != 0
+				&& $('#birthday').val().trim() != null
+				&& $('#birthday').val().trim() > formatDate(new Date()).split(
+						" ")[0]) {
+
+			$('#nowDate').css('display', 'inline');
+			flag = false;
+		}
+		//图片大小验证 imgSize
+
+		//证件号码验证
+		if ($('#idNumber').val().trim().length > 40) {
+			$('#idNumberLen').css('display', 'inline');
+			flag = false;
+		}
+		//学校验证
+		if ($('#school').val().trim().length > 50) {
+			$('#schoolLen').css('display', 'inline');
+			flag = false;
+		}
+		//专业验证
+		if ($('#prof').val().trim().length > 50) {
+			$('#profLen').css('display', 'inline');
+			flag = false;
+		}
+		//工作单位验证
+		if ($('#work').val().trim().length > 100) {
+			$('#workLen').css('display', 'inline');
+			flag = false;
+		}
+		//地址验证
+		if ($('#homeAddress').val().trim().length > 100) {
+			$('#addressLen').css('display', 'inline');
+			flag = false;
+		}
+		//爱好验证
+		if ($('#hobby').val().trim().length > 200) {
+			$('#hobbyLen').css('display', 'inline');
+			flag = false;
+		}
+		//邮箱验证
+		var emailFormat = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+		var emailVal = $('#email').val().trim();
+		if (emailVal.length == 0) {
+			$('#empEmail').css('display', 'inline');
+			flag = false;
+		} else if (emailVal.length > 30) {
+			$('#lenEmail').css('display', 'inline');
+			flag = false;
+		} else if (!emailFormat.test(emailVal)) {
+			$('#errEmail').css('display', 'inline');
+			flag = false;
+		}
+		//QQ验证
+		var QQ_format = /[1-9][0-9]{4,20}/g;
+		var qq = $('#qq').val().trim();
+		if (qq.length > 20) {
+			$('#errQQ').css('display', 'inline');
+			flag = false;
+		} else if (qq.length != 0 && !QQ_format.test(qq)) {
+			$('#lenQQ').css('display', 'inline');
+			flag = false;
+		}
+		//微信验证
+		var weixinVal = $('#weixin').val().trim();
+		if (weixinVal.length > 20) {
+			$('#weixinLen').css('display', 'inline');
+			flag = false;
+		}
+		//手机号验证
+		var mobile = $('#mobile').val().trim();
+		var mobileFormat = /^1[3|4|5|8|7][0-9]\d{8}$/;
+		if (mobile.length != 0) {
+			if (!mobileFormat.test(mobile)) {
+				$('#errMobile').css('display', 'inline');
+				flag = false;
+			}
+		}
+		//个人主页验证
+		var homeAddress = $('#myHome').val().trim();
+		var homeAddFormat = "^[a-zA-z]+://(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$";
+		var re = new RegExp(homeAddFormat);
+		if (homeAddress.length > 120) {
+			//lenUrl
+			$('#lenUrl').css('display', 'inline');
+			flag = false;
+		} else if (homeAddress.length > 0) {
+			if (!re.test(homeAddress)) {
+				$('#errUrlFormat').css('display', 'inline');
+				flag = false;
+			}
+		}
+		//银行账号验证 accountNoLen
+		var accVal = $('#accountNo').val().trim();
+		if (accVal.length > 30) {
+			$('#accountNoLen').css('display', 'inline');
+			flag = false;
+		}
+		return flag;
+	}
+
+	function change() {
+		if ($('#photo').val().length != 0) {
+			try {
+				alert(document.getElementById('photo').value);
+			} catch (err) {
+				alert(err);
+			}
+			$('#image').attr('src', $('#photo').val());
+		}
+	}
+	
+	function checkInject(){
+		var result = true;
+		var pattern = new RegExp("[%--`~!#$^&*()=|{}':;',\\[\\]<>/?~！#￥……&*（）——|{}【】‘；：”“'。，、？]");       //格式 RegExp("[在中间定义特殊过滤字符]")
+		$("#data :input").each(function(index,element){
+			if(pattern.test($(element).val())){
+				result = false;
+				alert('请不要输入特殊字符');
+				return false;
+			}
+		});
+		return result;
+	}
+	
+</script>
+</body>
+
+</html>

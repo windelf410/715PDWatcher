@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		 
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+
+ 	<context:component-scan base-package="com.cdatabank.shuhuibao.core.service.*" />
+ 	
+ 	<context:property-placeholder location="classpath:spring/db.properties"/>
+		
+	<bean id="dataSource" destroy-method="close"
+	  class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="${db.driver}"/>
+	    <property name="url" value="${db.url}"/>
+	    <property name="username" value="${db.username}"/>
+	    <property name="password" value="${db.password}"/>
+	    <property name="initialSize" value="3"/>
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+        <property name="numTestsPerEvictionRun" value="5" />
+        <property name="minEvictableIdleTimeMillis" value="1800000" />
+        <property name="maxActive" value="10000" />
+        <property name="maxIdle" value="10000" />
+        <property name="maxWait" value="5000" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="5" />	    
+	</bean>	
+	
+	<!-- 
+		2. mybatis的SqlSession的工厂: SqlSessionFactoryBean 
+			dataSource / typeAliasesPackage
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="typeAliasesPackage" value="com.cdatabank.shuhuibao.core.po"/>
+		<property name="mapperLocations" value="classpath:mappers/*.xml"/>
+	</bean>
+
+	<!-- 
+		3. mybatis自动扫描加载Sql映射文件 : MapperScannerConfigurer 
+			sqlSessionFactory / basePackage
+	-->
+	<bean id="config" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.cdatabank.shuhuibao.core.dao"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+	
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>  
+    	
+	<tx:annotation-driven transaction-manager="transactionManager" />  
+	  
+
+</beans>

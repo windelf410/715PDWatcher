@@ -1,0 +1,293 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>数据分析</title>
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->  
+<link rel="stylesheet" href="../../../css/common.css" />
+<link rel="stylesheet" href="../../../css/style.css" />
+<link rel="stylesheet" href="../../../../css/net/mycss.css" />
+	
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../js/themes/icon.css">
+
+<script src="../../../js/jquery-1.11.1.min.js"></script>
+<script src="../../../../js/jquery.easyui.min.js"></script>
+<script src="../../../../js/locale/easyui-lang-zh_CN.js"></script> 
+	
+<script src="../dataBrowse/js/echarts-all.js"></script>
+<script src="../dataBrowse/js/echarts.js"></script>
+</head>
+<body>
+	<div id="right_content" style="width:800px;height:800px">
+	 <div class="content_title">指标总览</div>
+	 <div class="clearfloat" style="height:10px;"></div>
+	<table id="overviewTab" style="width:100%">
+	  <tr style="width:100%">
+	     <td style="width:33%;text-align:center">
+	        <p style="width:100%">资产指数:<label id="assetIndex"></label></p>
+			<div class="default_line"></div>
+			<div id="assetIndexChart" style="width:100%;height:300px;position:relative;text-align:center;">
+			</div>
+	     </td>
+	     <td style="width:33%;text-align:center">
+	        <p>数据总项数:<label id="dataItems"></label></p>
+		    <div class="default_line"></div>
+		    <div id="dataItemsChart" style="width:100%;height:300px;position:relative;text-align:center;">
+		    </div>
+	     </td>
+	     <td style="width:33%;text-align:center">
+	        <p>总收益:<label id="totalEarning"></label></p>
+		    <div class="default_line"></div>
+		    <div id="totalEarningChart" style="width:100%;height:300px;position:relative;text-align:center;">
+		    </div>
+	     </td>
+	  </tr>
+	  <tr>
+	     <td colspan=3 style="height:20px;text-align:center">
+	        <label style="height:20px"></label>
+	     </td>
+	  </tr>
+	  <tr>
+	     <td colspan=3 style="text-align:center">
+	        <label>各项指标近期总趋势</label>
+	     </td>
+	  </tr>
+	</table>
+	</div>
+	<script type="text/javascript">
+	window.data1=[];
+	window.data2=[];
+	window.dateTab=[];
+	/*******时间初始化参数 开始  王继茹*******/
+	function timeInit(){
+	    var byear;
+	    var bmonth;
+	    var bday;
+	    var backDate;
+		var now=new Date();
+		var msecPerday=24*60*60*1000;
+		var nSec=now.getTime();
+		for(var i=4;i>=0;i--){
+			var bSec=nSec-msecPerday*i;
+			var bDate=new Date(bSec);
+			byear=bDate.getFullYear();
+			bmonth=bDate.getMonth()+1;
+			bday=bDate.getDate();
+			backDate=byear+"-"+bmonth+"-"+bday;
+			window.dateTab.push(backDate);
+		}
+	}
+	/********时间初始化参数 结束********/
+	
+	/*****页面参数初始化 somnus 开始*****/
+	$(function(){
+		timeInit();
+		getdata();
+	});
+	/*****页面参数初始化  结束*****/
+	
+	function getdata()
+	{   
+	    //图表初始化 somnus
+	    var myChart1 = echarts.init(document.getElementById('assetIndexChart'));
+	    var myChart2 = echarts.init(document.getElementById('dataItemsChart'));
+	    var myChart3 = echarts.init(document.getElementById('totalEarningChart'));
+	    
+	    /***************柱状图设置  somnus 开始*****************/
+		var option1={
+		  tooltip:{
+		      trigger:'axis'
+		  },
+		  grid:{
+		      x:'20%',
+		      y:'10%',
+		      x2:'2%',
+		      y2:'10%'
+		  },
+	      xAxis : [
+	        {
+	            show:true,
+	            axisTick:{
+	            	interval:0
+	            },
+	            axisLabel:{
+	            	interval:0
+	            },
+	            type : 'category',
+	            axisLine:{
+	            	show:false
+	            },
+	            data:['07/25','07/26','07/27','07/28','07/29']
+	        }
+	      ],
+	      yAxis : [
+	        {
+	            type : 'value',
+	            axisLine:{
+	            	show:false
+	            },
+	        }
+	      ],
+	      series : [
+	        {
+	            type: 'bar',
+	            barWidth:'15',
+	            itemStyle: {
+	                normal: {
+	                    color: function(params) {
+	                        // build a color map as your need.
+	                        var colorList = [
+	                          '#80D1FC','#80D1FC','#80D1FC','#80D1FC','#80D1FC'
+	                        ];
+	                        return colorList[params.dataIndex]
+	                    }
+	                }
+	            },
+	            data:[234,1001,534,710,205]
+	        }
+	      ]
+		}; 
+		var option2={
+		  tooltip:{
+		      trigger:'axis'
+		  },
+		  grid:{
+		      x:'20%',
+		      y:'10%',
+		      x2:'2%',
+		      y2:'10%'
+		  },
+	      xAxis : [
+	        {
+	            type : 'category',
+	            axisTick:{
+	            	interval:0
+	            },
+	            axisLabel:{
+	            	interval:0
+	            },
+	            data:['07/25','07/26','07/27','07/28','07/29']
+	        }
+	      ],
+	      yAxis : [
+	        {
+	            type : 'value'
+	        }
+	      ],
+	      series : [
+	        {
+	            type: 'bar',
+	            barWidth:'15',
+	            itemStyle: {
+	                normal: {
+	                    color: function(params) {
+	                        // build a color map as your need.
+	                        var colorList = [
+	                          '#80D1FC','#80D1FC','#80D1FC','#80D1FC','#80D1FC'
+	                        ];
+	                        return colorList[params.dataIndex]
+	                    }
+	                }
+	            },
+	            data:[10,23,55,100,69]
+	        }
+	      ]
+		}; 
+		var option3={
+		  tooltip:{
+		      trigger:'axis'
+		  },
+		  grid:{
+		      x:'20%',
+		      y:'10%',
+		      x2:'2%',
+		      y2:'10%'
+		  },
+	      xAxis : [
+	        {
+	            type : 'category',
+	            axisTick:{
+	            	interval:0
+	            },
+	            axisLabel:{
+	            	interval:0
+	            },
+	            data:['07/25','07/26','07/27','07/28','07/29']
+	        }
+	      ],
+	      yAxis : [
+	        {
+	            type : 'value'
+	        }
+	      ],
+	      series : [
+	        {
+	            type: 'bar',
+	            barWidth:'15',
+	            itemStyle: {
+	                normal: {
+	                    color: function(params) {
+	                        // build a color map as your need.
+	                        var colorList = [
+	                          '#80D1FC','#80D1FC','#80D1FC','#80D1FC','#80D1FC'
+	                        ];
+	                        return colorList[params.dataIndex]
+	                    }
+	                }
+	            },
+	            data:[0.64,1.01,5.24,6.00,12.3]
+	        }
+	      ]
+		}; 
+		/***************柱状图设置 结束*****************/
+		//getdata0();
+		//option.series[0].data=window.data1;
+		//option.series[1].data=window.data2;
+		//option.xAxis[0].data=window.dateTab;
+		myChart1.setOption(option1);
+		myChart2.setOption(option2);
+		myChart3.setOption(option3);
+	}
+	function getdata0(){
+		var startTime = $('#startTime').datebox('getValue');
+		var endTime = $('#endTime').datebox('getValue');
+		var url="../../../../rest/dataAnalysis/incomeAndConsumeAnalysis";
+		$.ajax({
+			url:url,
+			type:'get',
+			data:{
+				startDate:startTime,
+				endDate:endTime
+			},
+			async:false,
+			dataType:'json',
+			success:function(data){
+				var jLen=0;
+				for(var i in data){
+					jLen++;
+				}
+				window.data1=[];
+				window.data2=[];
+				window.dateTab=[];
+				console.log("after pop:");
+				console.log("window.data1="+window.data1);
+				console.log("window.data2="+window.data2);
+				console.log("window.dateTab="+window.dateTab);
+				for(var j=0;j<jLen;j++){
+					
+					window.data1.push(data[j].incomeAmount);
+					window.data2.push(data[j].consumeAmount);
+					window.dateTab.push(data[j].date);
+				}
+			},
+			error:function(xhr,msg){
+				alert(msg);
+			}
+		});
+	}
+	</script> 
+</body>  
+</html>  

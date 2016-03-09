@@ -1,0 +1,599 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Untitled</title>
+<meta name="generator" content="Web Page Maker (unregistered version)">
+
+<style type="text/css">
+/*----------Text Styles----------*/
+.ws6 {font-size: 8px;}
+.ws7 {font-size: 9.3px;}
+.ws8 {font-size: 11px;}
+.ws9 {font-size: 12px;}
+.ws10 {font-size: 13px;}
+.ws11 {font-size: 15px;}
+.ws12 {font-size: 16px;}
+.ws14 {font-size: 19px;}
+.ws16 {font-size: 21px;}
+.ws18 {font-size: 24px;}
+.ws20 {font-size: 27px;}
+.ws22 {font-size: 29px;}
+.ws24 {font-size: 32px;}
+.ws26 {font-size: 35px;}
+.ws28 {font-size: 37px;}
+.ws36 {font-size: 48px;}
+.ws48 {font-size: 64px;}
+.ws72 {font-size: 96px;}
+.wpmd {font-size: 13px;font-family: 'Arial';font-style: normal;font-weight: normal;}
+/*----------Para Styles----------*/
+DIV,UL,OL /* Left */
+{
+ margin-top: 0px;
+ margin-bottom: 0px;
+}
+</style>
+		<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="../../js/myjs/index.js"></script>
+</head>
+
+<body onload="startRequestchanl()">
+<script type="text/javascript">
+				
+					$(document).ready(function () { 
+						
+						startRequestchanl();   	   
+						setInterval("startRequestchanl()", 5000);  
+						
+						
+					});  
+				    (function ($) {
+		                $.getUrlParam = function (name) {
+		                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		                    var r = window.location.search.substr(1).match(reg);
+		                    if (r != null) return unescape(r[2]); return null;
+		                }
+		            })(jQuery);
+
+		            //方法二：
+		             
+		            var xh = $.getUrlParam('id');
+		            var name = $.getUrlParam('name');
+                   /*  var ch = 0;
+                    if(xh=='43'||xh=='17'||xh=='24'){
+                    	ch=9999;
+                    }else{
+                    	ch=xh;
+                    } */
+					function startRequestchanl(){
+                    	var as = window.parent.getTabsselct();
+                    	//alert(as+":"+name);
+                    
+						if(as==name){
+							$.ajax({
+								type:'POST',
+								url:'../../rest/app/user/channel',
+								dataType : 'json',
+								data: {
+									XH: xha
+								},
+								dataType: 'json',
+								success:function(data){
+									if(null!=data.AlarmConfigPo&&''!=data.AlarmConfigPo){
+										
+										var sj = "";
+										var temp = "未检测到";
+										var dy = "未检测到";
+										if(null!=data.AlarmConfigPo[0].sj){
+											sj = data.AlarmConfigPo[0].sj
+										}
+										if(null!=data.AlarmConfigPo[0].ad_21){
+											temp = data.AlarmConfigPo[0].ad_21
+										}
+										if(sj==""){
+											sj="未设置测试任务";
+										}else{
+											sj=sj;
+										}
+										$("#time").empty();
+										$("#temp").empty();
+										$("#time").append("测试时间：<br/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"+sj);
+										$("#temp").append("当前温度：<br/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"+temp+"゜C");
+										if(data.AlarmConfigPo[0].flag=="1"){
+											$("#9p").empty();
+											$("#9p").append("左10电压:"+data.AlarmConfigPo[0].ad_10+"V");
+											$("#8p").empty();
+											$("#8p").append("左09电压:"+data.AlarmConfigPo[0].ad_9+"V");
+											$("#7p").empty();
+											$("#7p").append("左08电压:"+data.AlarmConfigPo[0].ad_8+"V");
+											$("#6p").empty();
+											$("#6p").append("左07电压:"+data.AlarmConfigPo[0].ad_7+"V");
+											$("#5p").empty();
+											$("#5p").append("左06电压:"+data.AlarmConfigPo[0].ad_6+"V");
+											$("#4p").empty();
+											$("#4p").append("左05电压:"+data.AlarmConfigPo[0].ad_5+"V");
+											$("#3p").empty();
+											$("#3p").append("左04电压:"+data.AlarmConfigPo[0].ad_4+"V");
+											$("#2p").empty();
+											$("#2p").append("左03电压:"+data.AlarmConfigPo[0].ad_3+"V");
+											$("#1p").empty();
+											$("#1p").append("左02电压:"+data.AlarmConfigPo[0].ad_2+"V");
+											$("#0p").empty();
+											$("#0p").append("左01电压:"+data.AlarmConfigPo[0].ad_1+"V");
+											$("#29p").empty();
+											$("#29p").append("右10电压:"+data.AlarmConfigPo[0].ad_20+"V");
+											$("#28p").empty();
+											$("#28p").append("右09电压:"+data.AlarmConfigPo[0].ad_19+"V");
+											$("#27p").empty();
+											$("#27p").append("右08电压:"+data.AlarmConfigPo[0].ad_18+"V");
+											$("#26p").empty();
+											$("#26p").append("右07电压:"+data.AlarmConfigPo[0].ad_17+"V");
+											$("#25p").empty();
+											$("#25p").append("右06电压:"+data.AlarmConfigPo[0].ad_16+"V");
+											$("#24p").empty();
+											$("#24p").append("右05电压:"+data.AlarmConfigPo[0].ad_15+"V");
+											$("#23p").empty();
+											$("#23p").append("右04电压:"+data.AlarmConfigPo[0].ad_14+"V");
+											$("#22p").empty();
+											$("#22p").append("右03电压:"+data.AlarmConfigPo[0].ad_13+"V");
+											$("#21p").empty();
+											$("#21p").append("右02电压:"+data.AlarmConfigPo[0].ad_12+"V");
+											$("#20p").empty();
+											$("#20p").append("右01电压:"+data.AlarmConfigPo[0].ad_11+"V");
+										}
+
+									}
+									if(null!=data.ChanlesPo){
+										for(var a in data.ChanlesPo){
+											
+											var p =data.ChanlesPo[a].channel;
+											var name ="";
+											if(p*1>=20){
+												p=p*1-20;
+												p=p*1+1;
+												if(p==10){
+													name = "右"+p;
+												}else{
+													name = "右0"+p;
+												}
+											}else{
+												p=p*1+1;
+												if(p==10){
+													name = "左"+p;
+												}else{
+													name = "左0"+p;
+												}
+												
+											}
+											var e = data.ChanlesPo[a].event;
+											var ename = "";
+											if(e==0){
+												ename = "正常";
+											}else if(e==1){
+												ename = "通讯故障";
+											}else if(e==2){
+												ename = "出现废品";
+											}else if(e==3){
+												ename = "温度异常";
+											}else if(e==4){
+												ename = "电压异常";
+											}else if(e==5){
+												ename = "测试完毕";
+											}
+											if(e==1){
+												$("#allcont").attr("src","img/docO72VU/shape608AT.gif");
+												$("#allco1").attr("src","img/docO72VU/shape608AT.gif");
+												$("#allco2").attr("src","img/docO72VU/shape608AT.gif");
+												$("#allco3").attr("src","img/docO72VU/shape608AT.gif");
+												//$("#temp").empty();
+												$("#time").empty();
+												$("#time").append(" &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<font size=\"4\" color=\"red\">通讯故障</font>");
+												$("#9p").empty();
+												$("#9p").append("左10电压: V");
+												$("#8p").empty();          
+												$("#8p").append("左09电压: V");
+												$("#7p").empty();          
+												$("#7p").append("左08电压: V");
+												$("#6p").empty();          
+												$("#6p").append("左07电压: V");
+												$("#5p").empty();          
+												$("#5p").append("左06电压: V");
+												$("#4p").empty();          
+												$("#4p").append("左05电压: V");
+												$("#3p").empty();          
+												$("#3p").append("左04电压: V");
+												$("#2p").empty();          
+												$("#2p").append("左03电压: V");
+												$("#1p").empty();          
+												$("#1p").append("左02电压: V");
+												$("#0p").empty();          
+												$("#0p").append("左01电压: V");
+												$("#29p").empty();
+												$("#29p").append("右10电压: V");
+												$("#28p").empty();          
+												$("#28p").append("右09电压: V");
+												$("#27p").empty();          
+												$("#27p").append("右08电压: V");
+												$("#26p").empty();          
+												$("#26p").append("右07电压: V");
+												$("#25p").empty();
+												$("#25p").append("右06电压: V");
+												$("#24p").empty();
+												$("#24p").append("右05电压: V");
+												$("#23p").empty();
+												$("#23p").append("右04电压: V");
+												$("#22p").empty();
+												$("#22p").append("右03电压: V");
+												$("#21p").empty();
+												$("#21p").append("右02电压: V");
+												$("#20p").empty();
+												$("#20p").append("右01电压: V");
+												return;
+											}else if(e==4){
+												var dy = '';
+												if(p=='1')
+													dy = data.AlarmConfigPo[0].ad_1;
+												if(p=='2')
+													dy = data.AlarmConfigPo[0].ad_2;
+												if(p=='3')
+													dy = data.AlarmConfigPo[0].ad_3;
+												if(p=='4')
+													dy = data.AlarmConfigPo[0].ad_4;
+												if(p=='5')
+													dy = data.AlarmConfigPo[0].ad_5;
+												if(p=='6')
+													dy = data.AlarmConfigPo[0].ad_6;
+												if(p=='7')
+													dy = data.AlarmConfigPo[0].ad_7;
+												if(p=='8')
+													dy = data.AlarmConfigPo[0].ad_8;
+												if(p=='9')
+													dy = data.AlarmConfigPo[0].ad_9;
+												if(p=='10')
+													dy = data.AlarmConfigPo[0].ad_10;
+												if(p=='11')
+													dy = data.AlarmConfigPo[0].ad_11;
+												if(p=='12')
+													dy = data.AlarmConfigPo[0].ad_12;
+												if(p=='13')
+													dy = data.AlarmConfigPo[0].ad_13;
+												if(p=='14')
+													dy = data.AlarmConfigPo[0].ad_14;
+												if(p=='15')
+													dy = data.AlarmConfigPo[0].ad_15;
+												if(p=='16')
+													dy = data.AlarmConfigPo[0].ad_16;
+												if(p=='17')
+													dy = data.AlarmConfigPo[0].ad_17;
+												if(p=='18')
+													dy = data.AlarmConfigPo[0].ad_18;
+												if(p=='19')
+													dy = data.AlarmConfigPo[0].ad_19;
+												if(p=='20')
+													dy = data.AlarmConfigPo[0].ad_20;
+											
+
+												$("#"+data.ChanlesPo[a].channel+"p").empty();
+												$("#"+data.ChanlesPo[a].channel+"p").append(name+"报警:<font size=\"3\" color=\"red\">"+dy+"V</font>");
+												//$("#"+data.ChanlesPo[a].channel+"p").css("color","red"));
+												$("#"+data.ChanlesPo[a].channel+"m").empty();
+												$("#"+data.ChanlesPo[a].channel+"m").append("<img border=0 width=\"100%\" height=\"100%\" alt=\"\" src=\"img/docO72VU/shapeB8BHL.gif\">" );
+											}else if(e==3){
+												$("#temp").empty();
+												$("#temp").append("当前温度：<br/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<font size=\"4\" color=\"red\">"+data.AlarmConfigPo[0].ad_21+"゜C");
+											}else if(e==5){
+												$("#time").empty();
+												$("#time").append("测试时间：<br/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<font size=\"4\" color=\"red\">"+ename);
+											}
+											
+										}
+									}
+								},
+								error:function(){
+						    			
+							    }
+							});
+						}
+						
+					
+					//在元素内部追加内容
+					
+						
+					}
+					</script> 
+<div id="shape1" style="position:absolute; overflow:hidden; left:20px; top:20px; width:1329px; height:544px; z-index:0"><img border=0 width="100%" height="100%" alt="" id="allcont" src="img/docO72VU/shapeCT4DL.gif"></div>
+
+<div id="shape3" style="position:absolute; overflow:hidden; left:480px; top:60px; width:411px; height:487px; z-index:1"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeOH3GJ.gif"></div>
+
+<div id="text1" style="position:absolute; overflow:hidden; left:146px; top:137px; width:1px; height:4px; z-index:2">
+</div>
+
+<div id="text2" style="position:absolute; overflow:hidden; left:134px; top:139px; width:3px; height:2px; z-index:3">
+</div>
+
+<div id="shape2" style="position:absolute; overflow:hidden; left:60px; top:68px; width:387px; height:476px; z-index:4"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeRVMPH.gif"></div>
+
+
+
+<div id="9m" style="position:absolute; overflow:hidden; left:520px; top:100px; width:348px; height:22px; z-index:6"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeD3DG6.gif"></div>
+
+<div id="8m" style="position:absolute; overflow:hidden; left:520px; top:140px; width:348px; height:22px; z-index:7"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeBRRBB.gif"></div>
+
+<div id="7m" style="position:absolute; overflow:hidden; left:520px; top:180px; width:348px; height:22px; z-index:8"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeABK5E.gif"></div>
+
+<div id="6m" style="position:absolute; overflow:hidden; left:520px; top:220px; width:348px; height:22px; z-index:9"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape40Q33.gif"></div>
+
+<div id="5m" style="position:absolute; overflow:hidden; left:520px; top:260px; width:348px; height:22px; z-index:10"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape3DGVK.gif"></div>
+
+<div id="4m" style="position:absolute; overflow:hidden; left:520px; top:300px; width:348px; height:22px; z-index:11"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape1B9NH.gif"></div>
+
+<div id="3m" style="position:absolute; overflow:hidden; left:520px; top:340px; width:348px; height:22px; z-index:12"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeV8CTB.gif"></div>
+
+<div id="2m" style="position:absolute; overflow:hidden; left:520px; top:380px; width:348px; height:22px; z-index:13"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeNPA1L.gif"></div>
+
+<div id="1m" style="position:absolute; overflow:hidden; left:520px; top:420px; width:348px; height:22px; z-index:14"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape9Q5RE.gif"></div>
+
+<div id="0m" style="position:absolute; overflow:hidden; left:520px; top:460px; width:348px; height:22px; z-index:15"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeV8CTB.gif"></div>
+
+<div id="20" style="position:absolute; overflow:hidden; left:920px; top:60px; width:411px; height:494px; z-index:16"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeQTLB1.gif"></div>
+           
+<div id="29m" style="position:absolute; overflow:hidden; left:960px; top:100px; width:348px; height:22px; z-index:17"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeF2GT1.gif"></div>
+           
+<div id="28m" style="position:absolute; overflow:hidden; left:960px; top:140px; width:348px; height:22px; z-index:18"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape2PNND.gif"></div>
+           
+<div id="27m" style="position:absolute; overflow:hidden; left:960px; top:180px; width:348px; height:22px; z-index:19"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeHGISG.gif"></div>
+           
+<div id="26m" style="position:absolute; overflow:hidden; left:960px; top:220px; width:348px; height:22px; z-index:20"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape5PVS7.gif"></div>
+           
+<div id="25m" style="position:absolute; overflow:hidden; left:960px; top:260px; width:348px; height:22px; z-index:21"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeGB2Q1.gif"></div>
+           
+<div id="24m" style="position:absolute; overflow:hidden; left:960px; top:300px; width:348px; height:22px; z-index:22"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeJI3B9.gif"></div>
+           
+<div id="23m" style="position:absolute; overflow:hidden; left:960px; top:340px; width:348px; height:22px; z-index:23"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeUH7EQ.gif"></div>
+           
+<div id="22m" style="position:absolute; overflow:hidden; left:960px; top:380px; width:348px; height:22px; z-index:24"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeUEB2M.gif"></div>
+           
+<div id="21m" style="position:absolute; overflow:hidden; left:960px; top:420px; width:348px; height:22px; z-index:25"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shape0HGHA.gif"></div>
+
+<div id="20m" style="position:absolute; overflow:hidden; left:960px; top:460px; width:348px; height:22px; z-index:26"><img border=0 width="100%" height="100%" alt="" src="img/docO72VU/shapeACKIP.gif"></div>
+
+<div id="shape25" style="position:absolute; overflow:hidden; left:420px; top:580px; width:92px; height:59px; z-index:27"><img border=0 width="100%" height="100%" alt="" id ="allco3" src="img/docO72VU/shapeTCSJ9.gif"></div>
+
+<div id="shape26" style="position:absolute; overflow:hidden; left:1260px; top:580px; width:92px; height:59px; z-index:28"><img border=0 width="100%" height="100%" alt="" id ="allco2" src="img/docO72VU/shape6AFK5.gif"></div>
+
+<div id="shape27" style="position:absolute; overflow:hidden; left:100px; top:580px; width:92px; height:59px; z-index:29"><img border=0 width="100%" height="100%" alt="" id ="allco1" src="img/docO72VU/shapeHIDFM.gif"></div>
+
+<div id="text4" style="position:absolute; overflow:hidden; left:500px; top:73px; width:150px; height:90px; z-index:30">
+<div class="wpmd">
+<div><font face="微软雅黑" class="ws14"><B>&#24038;</B></font></div>
+</div></div>
+
+<div id="text5" style="position:absolute; overflow:hidden; left:938px; top:70px; width:150px; height:90px; z-index:31">
+<div class="wpmd">
+<div><font face="微软雅黑" class="ws14"><B>&#21491;</B></font></div>
+</div></div>
+
+<div id="text6" style="position:absolute; overflow:hidden; left:500px; top:460px; width:40px; height:22px; z-index:32">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">1</font></div>
+</div></div>
+
+<div id="text7" style="position:absolute; overflow:hidden; left:500px; top:420px; width:40px; height:22px; z-index:33">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">2</font></div>
+</div></div>
+
+<div id="text8" style="position:absolute; overflow:hidden; left:500px; top:380px; width:40px; height:22px; z-index:34">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">3</font></div>
+</div></div>
+
+<div id="text9" style="position:absolute; overflow:hidden; left:500px; top:340px; width:40px; height:22px; z-index:35">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">4</font></div>
+</div></div>
+
+<div id="text10" style="position:absolute; overflow:hidden; left:500px; top:300px; width:40px; height:22px; z-index:36">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">5</font></div>
+</div></div>
+
+<div id="text11" style="position:absolute; overflow:hidden; left:500px; top:260px; width:40px; height:22px; z-index:37">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">6</font></div>
+</div></div>
+
+<div id="text12" style="position:absolute; overflow:hidden; left:500px; top:220px; width:40px; height:22px; z-index:38">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">7</font></div>
+</div></div>
+
+<div id="text13" style="position:absolute; overflow:hidden; left:500px; top:180px; width:40px; height:22px; z-index:39">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">8</font></div>
+</div></div>
+
+<div id="text14" style="position:absolute; overflow:hidden; left:500px; top:140px; width:40px; height:22px; z-index:40">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">9</font></div>
+</div></div>
+
+<div id="text15" style="position:absolute; overflow:hidden; left:493px; top:100px; width:40px; height:22px; z-index:41">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">10</font></div>
+</div></div>
+
+<div id="text16" style="position:absolute; overflow:hidden; left:940px; top:460px; width:40px; height:22px; z-index:42">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">1</font></div>
+</div></div>
+
+<div id="text17" style="position:absolute; overflow:hidden; left:940px; top:420px; width:40px; height:22px; z-index:43">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">2</font></div>
+</div></div>
+
+<div id="text18" style="position:absolute; overflow:hidden; left:940px; top:380px; width:40px; height:22px; z-index:44">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">3</font></div>
+</div></div>
+
+<div id="text19" style="position:absolute; overflow:hidden; left:940px; top:340px; width:40px; height:22px; z-index:45">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">4</font></div>
+</div></div>
+
+<div id="text20" style="position:absolute; overflow:hidden; left:940px; top:300px; width:40px; height:22px; z-index:46">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">5</font></div>
+</div></div>
+
+<div id="text21" style="position:absolute; overflow:hidden; left:940px; top:260px; width:40px; height:22px; z-index:47">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">6</font></div>
+</div></div>
+
+<div id="text22" style="position:absolute; overflow:hidden; left:940px; top:220px; width:40px; height:22px; z-index:48">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">7</font></div>
+</div></div>
+
+<div id="text23" style="position:absolute; overflow:hidden; left:940px; top:180px; width:40px; height:22px; z-index:49">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">8</font></div>
+</div></div>
+
+<div id="text24" style="position:absolute; overflow:hidden; left:940px; top:140px; width:40px; height:22px; z-index:50">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">9</font></div>
+</div></div>
+
+<div id="text25" style="position:absolute; overflow:hidden; left:934px; top:100px; width:40px; height:22px; z-index:51">
+<div class="wpmd">
+<div><font face="华文中宋" class="ws14">10</font></div>
+</div></div>
+
+
+
+<div id="table1" style="position:absolute; overflow:hidden; left:80px; top:100px; width:477px; height:429px; z-index:52">
+<div class="wpmd">
+<div><TABLE bgcolor="#FFFFFF" border=0 bordercolorlight="#C0C0C0" bordercolordark="#808080">
+<TR valign=top>
+<TD width=161 height=112><div class="wpmd">
+<div><font face="微软雅黑" id="time">&#27979;&#35797;&#26102;&#38388;&#65306;:未配置</font></div>
+</div>
+</TD>
+<TD width=163 height=112><div class="wpmd">
+<div><font face="微软雅黑" id="temp">&#24403;&#21069;&#28201;&#24230;&#65306;:未配置</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="9p">&#24038;-10&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="29p">&#21491;-10&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161 height=20><div class="wpmd">
+<div><font face="微软雅黑" id="8p">&#24038;-09&#65306;</font></div>
+</div>
+</TD>
+<TD width=163 height=20><div class="wpmd">
+<div><font face="微软雅黑"id="28p">&#21491;-09&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="7p">&#24038;-08&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="27p">&#21491;-08&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="6p">&#24038;-07&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="26p">&#21491;-07&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="5p">&#24038;-06&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="25p">&#21491;-06&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="4p">&#24038;-05&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="24p">&#21491;-05&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="3p">&#24038;-04&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="23p">&#21491;-04&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="2p">&#24038;-03&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="22p">&#21491;-03&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="1p">&#24038;-02&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="21p">&#21491;-02&#65306;</font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=161><div class="wpmd">
+<div><font face="微软雅黑" id="0p">&#24038;-01&#65306;</font></div>
+</div>
+</TD>
+<TD width=163><div class="wpmd">
+<div><font face="微软雅黑" id="20p">&#21491;-01&#65306;</font></div>
+</div>
+</TD>
+</TR>
+</TABLE>
+</div>
+</div></div>
+
+
+</body>
+</html>

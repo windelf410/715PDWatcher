@@ -1,0 +1,105 @@
+/* CSS Document */
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	color:#000000;
+	font-size:14px
+}
+img{ border:0}
+
+.black_overlay{  display: none;  position: absolute;  top: 0%;  left: 0%;  width: 100%;  height: 100%;  background-color: black;  z-index:1001;  -moz-opacity: 0.8;  opacity:.80;  filter: alpha(opacity=50); overflow:hidden; }
+
+.windows_1{ width:890px; height:auto; border:1px #CECECE solid; background-color:#ffffff; background-color: white;  z-index:1002; }
+.windows_1 .windows_top{ width:890px; height:26px; background:url(../../images/flow/top_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_top .left_pic{ width:14px; height:15px; padding:5px 10px 0 10px; float:left; overflow:hidden;}
+.windows_1 .windows_top .top_title{ width:400px; height:auto; padding-top:7px; color:#00286B; float:left; overflow:hidden;}
+.windows_1 .windows_top .top_close{ width:13px; height:13px; padding:6px 12px 0 0; float:right; overflow:hidden;}
+.windows_1 .windows_top2{ width:890px; height:35px; background:url(../../images/flow/top_2bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_top2 .left_txt{ width:460px; height:auto; padding:10px 0 0 18px; float:left; overflow:hidden;}
+.windows_1 .windows_top2 .right_butten{ width:140px; height:auto; padding-top:6px; float:right; overflow:hidden;}
+.windows_1 .windows_content{ width:890px; height:auto; padding:10px 0 10px 0; background:url(../../images/flow/content_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_content .neirong{ width:890px; height:480px; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_content .neirong .aero01{width:auto; height:25px; padding-top:10px; padding-left:350px; padding-bottom:10px; margin:0 auto;}
+.windows_1 .windows_content .neirong .aero01 .input{ height:20px; padding-top:1px; float:left; padding-right:5px;}
+.windows_1 .windows_content .neirong .aero01 .lable{ height:20px; padding-top:5px; float:left; padding-right:10px;}
+
+.windows_1 .windows_content .neirong .aero02{width:100%; height:auto; text-align:center; padding-top:25px; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_content .neirong .aero03{width:100%; height:auto; padding-top:25px; padding-left:80px; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_content .neirong .aero03 .text_css a{ color:#FF0000; text-decoration:underline}
+.windows_1 .windows_content .neirong .aero03 .text_css a:hove{ color:#FF0000; text-decoration:underline}
+
+.windows_1 .windows_content .neirong .aero04{width:100%; height:290px; padding-top:20px; padding-left:80px; margin:0 auto; overflow:hidden;}
+.windows_1 .windows_content .neirong .aero05{width:100%; height:auto; text-align:center; padding-top:15px; margin:0 auto; overflow:hidden;}
+
+
+
+.windows_2{ width:890px; height:500px; border:1px #CECECE solid; background-color:#ffffff; background-color: white; }
+
+.windows_2 .windows_top{ width:890px; height:26px; background:url(../../images/flow/top_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_2 .windows_top .left_pic{ width:14px; height:15px; padding:5px 10px 0 10px; float:left; overflow:hidden;}
+.windows_2 .windows_top .top_title{ width:400px; height:auto; padding-top:7px; color:#00286B; float:left; overflow:hidden;}
+.windows_2 .windows_top .top_close{ width:13px; height:13px; padding:6px 12px 0 0; float:right; overflow:hidden;}
+.windows_2 .windows_top2{ width:890px; height:35px; background:url(../../images/flow/top_2bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_2 .windows_top2 .left_txt{ width:460px; height:auto; padding:10px 0 0 18px; float:left; overflow:hidden;}
+.windows_2 .windows_top2 .right_butten{ width:200px; height:auto; padding-top:6px; float:right; overflow:hidden;}
+.windows_2 .windows_content{ width:890px; height:445; padding:10px 0 10px 0; background:url(../../images/flow/content_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_2 .windows_content .neirong{ width:890px; height:auto; margin:0 auto; overflow:hidden;}
+.windows_2 .windows_content .neirong .aero01{width:890px;height:auto;padding-top:10px;text-align:center;margin:0 auto;overflow:hidden;}
+.windows_2 .windows_content .neirong .aero01 .bk{width:650px;height:330px;margin:0 auto;overflow:hidden;}
+.windows_2 .windows_content .neirong .aero01 .bk01{width:650px;height:27px;margin:0 auto;}
+.windows_2 .windows_content .neirong .aero01 .bk02{width:110px;height:19px;margin:0 auto; border-bottom:#ccccce 1px solid;border-left:#ccccce 1px solid; float:left; text-align:center; padding-top:8px;}
+.windows_2 .windows_content .neirong .aero01 .bk03{width:110px;height:19px;margin:0 auto; border-bottom:#ccccce 1px solid;border-left:#ccccce 1px solid; float:left; text-align:center; padding-top:3px;padding-bottom:1px;}
+.windows_2 .windows_content .neirong .aero01 .bk04{width:230px;height:19px;margin:0 auto; border-bottom:#ccccce 1px solid;border-left:#ccccce 1px solid; float:left; text-align:center; padding-top:8px;}
+.windows_2 .windows_content .neirong .aero01 .bk05{width:200px;height:19px;margin:0 auto; border-bottom:#ccccce 1px solid;border-left:#ccccce 1px solid; float:left;border-right:#ccccce 1px solid; text-align:center; padding-top:8px;}
+.windows_2 .windows_content .neirong .aero05{width:890px; height:45px; padding-top:15px; margin:0 auto; overflow:hidden; padding-left:50px;}
+.windows_2 .windows_content .aero05 .left_txt{ width:500px; height:auto; padding:10px 0 0 30px; float:left; overflow:hidden;}
+.windows_2 .windows_content .aero05 .right_butten{ width:210px; height:auto; padding-top:6px;padding-right:60px; float:right; overflow:hidden;}
+
+
+
+.windows_3{ width:890px; height:auto; border:1px #CECECE solid; background-color:#ffffff; background-color: white;  z-index:1002; }
+.windows_3 .windows_top{ width:880px; height:26px; background:url(../../images/flow/top_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_3 .windows_top .left_pic{ width:14px; height:15px; padding:5px 10px 0 10px; float:left; overflow:hidden;}
+.windows_3 .windows_top .top_title{ width:400px; height:auto; padding-top:7px; color:#00286B; float:left; overflow:hidden;}
+.windows_3 .windows_top .top_close{ width:13px; height:13px; padding:6px 12px 0 0; float:right; overflow:hidden;}
+.windows_3 .windows_top2{ width:890px; height:35px; background:url(../../images/flow/top_2bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_3 .windows_top2 .left_txt{ width:460px; text-align:left; height:auto; padding:10px; float:left; overflow:hidden;}
+.windows_3 .windows_top2 .right_butten{ width:250px; height:auto; padding-top:6px; float:right; overflow:hidden;}
+.windows_3 .windows_content{ width:890px; height:465px; padding:10px 0 10px 0; background:url(../../images/flow/content_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_3 .windows_content .neirong{ width:880px; height:380px; margin:0 auto; overflow:hidden;}
+.windows_3 .windows_content .neirong .aero01{width:880px;height:auto;padding-top:10px;margin:0 auto;overflow:hidden;}
+.windows_3 .windows_content .neirong .aero01 .bk{width:600px;height:auto;text-align:center;margin:0 auto;overflow:hidden;background-color:#FFFFFF;border:1px #eef0fc solid;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk01{width:200px;height:30px;padding:1px 1px 1px 1px;margin:0 auto;overflow:hidden;background-color:#cfe5fc;border:1px #ffffff solid; float:left;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk02{width:393px;height:30px;margin:0 auto;overflow:hidden;background-color:#cfe5fc;border:1px #ffffff solid; float:left;padding:1px 1px 1px 0;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk03{width:200px;height:30px;padding:1px 1px 1px 1px;margin:0 auto;overflow:hidden;background-color:#f7f7f7;border:1px #ffffff solid; float:left;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk04{width:393px;height:30px;margin:0 auto;overflow:hidden;background-color:#f7f7f7;border:1px #ffffff solid; float:left;padding:1px 1px 1px 0;}
+.nr{margin:0 auto;overflow:hidden; padding:8px 0 0 5px; height:30px; font-size:14px; float:left;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk02 .input{ height:30px; padding-top:4px; float:left; padding-right:5px; font-size:14px;}
+.windows_3 .windows_content .neirong .aero01 .bk .bk02 .lable{ height:30px; padding-top:8px; float:left; padding-right:10px; font-size:14px;}
+.windows_3 .windows_content .windows_top22{ width:890px; height:35px; margin:0 auto; overflow:hidden;}
+.windows_3 .windows_content .windows_top22 .left_txt{ width:460px; text-align:left; height:auto; padding:10px; float:left; overflow:hidden;}
+.windows_3 .windows_content .windows_top22 .right_butten{ width:250px; height:auto; padding-top:6px; float:right; overflow:hidden;}
+
+
+.windows_4{ width:890px; height:auto; border:1px #CECECE solid; background-color:#ffffff; background-color: white;}
+.txt_red{color:#FF0000;}
+.windows_4 .windows_top{ width:890px; height:26px; background:url(../../images/flow/top_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_top .left_pic{ width:14px; height:15px; padding:5px 10px 0 10px; float:left; overflow:hidden;}
+.windows_4 .windows_top .top_title{ width:400px; height:auto; padding-top:7px; color:#00286B; float:left; overflow:hidden;}
+.windows_4 .windows_top .top_close{ width:13px; height:13px; padding:6px 12px 0 0; float:right; overflow:hidden;}
+.windows_4 .windows_content{ width:890px; height:500px; padding:10px 0 10px 60px; background:url(../../images/flow/content_bg.gif) repeat-x; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_content .w4_top{ width:750px; height:55px; padding-left:15px; border:1px #DCDCDC solid; background:#FFFFFF; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_content .w4_top .w4_topl{ width:450px; height:55px; line-height:1.6; padding-top:8px; float:left; overflow:hidden;}
+.windows_4 .windows_content .w4_top .w4_topr{ width:200px; height:auto;  padding-top:15px; padding-right:8px; float:right;}
+.windows_4 .windows_content .w4_line{ width:750px; height:18px; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_content .neirong4{ width:750px; height:330px; margin:0 auto;}
+.windows_4 .windows_content .neirong4 .n4_butten{ width:270px; height:180px; padding-top:60px; text-align:center; float:left; overflow:hidden;}
+.windows_4 .windows_content .neirong4 .n4_aero{ width:230px; height:240px; background:#ffffff; border:1px #DCDCDC solid; float:left; overflow:hidden;}
+.windows_4 .windows_content .neirong4 .n4_aero .aero_top{ width:238px; height:35px; padding:7px 0 0 15px; color:#0C0088; font-size:14px; border:#FFFFFF 1px solid; background:#EEF5FF; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_content .neirong4 .n4_aero .aero_content{ width:228px; height:210px; border-top:#DCDCDC 1px solid; margin:0 auto; overflow:hidden;}
+.windows_4 .windows_content .neirong4 .n4_aero2{ width:100%; height:55px; padding-top:15px; margin:0 auto;}
+.windows_4 .windows_content .neirong4 .n4_aero2 .aero2_left{ width:280px; height:auto;  line-height:1.6; float:left; overflow:hidden;}
+.windows_4 .windows_content .neirong4 .n4_aero2 .aero2_right{ width:200px; height:auto; float:right; overflow:hidden;}
+

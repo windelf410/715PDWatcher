@@ -1,0 +1,89 @@
+/*首页TOP字体样式*/
+.Top_bs{font-size: 12px;color: #ffffff;}
+.Left_bs{font-size: 12px;color: #000000;}
+
+a {  font-size: 9pt; color: #00457D; text-decoration: none}
+/* a默认链接色彩*/
+
+a:hover {  font-size: 9pt; color: #FF0000; text-decoration: none}
+/* a:hover默认链接移上去时的色彩*/
+
+.mover{BACKGROUND:#efebef}
+/*mover鼠标移上去时单元格的色彩*/
+ 
+.mout{BACKGROUND:#f8f8f8}
+/*mover鼠标移出去时单元格的色彩*/
+/*#ACCBFD*/
+body {  font-size: 9pt; background-color: #ffffff;leftmargin:0;topmargin:0;marginwidth:0;marginheight:0;background-image: url('/combestportal/images/menuimage/wpsmainbg.gif');} 
+/* body可以修改整个系统的页面背景色彩 */
+
+.tbmenubg{width:99%;}
+/*tbmenubg可以修改内页抬头的线条色彩*/
+
+.trmenubg{background-image: url('/combestportal/images/ejjmcd.jpg');}
+.trmenubgstart{background-image: url('/combestportal/images/ejjmcd_start.jpg');}
+.trmenubgend{background-image: url('/combestportal/images/ejjmcd_end.jpg');}
+.trtypebgstart{background-image: url('/combestportal/images/ejzjm_start.jpg');}
+/*trmenubg可以修改内页抬头色彩*/
+
+.3dfont {color:#FF7D00;FILTER:glow(color=FFFFFF,strength=2)  dropshadow(color=#FFFFFF,offx=1,offy=1,positive=1)  shadow(color=aaaaaa,direction:138); POSITION: relative; WIDTH: 100%;font-size: 14px;}
+/*3dfont可以修改内页抬头的立体字样式*/
+
+.tbbg{BACKGROUND:#ffffff;color:#2E3D45;width:99%;}
+/*tbbg可以修改所有表格数据的背景色彩*/
+
+.toptrbg{BACKGROUND:#E5F0FE url('/combestportal/images/menuimage/bluewps/toptrbg_blue.gif');height:30px;color:#000000;background-image:url('/combestportal/images/menuimage/bluewps/toptrbg_blue.gif')}
+.toptrbg1{BACKGROUND:#E5F0FE}
+/*toptrbg可以修改所有表格抬头的背景及色彩*/
+
+.btmtrbg{BACKGROUND:#f1f1f1;}
+/*btmtrbg可以修改所有表格分页单元格的背景色彩*/
+
+.trbg{BACKGROUND:#F3F8FA}
+/*trbg可以修改所有表格中的单元格的背景色彩*/
+
+.topbg{color:#FFFFFF;BACKGROUND:#529AEF url('/combestportal/images/menuimage/bluewps/topbg.gif');}
+.topbg a{color:#FFFFFF;}
+.topbg a:hover{color:#FFFF00;}
+/*topbg可以修改主框架中的顶页面信息条的色彩*/
+
+.bottombg{color:#000000;background-image: url('/combestportal/images/menuimage/bluewps/topbg.gif');}
+/*bottombg可以修改主框架中的底页面按扭条的色彩*/
+
+.bottomline{BACKGROUND:#3399cc;}
+/*bottombg可以修改主框架中的底页面分隔细线条的色彩*/
+
+.leftmenubg{color:#FFFFFF;background-color:#1772C3;background-image: url('/combestportal/images/menuimage/bluewps/menu_bg_blue.gif')}
+/*leftmenubr可以修改左边菜单条的背影图片及色彩*/
+
+.middlebg{background-image: url('/combestportal/images/menuimage/bluewps/middlebg.gif');}
+/*middlebg可以修改主框架中的中间页面,隐藏与显示菜单条的色彩*/
+
+/* 以下的样式表为默认值,如无特别需求请不要修改下面的值 */
+.hinput {  font-size: 9pt; border: #333333; height: 15px}
+.myinput {  font-size: 9pt; border: #333333; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;}
+.searchinput {  font-size: 9pt; border: #666666; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;}
+.needinput {  border: #0033FF; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.coolButton {BORDER-BOTTOM: buttonface 1px solid; BORDER-LEFT: buttonface 1px solid; BORDER-RIGHT: buttonface 1px solid; BORDER-TOP: buttonface 1px solid; CURSOR: default; PADDING-BOTTOM: 1px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; PADDING-TOP: 1px; TEXT-ALIGN: center
+}
+select {  font-size: 9pt; font-style: normal}
+.myHr{display:none}
+.st{font-family: webdings;font-size:14px} 
+td {  font-size: 9pt; text-decoration: none}
+.dirdiv {HEIGHT: 18px}
+
+/*书签结构中字体样式*/
+.Bookmark_off{font-size: 12px; color: 000000; text-decoration: none;background-image:url(/combestpotal/images/Nbookmark.gif);border: 1px solid #808080}
+.Bookmark_on{font-size: 12px; color: 000000; text-decoration: none;background-image: url(/combestsou/images/Ybookmark.gif);border-left: 1px solid #808080; border-right: 1px solid #808080; border-top: 1px solid #808080}
+
+/****************** 横下拉菜单选中背景 **********************/
+.hmenu_td_on {color:#FFFFFF; background-image: url('/combestportal/images/menu_ht.JPG');}
+/* 主菜单选中颜色，被选中的主菜单的字体颜色和背景颜色 */
+.hmenu_td_off {color:#ffffff}
+/* 主菜单未选中颜色第二个是主菜单没有被选中的字体和背景颜色*/
+.hsubmenubg {background-color:#eff7ff;color:#E4E4E4;border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom: 1px solid #b9e2f6;height=24px}
+/* 子菜单背景颜色和字体颜色“您好那块的背景和字体颜色” */
+.hsubmenubg a{color:#000000;}	
+/* 二级菜单的字体颜色超链接的颜色 */
+.hsubmenubg a:hover{color:#FF0000;} 
+/* 二级菜单的字体颜色 */

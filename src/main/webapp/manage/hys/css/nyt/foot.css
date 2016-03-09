@@ -1,0 +1,5 @@
+/* CSS Document */
+html,body{height:100%; margin:0; padding:0;}
+body,h1,h2,h3,h4,ul,ol,li,dl,p,form{ list-style:none; margin:0px; padding:0px;}
+.foot{background:url(../../images/nyt/footBG.jpg) repeat-x top left; height:28px;}
+

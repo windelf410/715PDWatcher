@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8" />
+<script type="text/javascript" src="../../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../js/myjs/index.js"></script>
+<style type="text/css">
+/*----------Text Styles----------*/
+.ws6 {font-size: 8px;}
+.ws7 {font-size: 9.3px;}
+.ws8 {font-size: 11px;}
+.ws9 {font-size: 12px;}
+.ws10 {font-size: 13px;}
+.ws11 {font-size: 15px;}
+.ws12 {font-size: 16px;}
+.ws14 {font-size: 19px;}
+.ws16 {font-size: 21px;}
+.ws18 {font-size: 24px;}
+.ws20 {font-size: 27px;}
+.ws22 {font-size: 29px;}
+.ws24 {font-size: 32px;}
+.ws26 {font-size: 35px;}
+.ws28 {font-size: 37px;}
+.ws36 {font-size: 48px;}
+.ws48 {font-size: 64px;}
+.ws72 {font-size: 96px;}
+.wpmd {font-size: 13px;font-family: 'Arial';font-style: normal;font-weight: normal;}
+/*----------Para Styles----------*/
+DIV,UL,OL /* Left */
+{
+ margin-top: 0px;
+ margin-bottom: 0px;
+}
+</style>
+<script type="text/javascript">
+		(function ($) {
+		    $.getUrlParam = function (name) {
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		        var r = window.location.search.substr(1).match(reg);
+		        if (r != null) return unescape(r[2]); return null;
+		    }
+		})(jQuery);
+		$(document).ready(function() {
+			var id = $.getUrlParam('id');
+			
+			$.ajax({
+				type:'POST',
+				dataType : 'json',		
+				data:{ID:id},
+				url:'../../rest/manage/user/gettestandfp',		
+				success: function(data){
+					var batchNo = data.AlarmConfigPo.batchNo;
+					var xh=data.AlarmConfigPo.xh;
+					var start = data.AlarmConfigPo.start;
+					var endTime =  data.AlarmConfigPo.endTime;
+					var fp =  data.AlarmConfigPo.fp;
+					var devices	=  data.AlarmConfigPo.devices;
+					var res ="";
+					if(devices!=null&&devices!=""&&devices!=undefined){
+						var barray = devices.split(",");
+						var num = barray.length;
+						for(var j = 0; j < barray.length; j++){
+							var aarray = barray[j].split("-");
+							if(j==(num-1)){
+								res =res+ttoid(aarray[1]*1)+"到"+ttoid(aarray[aarray.length-1]*1);
+							}else{
+								res =res+ttoid(aarray[1]*1)+"到"+ttoid(aarray[aarray.length-1]*1)+",";
+							}
+						}
+						
+					}
+					if(endTime!=undefined&&endTime!=null&&endTime!=""){
+						endTime= endTime.substring(0,19);
+					}
+					
+					$("#1p").empty();
+					$("#1p").append(start);
+					$("#2p").empty();
+					$("#2p").append(endTime);
+					$("#3p").empty();
+					$("#3p").append(batchNo);
+					$("#4p").empty();
+					$("#4p").append(res);
+					$("#5p").empty();
+					$("#5p").append(fp);
+					$("#6p").empty();
+					$("#6p").append(xh);
+					
+					if(data.fpinfo.length>0){
+						$("#table2").empty();
+						$("#table2").append(
+								"<TR valign=top>"+
+								"<TD width=181><div class=\"wpmd\">"+
+								"<div align=center><font face=\"微软雅黑\"><B>&#24207;&#21495;</B></font></div>"+
+								"</div>"+
+								"</TD>"+
+								"<TD width=322><div class=\"wpmd\">"+
+								"<div align=center><font face=\"微软雅黑\"><B>&#20135;&#29983;&#24223;&#21697;&#25253;&#35686;&#26102;&#38388;</B></font></div>"+
+								"</div>"+
+								"</TD>"+
+								"<TD width=173><div class=\"wpmd\">"+
+								"<div align=center><font face=\"微软雅黑\"><B>&#25968;&#37327;</B></font></div>"+
+								"</div>"+
+								"</TD>"+
+								"</TR>");
+						for (var i = 0; i < data.fpinfo.length; i++) {
+							$("#table2").append("<TR valign=top><TD width=181><div align=center>"+(i+1)+"</div></TD><TD width=322>"+data.fpinfo[i].sj.substring(0,19)+"</TD><TD width=173>"+data.fpinfo[i].event+"</TD></TR>");
+							
+						}
+					}
+					
+				},
+				error: function(){
+					
+				}	
+				});
+			
+		})
+		//通道对应表
+	function ttoid(id){
+		switch (id){
+			case 0:
+			return "左1";
+			break;
+			case 1:
+			return "左2";
+			break;
+			case 2:
+			return "左3";
+			break;
+			case 3:
+			return "左4";
+			break;
+			case 4:
+			return "左5";
+			break;
+			case 5:
+			return "左6";
+			case 6:
+			return "左7";
+			break;
+			case 7:
+			return "左8";
+			break;
+			case 8:
+			return "左9";
+			break;
+			case 9:
+			return "左10";
+			case 20:
+			return "右1";
+			break;
+			case 21:
+			return "右2";
+			break;
+			case 22:
+			return "右3";
+			break;
+			case 23:
+			return "右4";
+			break;
+			case 24:
+			return "右5";
+			break;
+			case 25:
+			return "右6";
+			case 26:
+			return "右7";
+			break;
+			case 27:
+			return "右8";
+			break;
+			case 28:
+			return "右9";
+			break;
+			case 29:
+			return "右10";
+			break;
+			default:
+			return "";
+			break;
+		}
+	}
+</script>
+</head>
+
+<body>
+
+<div id="text1" style="position:absolute; overflow:hidden; left:400px; top:20px; width:495px; height:90px; z-index:0">
+<div class="wpmd">
+<div><font color="#000000" face="微软雅黑" class="ws18"><B>&#39640;&#28201;&#36127;&#33655;&#31579;&#36873;&#31665;&#23454;&#39564;&#20449;&#24687;&#25910;&#38598;&#21345;</B></font></div>
+</div></div>
+
+<div id="table1" style="position:absolute; overflow:hidden; left:222px; top:80px; width:711px; height:138px; z-index:1">
+<div class="wpmd">
+<div><TABLE bgcolor="#FFFFFF" border=1 bordercolorlight="#000000" bordercolordark="#000000" cellspacing=1>
+<TR valign=top>
+<TD width=100 valign=middle><div class="wpmd">
+<div align=center><font face="微软雅黑">&#36827;&#31665;&#26102;&#38388;</font></div>
+</div>
+</TD>
+<TD id='1p' width=206>
+</TD>
+<TD width=104><div class="wpmd">
+<div align=center><font face="微软雅黑">&#20986;&#31665;&#26102;&#38388;</font></div>
+</div>
+</TD>
+<TD id='2p' width=202>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=100><div class="wpmd">
+<div align=center><font face="微软雅黑">&#29983;&#20135;&#25209;&#21495;</font></div>
+</div>
+</TD>
+<TD id='3p' width=206>
+</TD>
+<TD width=104><div class="wpmd">
+<div align=center><font face="微软雅黑">&#31579;&#36873;&#31665;&#26495;&#21495;</font></div>
+</div>
+</TD>
+<TD id='4p' width=202>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=100><div class="wpmd">
+<div align=center><font face="微软雅黑">&#24223;&#21697;&#24635;&#25968;</font></div>
+</div>
+</TD>
+<TD id='5p' width=206>
+</TD>
+<TD width=104><div class="wpmd">
+<div align=center><font face="微软雅黑">&#31579;&#36873;&#31665;&#36164;&#20135;&#32534;&#21495;</font></div>
+</div>
+</TD>
+<TD id='6p' width=202>
+</TD>
+</TR>
+</TABLE>
+</div>
+</div></div>
+
+<div id="table20" style="position:absolute; overflow:hidden; left:200px; top:200px; width:708px;  z-index:2">
+<div class="wpmd">
+<div><TABLE id="table2" bgcolor="#FFFFFF" border=1 bordercolorlight="#000000" bordercolordark="#000000" cellspacing=1>
+<TR valign=top>
+<TD width=181><div class="wpmd">
+<div align=center><font face="微软雅黑"><B>&#24207;&#21495;</B></font></div>
+</div>
+</TD>
+<TD width=322><div class="wpmd">
+<div align=center><font face="微软雅黑"><B>&#20135;&#29983;&#24223;&#21697;&#25253;&#35686;&#26102;&#38388;</B></font></div>
+</div>
+</TD>
+<TD width=173><div class="wpmd">
+<div align=center><font face="微软雅黑"><B>&#25968;&#37327;</B></font></div>
+</div>
+</TD>
+</TR>
+<TR valign=top>
+<TD width=181><BR>
+</TD>
+<TD width=322><BR>
+</TD>
+<TD width=173><BR>
+</TD>
+</TR>
+</TABLE>
+</div>
+</div></div>
+
+</body>
+</html>

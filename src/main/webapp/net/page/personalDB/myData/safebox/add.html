@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <title>新增保管箱</title>
+    
+    <link rel="stylesheet" href="../../../../css/common.css" />
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../js/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../../../plugins/kindeditor/themes/default/default.css">
+    <link rel="stylesheet" href="../../../../plugins/kindeditor/plugins/code/prettify.css" />
+    <script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../../../../../js/jquery-1.8.0.min.js"></script>
+    <script src="../../../../../js/jquery.easyui.min.js"></script>
+    <script src="../../../../js/jquery.easing.1.3.js"></script>
+    <script src="../../../../js/calendar.js"></script>
+    <script src="../../../../../js/myjs/list.js"></script>
+    
+	<script charset="utf-8" src="../../../../plugins/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="../../../../plugins/kindeditor/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="../../../../plugins/kindeditor/plugins/code/prettify.js"></script>
+    
+  <!-- Script Somnus 2015-04-15 subStr在mainStr中出现的次数统计 -->
+  <script type="text/javascript">
+  
+      function countInstances(mainStr, subStr)
+    {
+        var count = 0;
+        var offset = 0;
+        do
+        {
+            offset = mainStr.indexOf(subStr, offset);
+            if(offset != -1)
+            {
+                count++;
+                offset += subStr.length;
+            }
+        }while(offset != -1)
+        return count;
+    }
+  </script>
+  <!-- Script Somnus 2015-04-15 初始化富文本控件 -->
+  <script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {
+			    height:600,
+			    items : ['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+                         'plainpaste', 'wordpaste', 'selectall','|', 'justifyleft', 'justifycenter', 'justifyright',
+                         'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                         'superscript', '|','fontname', 'fontsize', 'bold',
+                         'italic', 'underline', 'strikethrough', 'removeformat', '|','emoticons', 'image','multiimage',
+                         'flash', 'media', 'hr',  'link', 'unlink', '|', 'about'],
+				cssPath : '../../../../plugins/kindeditor/plugins/code/prettify.css',
+				uploadJson : '../../../../plugins/kindeditor/jsp/upload_json.jsp',
+				fileManagerJson : '../../../../plugins/kindeditor/jsp/file_manager_json.jsp',
+				allowFileManager : true,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						document.forms['ff'].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						document.forms['ff'].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+  </script>
+  </head>
+  
+  <body>
+    <div id="right_content">
+	<div class="content_title">新增保管箱</div>
+
+	<div class="clearfloat" style="height:10px;"></div>
+	<div class="default_line"></div>
+	<div class="clearfloat" style="height:24px;"></div>
+	<form action="" method="post" id="ff" class="easyui-form">
+	<table style="float:center;margin-left:0px;">
+	   <tr>
+	     <td style="width:12%" class="fnt_333333_13" style="align:right;">保管箱名称：</td>
+		 <td>
+				<div class="default_box" style="float:left;width:180px">
+					<input id="name" name="name" class="default_input" style="width:170px;height:19px">
+				</div>
+		 </td>
+		 <td style="width:10%" class="fnt_333333_13" style="align:right;">安全密码：</td>
+		 <td>
+				<div class="default_box" style="float:left;width:180px">
+					<input id="password" name="password" type="password" class="default_input" style="width:170px;height:19px" autocomplete="off">
+				</div>
+		 </td>
+	   </tr>
+	   <tr>
+	     <td style="height:20px;"></td>
+	   </tr>
+	   <tr>
+	     <td style="width:12%" class="fnt_333333_13" style="float:top;align:right;" >保管箱内容：<br>(容量需小于2MB)</td>
+		 <td colspan="3">
+				<div style="float:left;">
+					<textarea id="content" name="content">
+					
+					</textarea>
+				</div>
+		 </td>
+	   </tr>
+	</table>
+	<div class="clearfloat" style="height:24px;"></div>
+	<div class="default_line"></div>
+	<div class="clearfloat" style="height:24px;"></div>
+	<table style="margin-left:35%;width:30%">
+	  <tr>
+	    <td>
+	      <a href="javascript:void(0)" id="addSafebox" class="default_btn4 no-line"
+				style="float:left;margin-left:0px;" onclick="addSafebox()">保存</a>
+	    </td>
+	    <td style="float:left;margin-left:30px;">
+	      <a href="javascript:void(0)" id="cancel" class="default_btn4 no-line"
+				style="float:left;margin-left:0px;" onclick="cancel()">取消</a>
+	    </td>
+	  </tr>
+	</table>
+	</form>
+	</div>
+  </body>
+  <script type="text/javascript">
+    function cancel(){
+      //取消操作
+      window.location="safeBox.html";
+    }
+    function addSafebox(){
+      /*
+                   添加保管箱操作：
+                          将图片写入数据库
+                          删除临时保存的图片
+                          保存Safebox的内容到数据库
+                         修改editor html中图片的src           
+      */
+      //如果内容中存在“&”，在url传输过程中会出现错误，所以将全部&替换掉。
+      var reg=new RegExp("&","g");
+      var editorText=editor.text();
+      if(editorText.indexOf("&")!=-1){
+          editorText=editorText.replace(reg,"❤%26❤");
+      }
+      //alert(editorText);
+      var pwd=$("#password").val();
+      if(pwd==null ||pwd==""){
+         $.messager.show({
+	       title:'错误提示',
+	       msg:'密码不能为空',
+	       timeout:5000,
+	       showType:'slide'
+         });
+         return;
+      }else{
+         if(pwd.indexOf("&")!=-1){
+          pwd=pwd.repalce(reg,"%26");
+      }
+      }
+      
+      //alert("pwd="+pwd);
+      var safeBoxName=$("#name").val();
+      if(safeBoxName==null ||safeBoxName==""){
+          $.messager.show({
+	       title:'错误提示',
+	       msg:'保管箱名称不能为空',
+	       timeout:5000,
+	       showType:'slide'
+         });
+         return;
+      }else{
+         if(safeBoxName.indexOf("&")!=-1){
+          safeBoxName=safeBoxName.replace(reg,"%26");
+      }
+      }
+      
+      //alert("safeBoxName="+safeBoxName);
+      $.post('../../../../../rest/network/safebox/addContent?img='+encodeURI(editorText)+'&password='+pwd+'&name='+safeBoxName,{
+      },function(data){
+           var count3=countInstances(data,"3");
+           if(count3>0){
+              alert("上传图片总容量超出限制！！添加保险箱失败");
+              window.location="safeBox.html";
+           }else{
+             var count1=countInstances(data,"1");
+           if(count1<4){
+             alert("添加失败！");
+             window.location="safeBox.html";
+           }else{
+             alert("添加成功！");
+             window.location="safeBox.html";
+           } 
+         }  
+      });
+    }
+  </script>
+
+</html>

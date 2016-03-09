@@ -1,0 +1,52 @@
+.text1 {
+	font-size: 12px;
+	line-height:22px;
+	text-decoration: none;
+	color:#000000;
+	letter-spacing:0px;
+}
+.text2 {
+	font-size: 12px;
+	line-height:18px;
+	text-decoration: none;
+	color:#000000;
+	letter-spacing:0px;
+}
+a:{
+	color:#666666;
+	text-decoration:none;
+}
+a:link {
+	color:#666666;
+	text-decoration:none;
+}
+a:visited {
+	color:#666666;
+	text-decoration:none;
+}
+a:active {
+	color:#666666;
+	text-decoration:none;
+}
+a:hover {
+	color:#990000;
+	text-decoration:underline;
+}
+.ipt {
+	border-width:1px;
+	border-style:solid;
+	border-color:#999999;
+}
+body {
+	margin: 0px;
+}
+.sec1  {
+cursor:  hand;
+color:#990000;
+background-image:url(/jflow/resource/images/manage/news_btn_01a.jpg);
+}
+.sec2  {
+cursor:  hand;
+color:#CC0000;
+background-image:url(/jflow/resource/images/manage/news_btn_01b.jpg);
+}

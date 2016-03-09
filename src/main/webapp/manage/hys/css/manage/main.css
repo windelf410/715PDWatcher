@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+/* CSS Document */ /* Body */
+
+body {
+	margin: 0px;
+}
+
+/* 基本字体 */
+.text_height22 {
+	font-size: 12px;
+	line-height: 22px;
+	text-decoration: none;
+	color: #000000;
+	letter-spacing: 0px;
+}
+
+.text_height18 {
+	font-size: 12px;
+	line-height: 18px;
+	text-decoration: none;
+	color: #000000;
+	letter-spacing: 0px;
+}
+
+/* 超链接 */
+a :{
+	color: #666666;
+	text-decoration: none;
+}
+
+a:link {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:active {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FF6600;
+	text-decoration: underline;
+}
+
+/* 文本框 */
+.ipt {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+.card_01 {
+	color: #666666;
+	margin: 0px;
+	width: 90px;
+	height: 24px;
+	padding: 2px;
+	line-height: 20px;
+	cursor: hand;
+	background-image: url(/jflow/resource/images/manage/card_01.gif);
+	float: left;
+	font-size: 12px;
+}
+
+.card_02 {
+	color: #003399;
+	font-weight: bold;
+	margin: 0px;
+	width: 90px;
+	height: 24px;
+	padding: 2px;
+	line-height: 20px;
+	cursor: hand;
+	background-image: url(/jflow/resource/images/manage/card_02.gif);
+	float: left;
+	font-size: 12px;
+}
+
+.cardBody {
+	border-width: 1px;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-color: #CCCCCC;
+	background-color: #FFFFFF;
+	
+}
+
+.innertable {
+	padding: 0px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #CCCCCC;
+}
+
+//
+mouseover mouseout
+.bk_out {
+	background-color: #ffffff;
+	color: #484848;
+	height: 20px;
+	padding-top: 5px;
+}
+
+.bk_over {
+	background-color: #3CA0D1;
+	color: #000000;
+	cursor: hand;
+	height: 20px;
+	padding-top: 5px;
+}
+
+/* 右键菜单样式表 */
+.menuitems {
+padding-left:15px;
+padding-right:10px;
+padding-top:2px;
+padding-bottom:2px;
+}
+
+.skin1 {
+cursor:default;
+font:menutext;
+position:absolute;
+text-align:left;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10pt;
+width:120px;
+background-color:menu;
+border:1 solid buttonface;
+border:2 outset buttonhighlight;
+}

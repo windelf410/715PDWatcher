@@ -1,0 +1,9 @@
+body, ul, dl, dd, dt, ol, li, p, h1, h2, h3, h4, h5, h6, textarea, form, select, fieldset, table, td, div, input{margin:0;padding:0;}
+h1, h2, h3, h4, h5, h6{font-size:12px;font-weight:normal}
+a img{border:0}
+body{font:2px "微软雅黑";color:#333;text-align:center;}
+ul{list-style:none;}
+
+.box{margin:0 auto;width:1200px;}
+.box ul li{float:left;margin:10px;width:245px;height:245px;border:1px solid #e6e6e6;}
+.box ul li img{width:100%;min-height:245px;}

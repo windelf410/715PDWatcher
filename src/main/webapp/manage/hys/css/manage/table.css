@@ -1,0 +1,71 @@
+/*------ table --------*/
+	.tab {
+		text-align:center;
+		font-size:90%;
+		line-height:normal;
+	}
+	.tab.tr1{
+      	background:url("/tableft10.gif") no-repeat left top;
+      	margin:0;
+      	padding:0 0 0 2px;
+      	text-decoration:none;
+	}
+	.tab.tr1.td1{
+
+		text-align:center;
+      	display:block;
+      	background:url("/tabright10.gif") no-repeat right top;
+      	padding:5px 8px 5px 2px;
+      	color:#FFF;
+	}
+	.tab.tr2{
+      	background:url("/tableft.gif") no-repeat left top;
+      	margin:0;
+      	padding:0 0 0 4px;
+      	text-decoration:none;
+	}
+	.tab.tr2:hover{
+		background-position:0% -42px;
+	}
+	.tab.tr2.td2{
+		text-align:center;
+		display:block;
+      	background:url("/tabright.gif") no-repeat right top;
+      	padding:5px 8px 5px 2px;
+      	color:#666;
+	}
+	.tab.tr2.td2:hover{
+		background-position:100% -42px;
+	}
+	
+.divTab {
+	width:300px;
+	border:#666666 solid 1px;
+	margin:0px;
+	background-color:#d4d0c8;
+	font-size:12px;
+	line-height:18px;
+	
+}
+
+.divTab tr {
+	text-align:center;
+}
+
+.divTab th {
+	background-color:#e3e0db;
+	color:#000000;
+	font-weight : bold;
+	font-size:12px;
+}
+
+.divTab td {
+	background-color:#e3e0db;
+	color:#666666;
+}
+
+.cilckText {
+	cursor:hand;
+	display:block;	
+	color:#FF6600;
+}

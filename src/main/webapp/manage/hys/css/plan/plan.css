@@ -1,0 +1,27 @@
+/* CSS Document */
+#planInfo { width:718px; height:400px; margin:0 auto; }
+#planInfo .title { width:718px; height:40px; margin:0 auto; line-height:40px; font-size:16px; font-weight:bold; color:#666;}
+#planInfo .info { width:718px; height:48px; background:#f9fdfe; border-top:1px dashed #CCC; border-bottom:1px dashed #CCC;
+				  line-height:24px; color:#666;}
+ #planInfo .info .item { margin:0 10px;}
+#planInfo .content { width:716px; height:298px;border:1px solid #e8f5fb; background:#f9fdfe; margin:10px auto 0 auto; text-align:center; }
+  #planInfo .content .txt { width:690px; height:280px; margin:10px auto 0 auto; font-size:14px; line-height:30px; text-align:left; color:#666;}
+ 
+#planInc { width:720px; height:180; margin:10px auto; }
+
+
+#palnBar { width:100%; height:30px; background:url(../img/barBG2.jpg) repeat-x;
+		    text-align:center; line-height:30px; font-size:14px; font-weight:bold;}
+#palnBar .blank { width:10px; height:30px; float:left;}
+#palnBar .cardActive { width:120px; height:30px; float:left; background:url(../img/btnActive.jpg); color:#039; cursor:pointer;}
+#palnBar .cardNormal { width:120px; height:30px; float:left; background:url(../img/btnNormal.jpg); color:#999; cursor:pointer;}
+
+#planBody { margin:0px; padding:0px; border:0px; font-size:12px; background:#F7F7F7; text-align:left;}
+
+#planList { width:100%; height:auto;}
+  #planList .listTab {}
+  #planList .listTab tr td {height:24px; background:url(../img/arrow2.gif) no-repeat; padding:0 0 0 20px; line-height:24px;}
+  #planList .listTab tr td  a { display:block; width:100%; height:24px; text-decoration:none; color:#333;}
+  #planList .listTab tr td  a:hover { background:#EFF5FB; color:#36C;}
+
+#Gantt { width:100%; height:auto; }

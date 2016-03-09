@@ -1,0 +1,102 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="UTF-8">  
+<title>echarts测试</title>  
+<link rel="stylesheet" type="text/css" href="./js/themes/default/easyui.css" />
+
+<script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/locale/easyui-lang-zh_CN.js"></script>  
+
+<script src="./js/echarts.js"></script>
+</head>
+<body onload="checkscreen()">
+	<div id="main" style="">
+	起始时间：  
+	<input type="text" name="startTime" class="easyui-datebox" editable="false" value="2015-03-09"/>
+	结束时间：
+	<input type="text" name="endTime" class="easyui-datebox" editable="false" value="2015-05-30"/>
+	<input type=button value="submit" onclick="getdata()" />
+	</div>
+	<table id="info" ></table> 
+
+        <script type="text/javascript">
+	function checkscreen()
+	{
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		document.getElementById('main').style.width = width + "px";
+		document.getElementById('main').style.height = height + "px";
+		document.getElementById('main').style.border = "1px dotted black";
+	}
+	</script>
+
+	<script type="text/javascript">
+	function getdata()
+	{  
+		var startTime = document.getElementsByName('startTime')[0].value;
+		var endTime= document.getElementsByName('endTime')[0].value;
+	 	var url = "../../../../rest/common/plan/browse?startTime="+startTime+"&endTime="+endTime;
+		/* $.post("../rest/common/consume/statType", {  
+			startTime : startTime,
+			endTime : endTime
+		}, function(data) {              
+		option.series[0].data = data;   
+		echar();   
+		}, 'json');    */
+		$.ajax({
+			url: url,
+			type: 'get',
+			dataTypt: 'json',
+			success: function(data){
+					//alert(JSON.stringify(data));
+					//console.log(data);
+					require.config({
+						paths: {
+							echarts: './js'
+						}
+					});
+
+					require(
+						[
+				            'echarts',
+				            'echarts/chart/eventRiver'
+				        ],
+				        function (ec) {
+						var myChart = ec.init(document.getElementById('main'));
+						myChart.setOption({
+				        	title : {
+								text: '我的计划',
+								subtext: '数据来自数汇宝'
+							},
+							tooltip : {
+								trigger: 'item',
+								enterable: true
+							},
+							toolbox: {
+								show : true,
+								feature : {
+									mark : {show: true},
+									restore : {show: true},
+									saveAsImage : {show: true}
+								}
+							},
+							xAxis : [{
+								type : 'time',
+								boundaryGap: [0.05,0.1]
+							}],
+							series : data,
+					        });
+				        }
+					);
+				},
+			error: function(xhr, msg){
+				alert(msg);
+				}
+			});
+	}
+	
+	</script>
+</body>
+</html>

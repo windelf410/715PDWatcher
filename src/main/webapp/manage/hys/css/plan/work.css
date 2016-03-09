@@ -1,0 +1,26 @@
+/* CSS Document */
+#workInfo { width:98%; height:auto; margin:0 auto; }
+
+
+#palnBar { width:100%; height:30px; background:url(/jflow/resource/images/plan/img/barBG2.jpg) repeat-x;
+		    text-align:center; line-height:30px; font-size:14px; font-weight:bold;}
+#palnBar .blank { width:10px; height:30px; float:left;}
+#palnBar .cardActive { width:120px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnActive.jpg); color:#039; cursor:pointer;}
+#palnBar .cardNormal { width:120px; height:30px; float:left; background:url(/jflow/resource/images/plan/img/btnNormal.jpg); color:#999; cursor:pointer;}
+
+#planBody { margin:0px; padding:0px; border:0px; font-size:12px; background:#F7F7F7; text-align:left;}
+
+.listTab {}
+.listTab tr td {height:24px; background:url(/jflow/resource/images/plan/img/arrow2.gif) no-repeat; padding:0 0 0 20px; line-height:24px;}
+.listTab tr td  a { display:block; width:100%; height:24px; text-decoration:none; color:#333;}
+.listTab tr td  a:hover { background:#EFF5FB; color:#36C;}
+
+#body0,#body1,#body2  { width:100%; height:auto; margin:10px auto 0 auto;}
+
+table a { text-decoration:none; color:#00F;}
+table a:hover { color:#009;}
+
+table tr td { padding:0 0 0 5px;}
+#__01 tr td {padding:0;}
+
+.dashedTable { border-bottom:1px dashed #CCC;}

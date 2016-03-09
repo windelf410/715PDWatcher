@@ -1,0 +1,119 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="UTF-8">  
+<title>echarts测试</title>  
+<link rel="stylesheet" type="text/css" href="./js/themes/default/easyui.css" />
+
+<script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./js/locale/easyui-lang-zh_CN.js"></script>  
+
+<script src="./js/echarts-all.js"></script>
+<script src="./js/echarts.js"></script>
+</head>
+<body onLoad="checkscreen()">
+	<div id="main" style="">
+	<p>起始时间：  
+		<input name="startTime" type="text" class="easyui-datebox" value="2015-03-09" size="10" maxlength="10" editable="false"/>
+	   结束时间：
+		<input name="endTime" type="text" class="easyui-datebox" value="2015-05-30" size="10" maxlength="10" editable="false"/>
+	   显示项目数：
+		<input name="item" type="text" class="easyui-numberbox" size="1" maxlength="1" min= "1" max ="9"/>
+		<input type=button value="submit" onClick="getdata()" />
+	</p>
+	</div>
+	<table id="info" ></table> 
+
+        <script type="text/javascript">
+	function checkscreen()
+	{
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		document.getElementById('main').style.width = width + "px";
+		document.getElementById('main').style.height = height + "px";
+		document.getElementById('main').style.border = "1px dotted black";
+	}
+	</script> 
+
+	<script type="text/javascript">
+	function getdata()
+	{  
+		var startTime = document.getElementsByName('startTime')[0].value;
+		var endTime = document.getElementsByName('endTime')[0].value;
+		var top = document.getElementsByName('item')[0].value;
+		var url = "../../../../rest/common/income/browse?startTime="+startTime+"&endTime="+endTime+"&top="+top;
+		alert(url);
+		/*$.getJSON("http://192.168.1.20:8080/shuhuibao/rest/common/income/browse?startTime="+startTime+"&endTime="+endTime+"&top="+top,function(data) {
+			alert(JSON.stringify(data));
+		option.series[0].data = data;   
+		echar();   
+		});*/
+		$.ajax({
+			url: url,
+			type: 'get',
+			dataTypt: 'json',
+			success: function(data){
+					alert(JSON.stringify(data));
+					option.series[0].data = data;   
+					echar();
+				},
+			error: function(xhr, msg){
+				alert(msg);
+				}
+			});
+	}
+	</script> 
+ 
+	<script type="text/javascript">  
+	var option = {
+		title : {
+			text: '收入组成',
+			subtext: '数据来自数汇宝',
+			x:'center'
+		},
+		tooltip : {
+			trigger: 'item',
+			formatter: "{a} <br/>{b} : {c} ({d}%)"
+		},
+		calculable : true,
+		toolbox: {
+			show : true,
+			feature : {
+			dataView : {show: true, readOnly: false},
+			restore : {show: true},
+			saveAsImage : {show: true}
+			}
+		},
+		series : [{
+			type:'pie',
+			radius : '55%',
+			center: ['50%', 225],
+//           	data:[
+//                {value:10, name:'本月工资'},
+//                {value:20, name:'林总送礼'},
+//                {value:12, name:'张总送礼'},
+//                {value:45, name:'小刘保护费'},
+//                {value:20, name:'赌场利润'},
+//                {value:45, name:'洗浴城利润'},
+//                {value:67, name:'自然科学基金'},
+//                {value:21, name:'其他'}
+//            	]  
+		}]
+	};  
+	function echar()
+	{
+		var myChart = echarts.init(document.getElementById('main'));        
+		myChart.setOption(option);
+		var lenn=option.series[0].data.length;
+		var place=document.getElementById('info');
+
+		for (var j=0;j<lenn;j++)
+		{
+			var trg=document.createElement("tr");	trg.innerHTML="<td>"+option.series[0].data[j].name+"</td>"+"<td>"+option.series[0].data[j].value+"</td>";
+			place.appendChild(trg);
+		}
+	}
+	</script>  
+</body>  
+</html>  

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>宠物</title>
+<!--[if lt IE 9]>
+		<script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+
+<link rel="stylesheet" href="../../../../css/common.css" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<link rel="stylesheet" href="../../../../../css/net/mycss.css" />
+<link rel="stylesheet" type="text/css"href="../../../../../js/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../js/themes/icon.css" />
+</head>
+<body>
+	<div id="right_content">
+		<div class="content_title">宠物列表</div>
+
+		<div class="clearfloat" style="height:10px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="data_tab" style="cellpadding:0;cellspacing:0;border:0">
+			<tr>
+				<td style="width:10%;align:right" class="fnt_333333_13">宠物昵称：</td>
+				<td style="width:20%">
+					<input class="easyui-textbox" style="width:100px" id="nickName">
+				</td>
+				<td style="width:10%;align:right" class="fnt_333333_13">宠物类型：</td>
+				<td style="width:20%">
+					<input class="easyui-combobox" style="width:100px" id="type" data-options="
+						url: '../../../../../rest/getType/17',
+						textField: 'typeName',
+						valueField: 'type_ID',
+						editable: false
+					">
+				</td>
+				<td style="width:40%"><a href="javascript:void(0)" class="default_btn4 no-line" id="query"
+					style="float:left;margin-left:60px;">确认查询</a>
+					<a href="addPet.html" class="default_btn4 no-line"
+					style="float:left;margin-left:60px;">新增</a>
+				</td>
+			</tr>
+		</table>
+
+		<div class="clearfloat" style="height:24px;"></div>
+		<div class="default_line"></div>
+		<div class="clearfloat" style="height:24px;"></div>
+
+		<table class="easyui-datagrid" style="cellpadding:0;cellspacing:0" id="dg" data-options="
+					url: '../../../../../rest/common/pet/page',
+					fitColumns: true,
+					singleSelect:true,
+					method: 'post',
+					pagination: true,
+					striped: true,
+					onBeforeLoad: function(){
+						acquireType('../../../../../rest/getType/17');
+				}
+				">
+			<thead>
+				<tr class="tr1 fnt_333333_13">
+					<th data-options="field:'order', align:'center', formatter: generateOrder, width:50">序号</th>
+					<th data-options="field:'nickname', align:'center', width:200">宠物昵称</th>
+					<th data-options="field:'type', align:'center', width:150, formatter: getTypeName">宠物类型</th>
+					<th data-options="field:'age', align:'center', width:150">宠物年龄</th>
+					<th data-options="field:'operate', align:'center', formatter: operate, width:200">操作</th>
+				</tr>
+			</thead>
+		</table>
+		
+		<input id="idName" value="pet_ID" type="hidden">
+		<div class="clearfloat" style="height:15px;"></div>
+	</div>
+	
+	<!-- <script src="../../../js/jquery.easing.1.3.js"></script> -->
+	<script src="../../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../../../js/jquery.easyui.min.js"></script>
+	<script src="../../../../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../../../js/calendar.js"></script>
+	<script src="../../../../../js/myjs/list.js"></script>
+	<script>
+		$(function() {
+		  initUrl('../../../../../rest/common/pet/del', 'editPet.html');
+		  $("#query").bind("click", function(){
+			    var nickName = $('#nickName').textbox('getValue');
+				var type = $("#type").combobox("getValue");
+				
+				$("#dg").datagrid('load', {
+					nickname: nickName,
+					type: type
+				});
+		  });
+		  lines_bottom();
+		});
+		
+		function operate(vlaue, row, index){
+			var id = row.pet_ID;
+			var editButton = '<input id="edit' + index 
+							+ '" type="button" class="default_btn5 btn_height" value="修改"'
+							+ ' onmouseover="over(this)" onmouseout="out(this)" onclick="editRow(this)">';
+			var deleteButton = '<input id="delete' + index 
+							+ '" type="button" class="default_btn5 btn_height" value="删除"'
+							+ ' onmouseover="over(this)" onmouseout="out(this)" onclick="deleteRow(this)">';
+			var diaryButton = '<input type="diary"' + index + 'type="button" class="default_btn5 btn_height" value="事记"' +
+								' onmouseover="over(this)" onmouseout="out(this)" onclick="diary(' + id + ')">';
+			return editButton + ' ' + deleteButton + ' ' + diaryButton;
+		}
+		
+		function diary(id){
+			//alert(id);
+			window.location.href = "diary.html?id=" + id;
+		}
+	</script>
+</body>
+</html>

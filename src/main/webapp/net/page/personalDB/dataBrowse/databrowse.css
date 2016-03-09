@@ -1,0 +1,68 @@
+/* 覆写easyui-window格式 */
+.window, .window .window-body{
+  border-color: #CDEDFE !important;
+  z-index:10001 !important;
+}
+.window{
+  position: absolute !important;
+  -moz-border-radius: 5px 5px 5px 5px !important;
+  -webkit-border-radius: 5px 5px 5px 5px !important;
+  border-radius: 5px 5px 5px 5px !important;
+}
+.window {
+  background-color: #CDEDFE !important;
+  background: -webkit-linear-gradient(top,#CDEDFE 0,#CDEDFE 20%);
+  background: -moz-linear-gradient(top,#CDEDFE 0,#CDEDFE 20%);
+  background: -o-linear-gradient(top,#CDEDFE 0,#CDEDFE 20%);
+  background: linear-gradient(to bottom,#CDEDFE 0,#CDEDFE 20%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CDEDFE,endColorstr=#CDEDFE,GradientType=0);
+  overflow: hidden !important;
+  padding: 5px !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+.panel-body {
+  overflow: hidden !important;
+  text-align: center !important;
+}
+#main{
+  margin-right: auto !important; 
+  margin-left: auto !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+#chartShow{
+  margin-right: auto !important; 
+  margin-left: auto !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+#tab1{
+  margin-right: auto !important; 
+  margin-left: auto !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+#win{
+	z-index:10001 !important;
+}
+.panel-header {
+  background-color: #CDEDFE;
+  background: -webkit-linear-gradient(top,#CDEDFE 0,#CDEDFE 100%);
+  background: -moz-linear-gradient(top,#CDEDFE 0,#CDEDFE 100%);
+  background: -o-linear-gradient(top,#CDEDFE 0,#CDEDFE 100%);
+  background: linear-gradient(to bottom,#CDEDFE 0,#CDEDFE 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CDEDFE,endColorstr=#CDEDFE,GradientType=0);
+}
+
+.layout-expand {
+  background-color: #CDEDFE;
+}
+.layout{
+	z-index:10002 !important;
+}
+.panel{
+	text-align:center !important;
+}

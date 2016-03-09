@@ -1,0 +1,43 @@
+@charset "utf-8";
+html,body{
+	margin:0;padding:0;
+	background:#f3f3f3;
+}
+
+li{
+	list-style:none;
+}
+
+ul{
+	margin:0 0 0 0; 
+	padding:0 0 0 0; 
+}
+
+img{
+	border:0;
+}
+
+.clearfloat{
+	clear:both;
+	overflow:hidden;
+}
+
+a{
+	cursor:pointer;
+}
+
+a.non-line{
+	text-decoration:none;
+}
+
+a.non-line:hover{
+	text-decoration:underline;
+}
+
+a.no-line{
+	text-decoration:none;
+}
+
+.ellipsis{
+	overflow:hidden; text-overflow:ellipsis;white-space:nowrap;
+}

@@ -1,0 +1,1532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>个人数据银行</title>
+
+
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="../css/net/helpPage.css" />
+<link rel="stylesheet" href="../css/net/mycss.css" />
+<link rel="stylesheet" href="../css/net/loading.css"/>
+<link rel="stylesheet" href="../js/themes/icon.css"/>
+<link rel="stylesheet" href="../js/themes/default/easyui.css"/>
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/calendar.js"></script> 
+<script type="text/javascript" src="../js/myjs/js.cookie.js"></script>
+<script type="text/javascript" src="../js/myjs/MD5.js"></script>
+<!-- 新添加 -->
+     <link rel="stylesheet" type="text/css" href="../js/themes/default/easyui.css" />
+     <link rel="stylesheet" type="text/css" href="../js/themes/icon.css">
+     <link rel="stylesheet" type="text/css" href="page/personalDB/dataBrowse/databrowse.css">
+	<script src="../js/jquery.easyui.min.js"></script>
+	<script src="../js/locale/easyui-lang-zh_CN.js"></script> 
+	
+	<script src="page/personalDB/dataBrowse/js/echarts-all.js"></script>
+	<script src="page/personalDB/dataBrowse/js/echarts.js"></script>
+	
+    <script src="page/personalDB/dataBrowse/js/arbor/mxh7kqd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="page/personalDB/dataBrowse/js/arbor/js/jquery.address-1.4.min.js"></script>
+    <script src="page/personalDB/dataBrowse/js/arbor/js/arbor.js"></script>
+    <script src="page/personalDB/dataBrowse/js/arbor/js/arbor-tween.js"></script>
+    <script src="page/personalDB/dataBrowse/js/arbor/js/arbor-graphics.js"></script>
+    
+    <script src="../js/myjs/list.js"></script>
+    <script src="../js/myjs/index.js"></script>
+<!-- 结束 -->	
+
+<style type="text/css">
+.menu21_fold{
+	background:#bae3f9;
+	background-position:136px 15px;
+}
+
+.menu21_fold:hover{
+	background:#d3edfb;
+	background-position:136px 15px;
+}
+.menu21_per{
+	width:100%;
+	height:35px;
+	line-height:38px;
+	position:relative;
+	text-align:left;
+	text-indent:50px;
+	cursor:pointer;
+	cursor:hand;
+}
+.bg{
+  text-align:center;
+  text-decoration:none;
+}
+</style>
+
+<!-- 新添加 -->
+<script type="text/javascript">
+
+
+window.optionText;
+window.requestUrl;
+$(function(){
+	
+	$('#win').window('close');
+	window.optionText=null;
+	window.requestUrl=null;
+});
+/*******弹出窗口和chart的设置********/
+function creat(chartUrl,tableUrl){
+	 window.requestUrl=chartUrl;
+	 $('#win').window('open');
+	 checkscreen();
+	 //////////////////////////////
+	 var myChartTest=echarts.init(parent.window.document.getElementById('chartShow'));
+	var optionTest = {
+			title : {
+				text:'',
+				subtext: '数据来自数汇宝',
+				x:'center'
+			},
+			tooltip : {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			calculable : true,
+			toolbox: {
+				show : true,
+				feature : {
+				dataView : {show: true, readOnly: false},
+				magicType : {
+	               show: true, 
+	               type: ['pie', 'funnel'],
+	               option: {
+	                   funnel: {
+	                       x: '0%',
+	                       width: '2%',
+	                       funnelAlign: 'left',
+	                       max: 100
+	                   }
+	               }
+	           },
+				restore : {show: true},
+				saveAsImage : {show: true}
+				}
+			},
+			series : [
+			 {
+				 name:'',
+				 type:'pie',
+				radius : '55%',
+				center: ['50%', '50%'],
+				data:[]
+			  }
+			]
+	};
+	myChartTest.setOption(optionTest,true);  
+	loadGrid(tableUrl);
+	$('#layout').layout('expand','west');
+}
+
+function getdata(){
+	var startTime = $('#startTime').datebox('getValue');
+	var endTime = $('#endTime').datebox('getValue');
+	var top = $('#item').numberbox('getValue');
+	var url=window.requestUrl+"?startTime="+startTime+"&endTime="+endTime+"&top="+top;
+	getdata0(url);
+	//getdata0(url);
+}
+function keydown(){
+		var keycode ;
+		if(window.event){
+			keycode = event.keyCode;
+		}else if(event.which){
+			keycode = event.which;
+		}
+		if(keycode == 13)
+			entry();
+	}
+</script>
+<script type="text/javascript">
+function loadGrid(tableUrl){
+	dataArray.splice(0, dataArray.length);
+	if(tableUrl.indexOf("income")!=-1){
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect: true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/6&../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:40},  
+	            {field:'incomeDate',title:'收入时间', align:'center',width:75},  
+	            {field:'amount',title:'金额',align:'center',width:75},
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'type', title:'类型',align:'center',width:55,formatter:getTypeName},
+	            {field:'resource',title:'来源',align:'center',width:105}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("consume")!=-1){
+		//支出
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/4&../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'consumeDate',title:'消费时间', align:'center',width:75},
+	            {field:'consumeItem', title:'名称',align:'center',width:75},
+	            {field:'amount',title:'金额',align:'center',width:75},
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'type', title:'类型',align:'center',width:55,formatter:getTypeName},
+	            {field:'shop',title:'商家',align:'center',width:105}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("phyass")!=-1){
+		 //实物资产
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/7');
+			},
+	        columns:[[  
+	            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:50},  
+	            {field:'name', title:'名称',align:'center', width:100},  
+	            {field:'amount', title:'金额',align:'center', width:100},
+	            {field:'shop', title:'商家',align:'center', width:100},
+	            {field:'buyDate',title:'购买时间', align:'center', width:100},
+	            {field:'type', title:'类型',align:'center', formatter: getTypeName, width:80}
+	            /* {field:'maintenance', title:'维修记录',align:'center', resizable:true, width:100} */
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("insu")!=-1){
+		//保险
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/8');
+			},
+	        columns:[[  
+	            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:50},  
+	            {field:'name', title:'名称',align:'center', width:80},  
+	            {field:'amount', title:'保额',align:'center', width:90},
+	            {field:'issuer',title:'保险公司', align:'center', width:100},
+	            {field:'policyHolder',title:'投保人', align:'center'},
+	            {field:'buyDate',title:'投保日期', align:'center', width:100}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("inve")!=-1){
+		//投资
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/9');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'name', title:'名称',align:'center', width:90},  
+	            {field:'amount', title:'金额',align:'center', width:80},
+	            {field:'issuer', title:'发行方',align:'center', width:100},
+	            {field:'investDate',title:'投资日期', align:'center', width:100},
+	            {field:'type', title:'资产类型',align:'center', formatter: getTypeName, width:80}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("contact")!=-1){
+		//朋友圈
+		var friendArray = new Array();
+		  function generateFriend(value, row, index){
+			for(var i=0; i<friendArray.length; ++i)
+				if(value == friendArray[i].type_ID)
+					return friendArray[i].typeName;
+		  }
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/10');
+			 	$.ajax({
+	                  url : '../rest/getType/11',
+	                  type : 'post',
+	                  dataType : 'json',
+	                  success : function(data) {
+	                	  friendArray = data;
+	                  },
+	                  error : function(msg) {
+		                 alert('error-001: ' + msg);
+	                }
+	            });
+			},
+	        columns:[[  
+	            {field:'order',title:'序号', align:'center', formatter: generateOrder},  
+	            {field:'name',title:'姓名', align:'center'},  
+	            /* {field:'relation', title:'关系',align:'center', formatter: getTypeName}, */
+	            {field:'phone', title:'电话',align:'center'},
+	            {field:'qq', title:'QQ',align:'center'},
+	            {field:'weixin', title:'微信',align:'center', width:100},
+	            {field:'friend', title:'亲密度',align:'center', formatter:generateFriend }
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("call")!=-1){
+		//通话
+		if(tableUrl.indexOf("pageR")!=-1){
+			$('#dg').datagrid({ 
+				url: '../rest/app/call/page',
+		        fitColumns: true,
+		        singleSelect : true,
+		        method:'post',
+		        pagination: true,
+		        striped: true, 
+		        onBeforeLoad:function(data){
+		            data.direction=2;
+		        },
+		        columns:[[  
+		            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:40},  
+		            {field:'name', title:'联系人',align:'center', width:80},  
+		            {field:'phone', title:'电话',align:'center', width:100},
+		            {field:'callTime',title:'通话时间', align:'center', width:100},
+		            {field:'useTime', title:'通话时长',align:'center'},
+		            {field:'direction',title:'电话方向', align:'center', width:80, formatter: generateCallDirection}
+		        ]]  
+		    });
+		}else{
+			$('#dg').datagrid({ 
+				url: '../rest/app/call/page',
+		        fitColumns: true,
+		        singleSelect : true,
+		        method:'post',
+		        pagination: true,
+		        striped: true, 
+		        onBeforeLoad:function(data){
+		            data.direction=1;
+		        },
+		        columns:[[  
+		            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:40},  
+		            {field:'name', title:'联系人',align:'center', width:80},  
+		            {field:'phone', title:'电话',align:'center', width:100},
+		            {field:'callTime',title:'通话时间', align:'center', width:100},
+		            {field:'useTime', title:'通话时长',align:'center'},
+		            {field:'direction',title:'电话方向', align:'center', width:80, formatter: generateCallDirection}
+		        ]]  
+		    });
+		}
+		
+	}else if(tableUrl.indexOf("message")!=-1){
+		//短信
+		if(tableUrl.indexOf("pageR")!=-1){
+			$('#dg').datagrid({ 
+				url: '../rest/app/message/page',
+		        fitColumns: true,
+		        singleSelect : true,
+		        method:'post',
+		        pagination: true,
+		        striped: true,
+		        onBeforeLoad:function(data){
+		            data.direction=2;
+		        },
+		        columns:[[  
+		            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:40},  
+		            {field:'name', title:'联系人',align:'center', width:80},  
+		            {field:'method', title:'通信方式',align:'center', width:70, formatter:generateType},
+		            {field:'contactNo', title:'号码',align:'center', width:100},
+		            {field:'callTime', title:'通信时间',align:'center'},
+		            {field:'direction', title:'通信方向',align:'center', width:60, formatter: generateMsgDirection}
+		        ]]  
+		    });
+		}else{
+			$('#dg').datagrid({ 
+				url: '../rest/app/message/page',
+		        fitColumns: true,
+		        singleSelect : true,
+		        method:'post',
+		        pagination: true,
+		        striped: true, 
+		        onBeforeLoad:function(data){
+		            data.direction=1;
+		        },
+		        columns:[[  
+		            {field:'order',title:'序号', align:'center', formatter: generateOrder, width:40},  
+		            {field:'name', title:'联系人',align:'center', width:80},  
+		            {field:'method', title:'通信方式',align:'center', width:70, formatter:generateType},
+		            {field:'contactNo', title:'号码',align:'center', width:100},
+		            {field:'callTime', title:'通信时间',align:'center'},
+		            {field:'direction', title:'通信方向',align:'center', width:60, formatter: generateMsgDirection}
+		        ]]  
+		    });
+		}
+		
+	}else if(tableUrl.indexOf("medh")!=-1){
+		//电子病历
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'member', title:'成员',align:'center', width:50, formatter: getTypeName},  
+	            {field:'genDate', title:'时间',align:'center', width:80},
+	            {field:'hospital', title:'医院',align:'center'},
+	            {field:'fee', title:'费用',align:'center'},
+	            {field:'result', title:'治疗效果',align:'center', width:100}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("pe")!=-1){
+		//体检
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'genDate', title:'时间',align:'center', width:80},
+	            {field:'hospital', title:'地点',align:'center'},
+	            {field:'fee', title:'费用',align:'center'},
+	            {field:'result',title:'结果',align:'center',width:100}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("ht")!=-1){
+		//保健
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'doctor', title:'医师',align:'center', width:80},
+	            {field:'genDate', title:'时间',align:'center', width:80},
+	            {field:'hospital', title:'地点',align:'center'},
+	            {field:'fee', title:'费用',align:'center'},
+	            {field:'result',title:'效果',align:'center',width:80}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("plan")!=-1){
+		//计划
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/13&../rest/getType/3&../rest/getType/14');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'name', title:'名称',align:'center', width:80},
+	            {field:'member', title:'成员',align:'center', width:50, formatter: getTypeName},  
+	            {field:'type', title:'类型',align:'center', width:80, formatter: getTypeName},
+	            {field:'content', title:'内容',align:'center', width:180},
+	            {field:'progress', title:'进度',align:'center', width:60, formatter:getTypeName}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("ach")!=-1){
+		//成果
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/16&../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'name', title:'名称',align:'center', width:80},
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'type', title:'类型',align:'center', width:80, formatter: getTypeName},  
+	            {field:'content', title:'内容',align:'center'},
+	            {field:'genDate', title:'时间',align:'center', width:100},
+	            {field:'provider', title:'来源',align:'center', width:80}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("brow")!=-1){
+		//网页浏览
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'netName', title:'网站',align:'center', width:50},
+	            {field:'netAddress',title:'网址', align:'center', width:170},
+	            {field:'accessDate',title:'访问时间', align:'center', width:140}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("location")!=-1){
+		//位置
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'locateTime', title:'时间',align:'center', width:120},  
+	            {field:'location', title:'位置',align:'center', width:180}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("grow")!=-1){
+		//成长
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'age', title:'年龄',align:'center', width:50}, 
+	            {field:'place', title:'地点',align:'center', width:150},
+	            {field:'genDate', title:'日期',align:'center', width:100},
+	            {field:'content',title:'内容',align:'center',width:150}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("course")!=-1){
+		//课程
+		$('#dg').datagrid({ 
+			url: tableUrl,
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/3');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'member',title:'成员',align:'center',width:50,formatter:getTypeName},
+	            {field:'course', title:'课程',align:'center', width:150},
+	            {field:'teacher', title:'教师',align:'center', width:100},
+	            {field:'studyYear', title:'学习年度',align:'center', width:100},
+	            {field:'finalGrade',title:'成绩',align:'center',width:50}
+	        ]]  
+	    });
+	}else if(tableUrl.indexOf("animal")!=-1){
+		//宠物
+		$('#dg').datagrid({ 
+			url: '../rest/common/pet/page',
+	        fitColumns: true,
+	        singleSelect : true,
+	        method:'post',
+	        pagination: true,
+	        striped: true,  
+	        onBeforeLoad: function(){
+			 	acquireType('../rest/getType/17');
+			},
+	        columns:[[  
+	            {field:'order', title:'序号',align:'center', formatter: generateOrder, width:40},  
+	            {field:'nickname', title:'昵称',align:'center', width:100},  
+	            {field:'type', title:'宠物类型',align:'center', width:100, formatter: getTypeName},
+	            {field:'age', title:'宠物年龄',align:'center', width:150}
+	        ]]  
+	    });
+	}
+	$('#dg').datagrid('reload');
+	/*保管箱  暂未定下来*/
+	
+}
+</script>
+
+<script type="text/javascript">
+/*************getdata0(url) 开始*******************/
+function getdata0(url)
+{  
+	if(url.indexOf('../rest/common/income/browse')!=-1){
+		window.optionText='收入组成';
+	}else if(url.indexOf('../rest/common/consume/browse')!=-1){
+		window.optionText='消费组成';
+	}else if(url.indexOf('../rest/common/ht/browse')!=-1){
+		window.optionText='保健';
+	}else if(url.indexOf('../rest/common/medh/browse')!=-1){
+		window.optionText='电子病历';
+	}else if(url.indexOf('../rest/common/pe/browse')!=-1){
+		window.optionText='体检';
+	}else if(url.indexOf('../rest/app/asset/browse/phyass')!=-1){
+		window.optionText='实物资产';
+	}else if(url.indexOf('../rest/app/asset/browse/insu')!=-1){
+		window.optionText='保险';
+	}else if(url.indexOf('../rest/app/asset/browse/inve')!=-1){
+		window.optionText='投资';
+	}else if(url.indexOf('../rest/app/contact/browse')!=-1){
+		window.optionText='朋友圈';
+	}else if(url.indexOf('../rest/common/plan/browse')!=-1){
+		window.optionText='我的计划';
+	}else if(url.indexOf('../rest/app/ach/browse')!=-1){
+		window.optionText='我的成果';
+	}else if(url.indexOf('../rest/common/brow/browse')!=-1){
+		window.optionText='网页浏览';
+	}else if(url.indexOf('../rest/common/location/browse')!=-1){
+		window.optionText='位置';
+	}else if(url.indexOf('../rest/common/grow/browse')!=-1){
+		window.optionText='我的成长';
+	}else if(url.indexOf('../rest/common/course/browse')!=-1){
+		window.optionText='我的课程';
+	}else if(url.indexOf('../rest/common/pet/browse')!=-1){
+		window.optionText='宠物';
+	}
+	else if(url.indexOf('../rest/app/call/browseR')!=-1){
+		window.optionText='来电';
+	}
+	else if(url.indexOf('../rest/app/call/browseS')!=-1){
+		window.optionText='去电';
+	}
+	else if(url.indexOf('../rest/app/message/browseR')!=-1){
+		window.optionText='收信';
+	}
+	else if(url.indexOf('../rest/app/message/browseS')!=-1){
+		window.optionText='发信';
+	}
+	/* else if(url.indexOf('')){
+		window.optionText='保管箱';
+	}else if(url.indexOf('../rest/common/cdr/browse')){
+		window.optionText='私人 订制';
+	} */
+	
+	/************饼状图的显示设置  开始*************/
+	/* var option = {
+			title : {
+				subtext: '数据来自数汇宝',
+				x:'center'
+			},
+			tooltip : {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			calculable : true,
+			toolbox: {
+				show : true,
+				feature : {
+				dataView : {show: true, readOnly: false},
+				magicType : {
+	               show: true, 
+	               type: ['pie', 'funnel'],
+	               option: {
+	                   funnel: {
+	                       x: '0%',
+	                       width: '2%',
+	                       funnelAlign: 'left',
+	                       max: 100
+	                   }
+	               }
+	           },
+				restore : {show: true},
+				saveAsImage : {show: true}
+				}
+			},
+			series : [
+			 {
+				 type:'pie',
+				radius : '55%',
+				center: ['50%', '50%'], 
+			  }
+			]
+	}; */
+	
+	/************饼状图的显示设置  结束*************/
+	//console.log(window.requestUrl);
+    if((window.requestUrl).indexOf("animal")!=-1
+    	||(window.requestUrl).indexOf("contact")!=-1
+    	||(window.requestUrl).indexOf("brow/browse")!=-1
+    	||(window.requestUrl).indexOf("location")!=-1
+    	||(window.requestUrl).indexOf("course")!=-1){
+    	var insertText="<h1 style='color:red;align:center;width:auto;height:auto;float:center;top:auto;left:auto'>暂无适合统计指标。</h1>";
+    	parent.window.document.getElementById('chartShow').innerHTML=insertText;
+    }else{
+    	$.ajax({
+    		url: url,
+    		type: 'get',
+    		cache: false,
+    		dataType: 'json',
+    		//beforeSend : function() {
+              /*  myChart.showLoading({
+                   text: '正在努力的读取数据中...',
+               }); */
+           //},
+    		success: function(data){
+    			    if((window.requestUrl).indexOf("medh")!=-1
+    			    	||(window.requestUrl).indexOf("ht")!=-1
+    			    	||(window.requestUrl).indexOf("pe")!=-1
+    			    	||(window.requestUrl).indexOf("plan")!=-1
+    			    	||(window.requestUrl).indexOf("ach")!=-1
+    			    	||(window.requestUrl).indexOf("grow")!=-1){
+    			    	//时间河流图
+    			    	require.config({
+    						paths: {
+    							echarts: 'page/personalDB/dataBrowse/js'
+    						}
+    					});
+
+    					require(
+    						[
+    				            'echarts',
+    				            'echarts/chart/eventRiver'
+    				        ],
+    				        function (ec) {
+    							var myChart = ec.init(document.getElementById('chartShow'));
+    							//myChart.refresh();
+    							var option1={
+    						        	title : {
+    										text: window.optionText,
+    										subtext: '数据来自数汇宝'
+    									},
+    									tooltip : {
+    										trigger: 'item',
+    										enterable: true
+    									},
+    									toolbox: {
+    										show : true,
+    										feature : {
+    											mark : {show: false},
+    											restore : {show: true},
+    											saveAsImage : {show: true}
+    										}
+    									},
+    									xAxis : [{
+    										type : 'time',
+    										boundaryGap: [0.02,0.05]
+    									}],
+    									series : data,
+    							        };
+    							myChart.setOption(option1,true);
+    							
+    				        }
+    					);
+    			    }else{
+    			    	//饼状图
+    			    	//console.log("asking url:"+url);
+    			    	var myChart = echarts.init(parent.window.document.getElementById('chartShow'));
+	                    /* window.onresize = myChart.resize; */
+    			    	//myChart.refresh();
+    			    	var option = {
+    			    			title : {
+    			    				subtext: '数据来自数汇宝',
+    			    				x:'center'
+    			    			},
+    			    			tooltip : {
+    			    				trigger: 'item',
+    			    				formatter: "{a} <br/>{b} : {c} ({d}%)"
+    			    			},
+    			    			calculable : true,
+    			    			toolbox: {
+    			    				show : true,
+    			    				feature : {
+    			    				dataView : {show: true, readOnly: false},
+    			    				magicType : {
+    			    	               show: true, 
+    			    	               type: ['pie', 'funnel'],
+    			    	               option: {
+    			    	                   funnel: {
+    			    	                       x: '0%',
+    			    	                       width: '2%',
+    			    	                       funnelAlign: 'left',
+    			    	                       max: 100
+    			    	                   }
+    			    	               }
+    			    	           },
+    			    				restore : {show: true},
+    			    				saveAsImage : {show: true}
+    			    				}
+    			    			},
+    			    			series : [
+    			    			 {
+    			    				 type:'pie',
+    			    				radius : '55%',
+    			    				center: ['50%', '50%'], 
+    			    			  }
+    			    			]
+    			    	};
+    			    	console.log(data);
+    			    	option.series[0].data = data;
+    			    	option.series[0].name=window.optionText;
+    					option.title.text=window.optionText;
+    					myChart.setOption(option,true);
+    					//myChart.hideLoading();
+    			    }
+    			},
+    		error: function(xhr, msg){
+    			}
+    		});
+    }
+	
+}
+/*************getdata0(url) 结束*******************/
+
+
+function checkscreen()
+{
+	
+	var width1=$('#tab1').width();
+	document.getElementById('chartShow').style.width = width1 + "px";
+	document.getElementById('chartShow').style.height = ($('#main').innerHeight()-28-1) + "px";
+}
+//得到memberName
+var memberArray=new Array();
+function getMemberName(value,row,index){
+	for(var i=0;i<memberArray.length;i++){
+		if(value==memberArray[i].type_ID)
+			return memberArray[i].typeName;
+	}
+}
+//通信方式
+function generateType(value,row,index){
+	   switch(value){
+	     case 1201:
+	          return '手机';
+	     case 1202:
+	          return 'QQ';
+	     case 1203:
+	          return '微信';
+	     case 1204:
+	          return 'MSN';
+	     case 1205:
+	          return '飞信';
+	     case 1206:
+	          return '其他';
+	   }
+	}
+//电话方向
+function generateCallDirection(value, row, index){
+	if(value == 1)
+		return '拨出';
+	else 
+		return '拨入';
+}
+//短信方向
+function generateMsgDirection(value, row, index){
+	if(value == 1)
+		return '接收';
+	else 
+		return '发送';
+}
+function clearChart(){
+	/* console.log("clearChart");
+	try{
+		$("#chartShow").empty();
+	}catch(err){
+		alert(err);
+		console.log("err is:"+err);
+	} */
+	
+}
+</script>
+<!-- 结束 -->
+
+</head>
+<body style="overflow-y:auto;">
+        <div id="header" style="position:relative;">
+        	<div style="width:1024px;margin:0 auto;">
+            	<div style="float:left;width:380px;height:87px;padding-left:24px;" class="fnt_00a0e9_37_yahei">
+               		<img src="images/logo.png" >
+                </div>
+            	<div style="float:left;width:620px;height:87px;">
+                	<nav id="nav" style="float:right;">
+                        <ul id="cssdropdown">
+                            <li><a href="index.html" class="fnt_333333_14 no-line" >首页</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line" >个人数据银行</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝企业版</a></li>
+                            <li><a href="#" class="fnt_333333_14 no-line">数汇宝个人版</a></li>
+                            <li><a href="download.html" class="fnt_333333_14 no-line" >应用下载</a></li>
+                            <li  id="help">
+                            <a href="page/help/aboutUs.html" class="fnt_333333_14 no-line" >帮助与服务</a>
+                            <ul class="subMenu" id="subMenu">
+                            <li><a class="sub" href="page/help/aboutUs.html">关于我们</a></li>
+                            <li><a class="sub" href="page/help/employ.html" >诚聘英才</a></li>
+                            <li><a class="sub" href="page/help/contactUs.html" >联系我们</a></li>
+                            <li><a class="sub" href="page/help/question.html">常见问题</a></li>
+                            <li><a class="sub" href="page/help/serviceItem.html">服务条款</a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                        <div style="height:0px;" class="clearfloat"></div>
+                        <div style="width:100%;height:1px;background:#fff;margin-top:-1px;"></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    	<!-- /header -->
+	<div class="clearfloat" style="height: 53px;"></div>
+	<!-- main content -->
+	<div class="container">
+		<div id="login_info" style="height:30px;line-height:30px;float:right;" class="fnt_666666_13">
+	    	<img src="images/avatar.png" style="float:left;width:30px;height:30px;"  id="photo" alt="用户头像" />
+	        <div style="line-height:30px;float:left;margin-left:10px;">欢迎您，<span id="userName"></span></div >
+	        <div style="line-height:30px;float:left;margin-left:40px;">
+	        	<a href="#" onclick="logout()" id="logout"><img src="images/logout_btn.png" style="vertical-align:middle;"/></a>
+	       	</div >
+        </div>
+            <div class="clearfloat" style="height:6px"></div>
+		<!-- left menu -->
+		<div id="left_menu" style="float:left;">
+			<ul class="menu1">
+				<li>
+					<div class="menu1_per menu1_fold">
+						<span class="icon_user2">我的数据</span>
+					</div>
+					<div class="clearfloat" style="height:0px;"></div>
+					<div class="menu2_div">
+						<ul class="menu2">
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的收支</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="consume"
+											class="fnt_666666_13 menu3_per menu3_fold">消费</a></li>
+										<li><a href="javascript:void(0)" id="income"
+											class="fnt_666666_13 menu3_per menu3_fold">收入</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的财产</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="assete"
+											class="fnt_666666_13 menu3_per menu3_fold">实物资产</a></li>
+										<li><a href="javascript:void(0)" id="insurance"
+											class="fnt_666666_13 menu3_per menu3_fold">保险</a></li>
+										<li><a href="javascript:void(0)" id="investment"
+											class="fnt_666666_13 menu3_per menu3_fold">投资</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的朋友</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="circles"
+											class="fnt_666666_13 menu3_per menu3_fold">朋友圈</a></li>
+										<li><a href="javascript:void(0)" id="call"
+											class="fnt_666666_13 menu3_per menu3_fold">通话</a></li>
+										<li><a href="javascript:void(0)" id="message"
+											class="fnt_666666_13 menu3_per menu3_fold">短信</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的健康</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="medicalHistory"
+											class="fnt_666666_13 menu3_per menu3_fold">电子病历</a></li>
+										<li><a href="javascript:void(0)" id="physicalExamination"
+											class="fnt_666666_13 menu3_per menu3_fold">体检</a></li>
+										<li><a href="javascript:void(0)" id="healthcare"
+											class="fnt_666666_13 menu3_per menu3_fold">保健</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的日志</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="plan"
+											class="fnt_666666_13 menu3_per menu3_fold">计划</a></li>
+										<li><a href="javascript:void(0)" id="achievement"
+											class="fnt_666666_13 menu3_per menu3_fold">成果</a></li>
+										<li><a href="javascript:void(0)" id="browserRecord"
+											class="fnt_666666_13 menu3_per menu3_fold">网页浏览</a></li>
+										<li><a href="javascript:void(0)" id="location"
+											class="fnt_666666_13 menu3_per menu3_fold">位置</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的教育</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="growthRecord"
+											class="fnt_666666_13 menu3_per menu3_fold">成长</a></li>
+										<li><a href="javascript:void(0)" id="courseRecord"
+											class="fnt_666666_13 menu3_per menu3_fold">课程</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的宠物</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="pet"
+											class="fnt_666666_13 menu3_per menu3_fold">宠物</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">私人定制</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="customizedData"
+											class="fnt_666666_13 menu3_per menu3_fold">私人定制数据</a></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="fnt_666666_13 menu2_per menu2_fold">我的保管箱</div>
+								<div class="clearfloat" style="height:0px;"></div>
+								<div class="menu3_div">
+									<ul class="menu3">
+										<li><a href="javascript:void(0)" id="safebox"
+											class="fnt_666666_13 menu3_per menu3_fold">保管箱</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="menu1_per menu1_fold">
+						<span id="statistic" class="icon_data_view">数据浏览</span>
+					</div>
+
+					<div class="clearfloat" style="height:0px;"></div>
+				</li>
+				<li>
+					<div class="menu1_per menu1_fold">
+						<!-- <span class="icon_data_analysis">数据分析</span> -->
+						<span class="icon_data_analysis">数据产品</span>
+
+					</div>
+						<div class="clearfloat" style="height:0px;"></div>
+					<div class="menu2_div">
+						<ul class="menu2">
+							<li>
+								<div id="dataProduct" class="fnt_666666_13 menu21_per menu21_fold">
+								                数据产品
+								</div>
+								
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<div class="menu1_per menu1_fold">
+						<span id="dataAnalysis" class="icon_data_analysis">数据分析</span>
+					</div>
+				</li>
+				<li>
+					<div class="menu1_per menu1_fold">
+						<span class="icon_my_config">我的设置</span>
+					</div>
+					<div class="clearfloat" style="height:0px;"></div>
+					<div class="menu2_div">
+						<ul class="menu2">
+							<li>
+								<div id="basicInfo" class="fnt_666666_13 menu21_per menu21_fold">
+								    <!-- <label id="basicInfo" class="bg fnt_666666_13"> -->
+								                 基本信息
+								    <!-- </label> -->
+								</div>
+								<div class="clearfloat" style="height:1px;"></div>
+								<div id="passwordModify" class="fnt_666666_13 menu21_per menu21_fold">
+								   <!--  <label id="passwordModify" class="bg fnt_666666_13"> -->
+								                  密码修改
+								   <!--  </label> -->
+								</div>
+								<div class="clearfloat" style="height:1px;"></div>
+								<div id="dataTypeMaintain" class="fnt_666666_13 menu21_per menu21_fold">
+								   <!--  <label id="dataTypeMaintain" class="bg fnt_666666_13"> -->
+								              数据分类维护
+								   <!--  </label> -->
+								</div>   
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- /left menu -->
+		<!-- right content -->
+
+		<iframe id="iframe" style="frameborder:0"
+			src="page/personalDB/myData/property/assete.html" sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts"></iframe>
+		<!-- /right content -->
+		<div class="clearfloat" style="height:0px;"></div>
+	</div>
+	<!-- /main content -->
+	<div class="clearfloat" style="height:0px;"></div>
+	<!-- bottom -->
+	<div id="bottom2" style="width:100%;">
+            <div style="height:48px;background:#d7d7d7;">
+                <div style="width:1024px;height:48px;margin:0 auto;line-height:48px;text-align:left;">
+                    <div style="float:left;width:700px;">
+                        <a href="#" class="fnt_666666_13">首页</a>
+                        &nbsp;|&nbsp;
+                        <a href="#" class="fnt_666666_13">个人数据银行</a>
+                        &nbsp;|&nbsp;
+                        <a href="#" class="fnt_666666_13">数汇宝企业版</a>
+                        &nbsp;|&nbsp;
+                        <a href="#" class="fnt_666666_13">数汇宝个人版</a>
+                        &nbsp;|&nbsp;
+                        <a href="#" class="fnt_666666_13">应用下载</a>
+                        &nbsp;|&nbsp;
+                        <a href="#" class="fnt_666666_13">帮助与服务</a>
+                    </div>
+                    <div style="float:left;width:324px" class="fnt_999999_13">
+                        成都数银科技有限公司©2014-2020 蜀ICP备15003732号
+
+                    </div>
+                </div>
+            </div>
+        </div>
+	<!-- /bottom -->
+	<!-- loginwin -->
+	<!-- <div id="loginWin" class="easyui-window" style="width:430px;height:290px;" data-options="modal:true, closable:false,
+                collapsible:false,minimizable:false,maximizable:false,title:'请登录'">
+		<div class="login_box">
+			<form class="label_div" style="padding:32px 0 0 44px;" onkeydown="keydown()">
+				<div class="input_box username">
+					<div class="left_line">
+						<input class="text_input fnt_999999_13" placeholder="请输入您的用户名"
+							id="name">
+					</div>
+				</div>
+				<div class="clearfloat" style="height:22px;"></div>
+				<div class="input_box password">
+					<div class="left_line">
+						<input type="password" class="text_input fnt_999999_13"
+							placeholder="请输入您的密码" id="password">
+					</div>
+				</div>
+				<div class="clearfloat" style="height:22px;"></div>
+				<div class="input_box password" style="width:180px;display:none;" id="code">
+               	 	<div class="left_line" >
+                    	<input type="text" class="text_input fnt_999999_13" style="width:120px;" placeholder="请输入您的验证码 " 
+                    		id="validateCode" name="safecode">
+                    </div>
+					<div style="position:absolute;top:200px;left:240px">
+						<img id="img" src="../safecode"> <a
+							href="javascript:void(0)" class="fnt_999999_13"
+							onclick="changeImg()" style="vertical-align:40%;"><img style="vertical-align:top;" src="../images/arrow_refresh.png" alt="点击重选图片"></a>
+					</div>
+				</div>
+				
+				<div style="width:312px;height:20px;line-height:20px;text-align:left;"
+					class="fnt_999999_13">
+					<span style="float:right;"> <a href="#"
+						class="fnt_999999_13 no-line">忘记密码？</a>
+					</span>
+				</div>
+				<div class="clearfloat" style="height:10px;"></div>
+				<div>
+					<a href="#" class="default_btn no-line"
+						style="float:left;width:125px;height:36px;line-height:40px;font-size:15px;text-align:center;"
+						onclick="window.parent.entry()">登录</a> <a id="register" onclick="window.parent.register()"
+						href="javascript:void(0)" class="default_btn2 no-line"
+						style="float:left;width:125px;height:36px;line-height:40px;font-size:15px;margin-left:20px;text-align:center">注册</a>
+				</div>
+			</form>
+		</div>
+	</div> -->
+	<!-- loginwin -->
+	<div id="win" class="easyui-window" title="enter" data-options="title: '数据统计',
+    width: 1010,height: 500,top: ($(window).height() - 500) * 0.5,left: ($(window).width()-1010) * 0.5,
+    modal:false,closed:true,collapsible:false,minimizable:false,maximizable:false,shadow:false,inline:false,zIndex:100001"> 
+  <div class="easyui-layout" data-options="fit:true" id="layout" style="height:464px">
+   <div id="dataTable" data-options="region:'west',collapsed:true,split:true,title:'数据浏览(如数据未及时显示，请刷新)'" style="width:430px;height:478px">
+		<table id="dg" class="easyui-datagrid" style="cellpadding:0;cellspacing:0"></table>
+   </div>
+  <div data-options="region:'center'" id="main" data-options="fit:true,align:'center'" title="数据统计" style="position:relative;">
+    <table id="tab1" style="position:relative;float:center;text-align:center;">
+	  <tr>
+	    <td>
+	                起始时间:
+	    </td>
+	    
+	    <td>
+	      <input id="startTime" type="text" class="easyui-datebox" value="2015-03-09" size="10" maxlength="10" data-options="editable:false"/>
+	    </td>
+	    <td style="width:10px"></td>
+	    <td>
+	                结束时间:
+	    </td>
+	    <td>
+	      <input id="endTime" type="text" class="easyui-datebox" value="2015-05-30" size="10" maxlength="10" data-options="editable:false"/>
+	    </td>
+	    <td style="width:10px"></td>
+	    <td>
+	                  显示条数: 
+	    </td>
+	    <td>
+	      <input id="item" type="text" class="easyui-numberbox" size="1" maxlength="1" min= "1" max ="9"/>
+	    </td>
+	    <td style="width:10px"></td>
+	     <td>
+	       <input type="button" class="default_btn4" value="统计" onClick="getdata()" />
+	     </td>
+	  </tr>
+	</table>
+	<div class="default_line"></div>
+    <div id="chartShow" style="position:relative;text-align:center;"></div>
+  </div> 
+ 
+ </div>
+</div>
+	
+
+<script>
+	/*
+		左侧目录初始化
+		需要展开的节点默认设置：如需一级，则设置menu1_unfold，二级menu2_unfold，三级menu3_unfold
+		本demo默认为三级，可参考代码自行测试
+	*/
+	$(function() {
+		//closeWindow();
+		loadUserInfo();
+		//给导航栏绑定退出登录事件
+		$('nav li a').each(function(){
+			$(this).bind('click',function(){
+				//var href = window.location.search;
+				//alert($(this).innerHTML);
+				//if(href.indexOf('personalDB.html?P=')>=0 && $(this).innerHTML="个人数据银行")
+				//return;
+				logout();
+			});
+		});
+		//判断是否显示验证码
+	/*   $(function(){
+		  if(Cookies.get('w') != undefined){
+			 // $('.login_box').css('height', '360px');
+			 // $('#code').css('display', 'block');
+		  }
+	  }
+	  ); */
+		$(".menu1 li .menu1_per").each(function(){
+			$(this).bind("click",function(){
+				if($(this).hasClass("menu1_unfold")){
+					$(this).parent().children("div.menu2_div").stop().animate({"height":"0"},500);
+					$(this).removeClass("menu1_unfold").addClass("menu1_fold");
+				}else{
+					$(this).parent().children("div.menu2_div").stop().animate({"height":$(this).parent().find("ul.menu2").outerHeight()},500,function(){$(this).parent().children("div.menu2_div").css({"height":"100%"});});
+					$(this).removeClass("menu1_fold").addClass("menu1_unfold");
+				}
+			});
+			$(this).parent().find("ul.menu2 li .menu2_per").each(function(){
+				$(this).bind("click",function(){
+					if($(this).hasClass("menu2_unfold")){
+						$(this).parent().children("div.menu3_div").stop().animate({"height":"0"},500);
+						$(this).removeClass("menu2_unfold").addClass("menu2_fold");
+					}else{
+						$(this).parent().children("div.menu3_div").stop().animate({"height":$(this).parent().find("ul.menu3").outerHeight()},500);
+						$(this).removeClass("menu2_fold").addClass("menu2_unfold");
+					}
+				});
+			});
+		});
+		
+		$(".menu1").find(".menu1_unfold").each(function(){
+			$(this).parent().children("div.menu2_div").css({"height":"100%"});
+		});
+		$(".menu1").find(".menu2_unfold").each(function(){
+			$(this).parent().children("div.menu3_div").css({"height":"100%"});
+			$(this).parents(".menu2_div").parent().children(".menu1_per").removeClass("menu1_fold").addClass("menu1_unfold");
+		});
+		$(".menu1").find(".menu3_unfold").each(function(){
+			$(this).parents(".menu3_div").css({"height":"100%"}).parent().children(".menu2_per").removeClass("menu2_fold").addClass("menu2_unfold");
+			$(this).parents(".menu2_div").css({"height":"100%"}).parent().children(".menu1_per").removeClass("menu1_fold").addClass("menu1_unfold");
+		});
+		/********************统计测试**********************/
+		$("#statistic").bind('click',function(){
+			$("#iframe").attr("src", "page/personalDB/dataBrowse/arbor.html");
+		});
+		/*********************结束*********************/
+		/********************数据分析  somnus 2015-07-20**********************/
+		$("#dataAnalysis").bind('click',function(){
+			//$("#iframe").attr("src", "page/personalDB/dataAnalysis/dataAnalysis.html");
+			//$("#iframe").attr("src", "page/footprint/footprint.html");
+			$("#iframe").attr("src", "page/personalDB/IndicatorsOverview/IndicatorOverview.html");
+		});
+		/*********************数据分析  结束*********************/
+		$("#assete").bind('click',function(){
+			$("#iframe").attr("src", "page/personalDB/myData/property/assete.html");
+		});
+		
+		$('#income').bind('click', function(){
+			$('#iframe').attr('src', "page/personalDB/myData/IncomeAndConsume/income.html");
+		});
+		
+		$('#consume').bind('click', function(){
+			$('#iframe').attr('src', "page/personalDB/myData/IncomeAndConsume/consume.html");
+		});
+		
+		$('#insurance').bind('click', function(){
+			$('#iframe').attr('src', "page/personalDB/myData/property/insurance.html");
+		});
+		
+		$('#investment').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/property/investment.html');
+		});
+		/* $('#safebox').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/safebox/safeBox.html');
+		});
+		 */
+		$('#call').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/friend/callRecords.html');
+		});
+		
+		$('#message').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/friend/msgRecords.html');
+		});
+		
+		$('#circles').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/friend/circleOfFriends.html');
+		});
+		
+		$('#medicalHistory').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/health/medicalHistory.html');
+		});
+		
+		$('#physicalExamination').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/health/physicalExamination.html');
+		});
+		
+		$('#healthcare').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/health/healthCare.html');
+		});
+		
+		$('#plan').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/log/plan.html');
+		});
+		
+		$('#browserRecord').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/log/browserRecord.html');
+		});
+		
+		$('#location').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/log/location.html');
+		});
+		
+		$('#achievement').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/log/achievement.html');
+		});
+		
+		$('#growthRecord').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/education/growthRecord.html');
+		});
+		
+		$('#courseRecord').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/education/courseRecord.html');
+		});
+		
+		$('#pet').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/pet/pet.html');
+		});
+		
+		$('#customizedData').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/customizedData/customizedData.html');
+		});
+		$('#basicInfo').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/mySetting/basicInfo.html');
+		});
+		$('#passwordModify').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/mySetting/passwordModify.html');
+		});
+		$('#dataTypeMaintain').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/mySetting/dataTypeMaintain.html');
+		});
+		$('#safebox').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/myData/safebox2/safebox.html');
+		});
+		$('#dataProduct').bind('click', function(){
+			$('#iframe').attr('src', 'page/personalDB/dataProduct/dataProductList.html');
+		});
+	});
+	/* function openWindow(){
+		alert(Cookies.get('w'));
+		if(Cookies.get('w') != undefined){
+			$('#loginWin').css('height', '340px');
+			$('#code').css('display', 'block');
+		}
+		$('#loginWin').window('center');
+		$('#loginWin').window('open');
+	} */
+	/* function closeWindow(){
+		$('#loginWin').window('close');
+	} */
+	function autoLogin(){
+		var key = Cookies.get('key');
+		var value = Cookies.get('value');
+		login(key, value, 'cookies');
+	}
+	function entry(){
+		var name = $('#name').val().trim();
+		var password = $('#password').val().trim();
+		login(name, MD5(password), 'net');
+	}
+	function login(name, password, source){
+		var safecode = Cookies.get('w');
+		if($('#name').val().trim().length == 0 ||
+				$('#password').val().trim().length == 0 ||
+				($('#validateCode').val().trim().length == 0 && safecode != undefined))
+			return;
+		$.ajax({
+			url: '../rest/app/user/login',
+			type: 'post',
+			dataType: 'text',
+			data:{loginID: name, password: password, source: source},
+			success: function(data){
+				data = JSON.parse(data);
+				
+				try{
+					if(data.loginID == name){
+						if(source == 'net'){
+							if(Cookies.get('w') != undefined){
+								Cookies.remove('w');
+								//$('#loginWin').css('height', '290px');
+								//$('#code').css('display', 'none');
+							}
+							/* $('#userName').html(data.loginID);
+							if(data.havePhoto == 1)
+								$('#photo').attr('src', '../rest/app/user/download?user_ID=' + data.user_ID); */
+							//closeWindow();
+							//console.log(document.getElementById('ifrmae'));
+						}
+						//document.getElementById('iframe').contentWindow.location.reload();
+						window.location = 'personalDB.html?P=' + data.havePhoto + '&ID=' + name + '&U=' + data.user_ID;
+						//Cookies.set('L', Math.random()*100000);
+					}
+					else if(data.code != undefined){
+						alert(data.desc);
+						var da = new Date();
+						da.setMinutes(da.getMinutes() + 20);
+						Cookies.set('w', Math.random()*100000, {expire: da});
+						window.location.reload();
+					}
+					else 
+						alert('login error');
+				}catch(err){
+					alert(err);
+				}
+			},
+			error: function(err){
+			}
+		});
+	}
+	function register(){
+	    window.location="page/register.html";
+	  }
+	function loadUserInfo(){
+		var search = window.location.search;
+		if(search != null && search != ''){
+			var split1 = search.split('&');
+			var havePhoto = split1[0].split('=')[1];
+			var loginID = split1[1].split('=')[1];
+			var user_ID = split1[2].split('=')[1];
+			if(havePhoto == 1){
+				$('#photo').attr('src', '../rest/app/user/download?user_ID=' + user_ID);
+			}
+			$('#userName').html(loginID);
+		}
+	}
+	function logout(){
+		 try{
+			
+			//var href = $("#logout").attr('href');
+			
+			//if(href == 'personalDB.html' || href == '#')
+			
+			var id = window.location.search.split('&')[2].split('=')[1];
+			id = id.replace("#","");
+			$.ajax({
+				url: '../rest/app/user/logout',
+				type: 'get',
+				data: {
+					user_ID: id
+				},
+				dataType: 'json',
+				success: function(a,b,c){
+					//data = JSON.parse(data);
+					//	alert(c[0].value);
+					//alert(data);
+					//alert(JSON.parse(data.responseText).code);
+				//	alert(JSON.parsexhr);
+					//if(JSON.parse(data).code == 1){
+					// 	alert(321);
+						window.location = "index.html";
+					//}else{
+					//	alert('网络异常，请稍候再试');
+					//}
+						
+				}
+			});
+		}catch(err){
+			
+		} 
+	}
+	
+</script>
+
+</body>
+</html>

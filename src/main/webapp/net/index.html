@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>宏科电子筛选箱监测预警平台</title>
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<![endif]-->
+
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="../css/net/helpPage.css" />
+<style>
+#se1_con1,#se1_con2,#se1_con4,#se2_con1,#se2_con2,#se2_con3,#se2_con4,#se2_con5,#se2_con6,#se2_con7,#se2_con8,#se2_con9,#se3_con1,#se3_con2,#se4_con1,#se4_con2,#se4_con3,#se4_con4,#se4_con5,#se4_con6,#se4_con7,#se4_con8,#se4_con9,#se4_con10,#se4_con11,#se4_con12,#se4_con13{position:relative;}
+</style>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="plugins/scrollify/scrollify.min.js"></script>
+<script src="plugins/rotate/jquery.rotate.min.js"></script>
+<script src="../js/myjs/js.cookie.js"></script>
+<script type="text/javascript" src="../js/myjs/MD5.js"></script>
+<script type="text/javascript">
+//暂不实现自动登录
+/*   $(function(){
+	 if(Cookies.get('key') != undefined){
+		 var key = Cookies.get('key');
+		 var value = Cookies.get('value');
+		 login(key, value, 'cookies');
+	 }else
+		 $('#logined').hide();
+  }); */
+  $(function(){
+	  if(Cookies.get('w') != undefined){
+		  $('.login_box').css('height', '360px');
+		  $('#code').css('display', 'block');
+	  }
+  });
+  function register(){
+    window.location="page/register.html";
+  }
+  function dofocus(){
+		var oInput = document.getElementById("name");
+		oInput.focus();
+
+		}
+
+</script>
+<script>
+	var se2_con2_timer;
+	var se2_con8_timer;
+	var se2_con9_timer;
+	var se2_con3_deg = 0;
+	var se2_con4_deg = 0;
+	
+	function se2_con8_fliker(){
+		$("#se2_con8").stop().animate({"opacity":0.1},600,function(){
+			$("#se2_con8").stop().animate({"opacity":0.5},600);
+		});
+	}
+		
+	function se2_con9_fliker(){
+		$("#se2_con9").stop().animate({"opacity":0.2},800,function(){
+			$("#se2_con9").stop().animate({"opacity":0.5},800);
+		});
+	}
+		
+	function se2_con2_fliker(){
+		$("#se2_con2").stop().animate({"opacity":0.5},400,function(){
+			$("#se2_con2").stop().animate({"opacity":0.8},400);
+		});
+		
+		var aa = Math.floor(Math.random() * 5);
+		var dua = 100;
+		var dua2 = 800;
+		if(aa >= 0 && aa < 1){
+			se2_con3_deg += 45;
+			se2_con4_deg -= 30;
+		}else if(aa >= 1 && aa < 2){
+			se2_con3_deg -= 45;
+			se2_con4_deg += 30;
+		}else if(aa >= 2 && aa < 3){
+			se2_con3_deg += 30;
+			se2_con4_deg -= 45;
+		}else if(aa >= 3 && aa < 4){
+			se2_con3_deg -= 30;
+			se2_con4_deg += 45;
+		}else if(aa >= 4 && aa <= 5){
+			se2_con3_deg += 45;
+			se2_con4_deg -= 45;
+		}
+		$("#se2_con3").rotate({duration:dua,animateTo:se2_con3_deg});
+		$("#se2_con4").rotate({duration:dua2,animateTo:se2_con4_deg});
+	}
+	
+	function init(){
+		
+		$("section").css({"height":$(window).height()-87});
+		
+		$(".container").each(function(){
+			$(this).css({"top":($(window).height()-$(this).outerHeight() - 87 )/2+"px"});
+			if($(this).attr("id") == "bottom"){
+				$(this).css({"top":($(window).height()-$(this).outerHeight()-$("#bottom2").outerHeight())/2 -87 + 48 +"px"});
+			}
+		});
+		
+		$(".right_nav").find("a[href^=#se_]").each(function(){
+			$(this).click(function(e){
+				e.preventDefault();
+				$.scrollify("move",$(this).attr("href"));
+				$(".right_nav").find("a[href^=#se_]").removeClass("sel");
+				$(this).addClass("sel");
+			});
+		});
+		
+		$.scrollify({
+			section:"section",
+			before:function(){
+				//se_1
+				if(last_se != "se_1_div"){
+					$("#se1_con1").stop().animate({"opacity":0,"left":"-1000px"},200);
+					$("#se1_con2").stop().animate({"opacity":0,"left":"-1000px"},200);
+					$("#se1_con4").stop().animate({"opacity":0},200);
+				}
+				//se_2
+				if(last_se != "se_2_div"){
+					clearInterval(se2_con2_timer);
+					clearInterval(se2_con8_timer);
+					clearInterval(se2_con9_timer);
+					
+					$("#se2_con1").stop().animate({"opacity":0},200);
+					$("#se2_con2").stop().animate({"opacity":0},200);
+					$("#se2_con3").stop().animate({"opacity":0},200);
+					$("#se2_con4").stop().animate({"opacity":0},200);
+					$("#se2_con5").stop().animate({"opacity":0,"top":"1000px"},200);
+					$("#se2_con6").stop().animate({"opacity":0,"top":"1000px"},200);
+					$("#se2_con7").stop().animate({"opacity":0,"top":"1000px"},200);
+					$("#se2_con8").stop().animate({"opacity":0},200);
+					$("#se2_con9").stop().animate({"opacity":0},200);
+				}
+				//se_3
+				if(last_se != "se_3_div"){
+					$("#se3_con2").stop().animate({"top":"-235px","left":"-512px"},200);
+					$("#se3_con1").stop().animate({"opacity":0,"width":"0%","height":"0%","top":"235px","left":"512px"},200);
+				}
+				
+				//se_4
+				if(last_se != "se_4_div"){
+					$("#se4_con1").stop().animate({"opacity":0,"top":"-1000px"},200);
+					$("#se4_con2").stop().animate({"opacity":0},200);
+					$("#se4_con3").stop().animate({"opacity":0},200);
+					$("#se4_con4").stop().animate({"opacity":0,"left":"155px"},200);
+					$("#se4_con5").stop().animate({"opacity":0,"right":"155px"},200);
+					
+					$("#se4_con6").stop().animate({"opacity":0},200);
+					
+					$("#se4_con7").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con8").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con9").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con10").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con11").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con12").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+					$("#se4_con13").stop().animate({"opacity":0,"bottom":"-1000px"},200);
+				}
+				
+				//se_bottom
+				if(last_se != "se_bottom_div"){
+					$("#bottom").stop().animate({"opacity":0},200);
+				}
+				
+			},
+			after:function(){
+				$(".right_nav").find("a[href^=#se_]").removeClass("sel");
+				//se_1
+				if($("#se_1_div").offset().top == $(window).scrollTop() && last_se != "se_1_div"){
+					$(".right_nav").find("a[href=#se_1]").addClass("sel");
+					
+					$("#se1_con1").stop().animate({"opacity":1,"left":"0px"},200,function(){
+						$("#se1_con2").stop().animate({"opacity":1,"left":"0px"},200);
+						$("#se1_con4").stop().animate({"opacity":1},500);
+					});
+					last_se = "se_1_div";
+				}
+				//se_2
+				if($("#se_2_div").offset().top == $(window).scrollTop() && last_se != "se_2_div"){
+					$(".right_nav").find("a[href=#se_2]").addClass("sel");
+					
+					$("#se2_con1").stop().animate({"opacity":1},400,function(){
+						$("#se2_con2").stop().animate({"opacity":0.8},300,function(){
+							$("#se2_con3").stop().animate({"opacity":0.7},250,function(){
+								$("#se2_con4").stop().animate({"opacity":0.7},200,function(){
+									se2_con2_timer = setInterval(function(){se2_con2_fliker();},800);
+									$("#se2_con2").hover(function(){
+										clearInterval(se2_con2_timer);
+										$("#se2_con2").stop().css({"opacity":1});
+										$("#se2_con3").stop().css({"opacity":1});
+										$("#se2_con4").stop().css({"opacity":1});
+									},function(){
+										se2_con2_timer = setInterval(function(){se2_con2_fliker();},800);
+										$("#se2_con2").stop().css({"opacity":0.8});
+										$("#se2_con3").stop().css({"opacity":0.7});
+										$("#se2_con4").stop().css({"opacity":0.7});
+									});
+								});
+							});
+						});
+					});
+					
+					$("#se2_con5").stop().animate({"opacity":1,"top":"0px"},500,function(){
+						$("#se2_con8").stop().animate({"opacity":0.7},800);
+					});
+					$("#se2_con6").stop().animate({"opacity":1,"top":"0px"},800);
+					$("#se2_con7").stop().animate({"opacity":1,"top":"0px"},1200,function(){
+						$("#se2_con9").stop().animate({"opacity":0.7},1200);
+					});
+					
+					se2_con8_timer = setInterval(function(){se2_con8_fliker();},1200);
+					$("#se2_con8").hover(function(){
+						clearInterval(se2_con8_timer);
+						$(this).stop().css({"opacity":1});
+					},function(){
+						se2_con8_timer = setInterval(function(){se2_con8_fliker();},1200);
+						$(this).stop().css({"opacity":0.5});
+					});
+					
+					se2_con9_timer = setInterval(function(){se2_con9_fliker();},1600);
+					$("#se2_con9").hover(function(){
+						clearInterval(se2_con9_timer);
+						$(this).stop().css({"opacity":1});
+					},function(){
+						se2_con9_timer = setInterval(function(){se2_con9_fliker();},1600);
+						$(this).stop().css({"opacity":0.5});
+					});
+					
+					last_se = "se_2_div";
+				}
+				//se_3
+				if($("#se_3_div").offset().top == $(window).scrollTop() && last_se != "se_3_div"){
+					$(".right_nav").find("a[href=#se_3]").addClass("sel");
+					
+					$("#se3_con2").stop().animate({"top":"0","left":"0"},1000);
+					$("#se3_con1").stop().animate({"opacity":1,"width":"100%","height":"100%","top":"0","left":"0"},1000);
+					
+					last_se = "se_3_div";
+				}
+				
+				//se_4
+				if($("#se_4_div").offset().top == $(window).scrollTop() && last_se != "se_4_div"){
+					$(".right_nav").find("a[href=#se_4]").addClass("sel");
+					
+					$("#se4_con1").stop().animate({"opacity":1,"top":"0px"},600,function(){
+						$("#se4_con2").stop().animate({"opacity":1},600,function(){
+							$("#se4_con3").stop().animate({"opacity":1},600,function(){
+								$("#se4_con4").stop().animate({"opacity":1,"left":"22px"},500);
+								$("#se4_con5").stop().animate({"opacity":1,"right":"22px"},500,function(){
+									$("#se4_con6").stop().animate({"opacity":1},700,function(){
+										$("#se4_con7").stop().animate({"opacity":1,"bottom":"0"},1200);
+										$("#se4_con8").stop().animate({"opacity":1,"bottom":"0"},1000);
+										$("#se4_con9").stop().animate({"opacity":1,"bottom":"0"},800);
+										$("#se4_con10").stop().animate({"opacity":1,"bottom":"0"},600);
+										$("#se4_con11").stop().animate({"opacity":1,"bottom":"0"},800);
+										$("#se4_con12").stop().animate({"opacity":1,"bottom":"0"},1000);
+										$("#se4_con13").stop().animate({"opacity":1,"bottom":"0"},1200);
+									});
+								});
+							});
+						});
+					});
+					
+					last_se = "se_4_div";
+				}
+				
+				//bottom
+				if($("#se_bottom_div").offset().top == $(window).scrollTop()){
+					$(".right_nav").find("a[href=#se_bottom]").addClass("sel");
+					
+					//$("#header").animate({'marginTop':'-87px'},200);
+					$("#bottom").stop().animate({"opacity":1},500);
+					last_se = "se_bottom_div";
+				}else{
+					//$("#header").animate({'marginTop':'0px'},200);
+				}
+				
+			},
+			scrollbars:false
+		});
+		
+		$(".se_bg_1").css({"width":$(window).width(),"height":$(window).height()});
+		$(".se_bg_2").css({"width":$(window).width(),"height":$(window).height()});
+		
+	}
+	
+	var last_se;
+	
+	$(function() {
+		//first page init
+		$("#se1_con1").css({"opacity":0,"left":"-1000px"});
+		$("#se1_con2").css({"opacity":0,"left":"-1000px"});
+		$("#se1_con4").css({"opacity":0});
+		
+		init();
+		$(window).resize(function(){
+			init();
+		});
+		
+		$.scrollify("move","#se_1");
+		
+		$(".login_box .label").each(function(){
+			$(this).bind("click",function(){
+				var inx = $(this).index($(".login_box .label"));
+				$(".login_box .label").removeClass("select").addClass("unselect");
+				$(".login_box .label_div").hide();
+				
+				$(".login_box .label").eq(inx).removeClass("unselect").addClass("select");
+				$(".login_box .label_div").eq(inx).show();
+			});
+		});
+	});
+	
+	function login(name, password, source){
+		var safecode = Cookies.get('w');
+		if($('#name').val().trim().length == 0 ||$('#password').val().trim().length == 0){
+			//return;
+		}
+		$.ajax({
+			url: '../rest/app/user/login',
+			type: 'post',
+			dataType: 'text',
+			data:{loginID: name, password: password, source: source},
+			success: function(data){
+				//alert("data:"+data);
+				data = JSON.parse(data);
+				try{
+					if(data.name == name){
+						if(source == 'net'){
+							alert(data.remark);
+							window.location = '../manage/index.html?P=' + data.havePhoto + '&ID=' + name + '&U=' + data.user_ID+'&Q='+data.remark;
+							if(Cookies.get('w') != undefined){
+								Cookies.remove('w');
+								$('#code').css('display', 'none');
+								$('.login-box').css('height', '300px');
+							}
+							//Cookies.set('L', Math.random()*100000);
+							/* if(document.getElementById('avoid').checked){
+								Cookies.set('key', data.loginID, { expires: 10 });
+								Cookies.set('value', data.password, { expires: 10 });
+							} */
+						}/* else if(source == 'cookies'){
+							$(".login_box .label_div").eq(0).hide();
+							$('.login_box .label_div').eq(2).show();
+						} */
+					}
+					else if(data.code != undefined){
+						alert(data.desc);
+						var da = new Date();
+						da.setMinutes(da.getMinutes() + 20);
+						Cookies.set('w', Math.random()*100000, {expires: da});
+						//window.location.reload();
+					}
+					else 
+						alert('login error');
+				}catch(err){
+					//alert(err);
+				}
+			},
+			error: function(err){
+			}
+		});
+	}
+	
+	function entry(){
+		var name = $('#name').val().trim();
+		var password = $('#password').val().trim();
+		login(name, password, 'net');
+	}
+	 function changeImg(){
+		  document.getElementById("img").src=
+			  document.getElementById("img").src+ "?nocache=" + new Date().getTime();
+	  }
+	function keydown(){
+		var keycode ;
+		if(window.event){
+			keycode = event.keyCode;
+		}else if(event.which){
+			keycode = event.which;
+		}
+		if(keycode == 13 && document.activeElement.id != 'personalLogin'){
+			entry();
+		}
+	}
+</script>   
+</head>
+	<body onload="dofocus">
+    	<!-- header -->
+        <div id="header" style="position:fixed;">
+        	<div style="width:1024px;margin:0 auto;">
+            	<div style="float:left;width:380px;padding-left:24px;" class="fnt_00a0e9_37_yahei">
+               		<img src="images/logo.png" >
+                </div>
+            	
+            </div>
+        </div>
+    	<!-- /header -->
+
+        <section id="se_1_div" data-section-name="se_1">
+       		<div class="se_bg_1" style="background:url(images/bg_1_1.png) repeat;"></div>
+            <img class="se_bg_2" src="images/bg_1_2.png" />
+            <div class="container">
+            	<div style="float:left;width:520px;text-align:center;">
+                	<div id="se1_con1" class="fnt_ffffff_60_yahei_b" style="line-height:60px;margin-top:50px;letter-spacing:10px;">
+                    	宏科电子筛选箱监测预警平台
+                    </div>
+                    <div id="se1_con2" class="fnt_ffffff_30_yahei" style="line-height:50px;margin-top:60px;letter-spacing:20px;">
+                                                    时实监控<br>
+					高效预警
+                    </div>
+                </div>
+                <div id="se1_con4" style="float:left;margin-left:100px;margin-top:10px;">
+                	<div class="login_box">
+                    	<div class="label select">
+                        	员工登录
+                        </div>
+                    	
+                        <div class="clearfloat" style="height:0px;"></div>
+                        <form class="label_div" style="padding:32px 0 0 44px;" id="form" onkeydown="keydown()">
+                        	<div class="input_box username">
+                           	 	<div class="left_line">
+                                	<input class="text_input fnt_999999_13" placeholder="请输入您的用户名" id="name" >
+                                </div>
+                            </div>
+                        	<div class="clearfloat" style="height:22px;"></div>
+                        	<div class="input_box password">
+                           	 	<div class="left_line">
+                                	<input type="password" class="text_input fnt_999999_13" placeholder="请输入您的密码" id="password" autocomplete="off">
+                                </div>
+                            </div>
+                        	<div class="clearfloat" style="height:20px;"></div>
+                            <div class="clearfloat" style="height:20px;display:none"></div>
+                            
+                        	<div class="clearfloat" style="height:10px;"></div>
+                            <div>
+                            	<a href="#" id="personalLogin" class="default_btn no-line" style="float:left;width:168px;height:36px;line-height:40px;font-size:15px;" onclick="entry()">登录</a>
+                            </div>
+                        </form>
+                       
+                        
+                        
+                    </div>
+                </div>
+                <div class="clearfloat" style="height:0px;"></div>
+            </div>
+        </section>
+        
+        
+	<script type="text/javascript">
+        	$(function(){
+        		var ourNews = '';
+        		var otherNews = '';
+        		var templateList = '<li><a href="page/news/news.html?id=?id?" class="fnt_999999_13 no-line"><span class="news_title ellipsis">·&nbsp;?title?</span><span class="news_date fnt_cccccc_13">[?date?]</span></a></li>';
+        		$.ajax({
+        			url: '../rest/common/news/page',
+        			type: 'post',
+        			dataType: 'json',
+        			data: {
+        				page: 1,
+        				rows: 5,
+        				sort: 'CreateDate',
+        				order: 'desc'
+        			},
+        			success: function(data){
+        				var json;
+        				 for(index in data.rows){
+							json = data.rows[index];
+        					if(json.resource == "数汇宝"){
+        						ourNews += templateList.replace("?id?", json.news_ID).replace("?title?", json.newsTitle).replace("?date?", json.createDate.split(' ')[0]);
+        					}else{
+        						otherNews += templateList.replace("?id?", json.news_ID).replace("?title?", json.newsTitle).replace("?date?", json.createDate.split(' ')[0]);
+        					}
+        				}
+        			},
+        			error: function(xhr,msg){
+        			}
+        		});
+        	});
+        	function personalCheck(){
+        		var href = window.location+"";
+        		
+        		if(href.indexOf('personalDB.html?P=')>=0){
+        			window.location = href;
+        		}else{
+        			window.location = 'index.html';
+        		}
+        	}
+        </script>
+</body>
+</html>
